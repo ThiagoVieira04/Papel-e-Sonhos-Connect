@@ -8,6 +8,7 @@ const CONFIG = {
     googleReviewUrl: 'https://www.google.com/search?q=Papel+e+Sonhos+Informática',
     instagramUrl: 'https://www.instagram.com',
     facebookUrl: 'https://www.facebook.com',
+    pageUrl: 'https://papel-e-sonhos-connect.vercel.app/',
 };
 
 // =====================
@@ -196,8 +197,8 @@ function generatePageQRCode() {
     // Clear previous QR code
     container.innerHTML = '';
     
-    // Get current page URL
-    const pageUrl = window.location.href;
+    // Use the Vercel page URL if provided, otherwise use current location
+    const pageUrl = CONFIG.pageUrl || window.location.href;
     
     try {
         new QRCode(container, {
