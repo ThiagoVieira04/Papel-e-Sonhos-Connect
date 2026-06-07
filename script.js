@@ -291,34 +291,104 @@ function connectToWiFi() {
     const userAgent = navigator.userAgent.toLowerCase();
     const isIOS = /iphone|ipad|ipod/.test(userAgent);
     const isAndroid = /android/.test(userAgent);
-    
-    try {
-        if (isAndroid) {
-            // Android - tenta abrir configurações de WiFi
-            window.location.href = 'intent://net.settings.Wireless#Intent;action=android.intent.action.MAIN;end';
-            
-            // Fallback se intent não funcionar
-            setTimeout(() => {
-                window.location.href = 'android-app://com.android.settings/';
-            }, 500);
-        } else if (isIOS) {
-            // iOS - abre configurações de WiFi
-            window.location.href = 'App-Prefs:root=WIFI';
-            
-            // Fallback para iOS 15+
-            setTimeout(() => {
-                window.location.href = 'prefs:root=WIFI';
-            }, 500);
-        } else {
-            // Navegador desktop - mostra mensagem
-            showToast('Acesse as configurações de WiFi do seu dispositivo manualmente', 'info');
-        }
-    } catch (e) {
-        console.error('Erro ao abrir configurações WiFi:', e);
-        showToast('Abra as configurações de WiFi manualmente', 'info');
-    }
+    const wifiSSID = 'TSDINFORMATICA';
+    const wifiPassword = 't04101986';
     
     trackEvent('wifi_connect_button_clicked', {});
+    
+    if (isAndroid) {
+        connectAndroid();
+    } else if (isIOS) {
+        connectIOS();
+    } else {
+        showWiFiInstructions(wifiSSID, wifiPassword);
+    }
+}
+
+function connectAndroid() {
+    const wifiSSID = 'TSDINFORMATICA';
+    const wifiPassword = 't04101986';
+    
+    // Método 1: Intent específico para Settings WiFi
+    const intents = [
+        'intent://net.settings.Wireless#Intent;action=android.intent.action.MAIN;end',
+        'intent://net.settings.Settings#Intent;action=android.intent.action.MAIN;end',
+        'android-app://com.android.settings/net/wifi',
+        'android-app://com.android.settings/',
+    ];
+    
+    let intentIndex = 0;
+    
+    function tryNextIntent() {
+        if (intentIndex < intents.length) {
+            try {
+                window.location.href = intents[intentIndex];
+                intentIndex++;
+                setTimeout(tryNextIntent, 800);
+            } catch (e) {
+                intentIndex++;
+                tryNextIntent();
+            }
+        } else {
+            // Nenhum intent funcionou - mostrar instruções
+            showWiFiInstructions(wifiSSID, wifiPassword);
+        }
+    }
+    
+    tryNextIntent();
+}
+
+function connectIOS() {
+    const wifiSSID = 'TSDINFORMATICA';
+    const wifiPassword = 't04101986';
+    
+    // Métodos em ordem de prioridade
+    const methods = [
+        'App-Prefs:root=WIFI',  // iOS 15.1+
+        'prefs:root=WIFI',      // iOS antigo
+    ];
+    
+    let methodIndex = 0;
+    
+    function tryNextMethod() {
+        if (methodIndex < methods.length) {
+            try {
+                window.location.href = methods[methodIndex];
+                methodIndex++;
+                setTimeout(tryNextMethod, 800);
+            } catch (e) {
+                methodIndex++;
+                tryNextMethod();
+            }
+        } else {
+            // Nenhum método funcionou
+            showWiFiInstructions(wifiSSID, wifiPassword);
+        }
+    }
+    
+    tryNextMethod();
+}
+
+function showWiFiInstructions(ssid, password) {
+    let title = '📶 Conectar ao WiFi';
+    let instructions = `\n\nRede: ${ssid}\n`;
+    instructions += `Senha: ${password}\n\n`;
+    instructions += `Passos:\n`;
+    instructions += `1️⃣  Abra as Configurações\n`;
+    instructions += `2️⃣  Selecione WiFi\n`;
+    instructions += `3️⃣  Procure por: ${ssid}\n`;
+    instructions += `4️⃣  Digite a senha\n\n`;
+    instructions += `Deseja copiar a senha?`;
+    
+    if (confirm(title + instructions)) {
+        navigator.clipboard.writeText(password)
+            .then(() => {
+                showSuccessMessage('✅ Senha copiada! Conecte às configurações WiFi.');
+            })
+            .catch(() => {
+                showToast('Abra as configurações manualmente', 'info');
+            });
+    }
 }
 
 // =====================
