@@ -17,10 +17,12 @@ const CONFIG = {
 
 const pixModal = document.getElementById('pixModal');
 const qrcodeModal = document.getElementById('qrcodeModal');
+const wifiModal = document.getElementById('wifiModal');
 const linkButtons = document.querySelectorAll('.link-button');
 const modalCloseButtons = document.querySelectorAll('.modal-close');
 const copyPixBtn = document.getElementById('copyPixBtn');
 const downloadQRBtn = document.getElementById('downloadQRBtn');
+const connectWiFiBtn = document.getElementById('connectWiFiBtn');
 const successMessage = document.getElementById('successMessage');
 const toast = document.getElementById('toast');
 
@@ -74,6 +76,11 @@ function initEventListeners() {
         downloadQRBtn.addEventListener('click', downloadQRCode);
     }
 
+    // Connect WiFi button
+    if (connectWiFiBtn) {
+        connectWiFiBtn.addEventListener('click', connectToWiFi);
+    }
+
     // Close modals on Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
@@ -99,6 +106,9 @@ function handleButtonClick(e) {
             break;
         case 'qrcode-modal':
             openQRCodeModal();
+            break;
+        case 'wifi-modal':
+            openWiFiModal();
             break;
         default:
             break;
@@ -236,6 +246,79 @@ function downloadQRCode() {
     
     showSuccessMessage('QR Code baixado!');
     trackEvent('qrcode_downloaded', {});
+}
+
+// =====================
+// WiFi MODAL
+// =====================
+
+function openWiFiModal() {
+    closeAllModals();
+    wifiModal.classList.add('active');
+    generateWiFiQRCode();
+    
+    if (window.innerWidth < 768) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function generateWiFiQRCode() {
+    const container = document.getElementById('wifiQRCode');
+    
+    // Clear previous QR code
+    container.innerHTML = '';
+    
+    // WiFi data in standard format
+    // Format: WIFI:T:WPA;S:SSID;P:PASSWORD;;
+    const wifiString = 'WIFI:T:WPA;S:TSDINFORMATICA;P:t04101986;;';
+    
+    try {
+        new QRCode(container, {
+            text: wifiString,
+            width: 200,
+            height: 200,
+            colorDark: '#0a2463',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    } catch(e) {
+        console.error('Erro ao gerar QR Code WiFi:', e);
+        container.innerHTML = '<p style="color: #d32f2f;">Erro ao gerar QR Code</p>';
+    }
+}
+
+function connectToWiFi() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOS = /iphone|ipad|ipod/.test(userAgent);
+    const isAndroid = /android/.test(userAgent);
+    
+    try {
+        if (isAndroid) {
+            // Android - tenta abrir configurações de WiFi
+            window.location.href = 'intent://net.settings.Wireless#Intent;action=android.intent.action.MAIN;end';
+            
+            // Fallback se intent não funcionar
+            setTimeout(() => {
+                window.location.href = 'android-app://com.android.settings/';
+            }, 500);
+        } else if (isIOS) {
+            // iOS - abre configurações de WiFi
+            window.location.href = 'App-Prefs:root=WIFI';
+            
+            // Fallback para iOS 15+
+            setTimeout(() => {
+                window.location.href = 'prefs:root=WIFI';
+            }, 500);
+        } else {
+            // Navegador desktop - mostra mensagem
+            showToast('Acesse as configurações de WiFi do seu dispositivo manualmente', 'info');
+        }
+    } catch (e) {
+        console.error('Erro ao abrir configurações WiFi:', e);
+        showToast('Abra as configurações de WiFi manualmente', 'info');
+    }
+    
+    trackEvent('wifi_connect_button_clicked', {});
 }
 
 // =====================

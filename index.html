@@ -125,6 +125,17 @@
                         <p>Compartilhe via código QR</p>
                     </div>
                 </button>
+
+                <!-- WiFi Button -->
+                <button class="link-button wifi-btn" data-action="wifi-modal">
+                    <div class="button-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="button-content">
+                        <h3>WiFi Grátis</h3>
+                        <p>Conecte-se à rede</p>
+                    </div>
+                </button>
             </div>
         </section>
 
@@ -187,6 +198,30 @@
             <p class="qr-info">
                 <i class="fas fa-info-circle"></i>
                 Escaneie este código para acessar nossa página diretamente.
+            </p>
+        </div>
+    </div>
+
+    <!-- WiFi Modal -->
+    <div class="modal" id="wifiModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>WiFi Grátis</h2>
+            
+            <div class="qr-code-container" id="wifiQRCode"></div>
+            
+            <button class="action-btn" id="connectWiFiBtn">
+                <i class="fas fa-wifi"></i> Conectar Agora
+            </button>
+            
+            <div class="wifi-info">
+                <p><strong>Rede:</strong> TSDINFORMATICA</p>
+                <p><strong>Segurança:</strong> WPA</p>
+            </div>
+            
+            <p class="qr-info">
+                <i class="fas fa-info-circle"></i>
+                Toque em "Conectar Agora" para abrir as configurações WiFi ou escaneie o QR Code.
             </p>
         </div>
     </div>

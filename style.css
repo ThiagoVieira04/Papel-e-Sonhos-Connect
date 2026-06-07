@@ -338,6 +338,32 @@ body {
     background: linear-gradient(135deg, #0a2463, #247ba0);
 }
 
+.wifi-btn .button-icon {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #ffffff;
+}
+
+/* WiFi Info Section */
+.wifi-info {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.1));
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #3498db;
+}
+
+.wifi-info p {
+    color: var(--gray-dark);
+    font-size: 15px;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.wifi-info strong {
+    color: #2980b9;
+    font-weight: 600;
+}
+
 /* =====================
    FOOTER
    ===================== */
