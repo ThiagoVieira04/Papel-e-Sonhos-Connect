@@ -202,7 +202,7 @@ Para guias mais detalhados, consulte:
 
 <div align="center">
 
-Desenvolvido com ❤️ para **Papel e Sonhos Informática**  
+Desenvolvido por **Papel e Sonhos Informática**  
 *Serviços digitais, impressão, documentos e atendimento rápido pelo WhatsApp.*
 
 </div>
