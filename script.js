@@ -719,126 +719,144 @@ const BANKS = [
         scheme: 'nubank://',
         intent: 'intent://#Intent;scheme=nubank;package=br.com.nubank;end',
         color: 'linear-gradient(135deg, #820AD1, #530082)',
-        initials: 'Nu'
+        initials: 'Nu',
+        domain: 'nubank.com.br'
     },
     {
         name: 'Itaú',
         scheme: 'itau://',
         intent: 'intent://#Intent;scheme=itau;package=com.itau;end',
         color: 'linear-gradient(135deg, #FF7A00, #EC5E00)',
-        initials: 'Itaú'
+        initials: 'Itaú',
+        domain: 'itau.com.br'
     },
     {
         name: 'Bradesco',
         scheme: 'bradescomobile://',
         intent: 'intent://#Intent;scheme=bradescomobile;package=com.bradesco;end',
         color: 'linear-gradient(135deg, #CC092F, #E60042)',
-        initials: 'Brad'
+        initials: 'Brad',
+        domain: 'bradesco.com.br'
     },
     {
         name: 'Banco do Brasil',
         scheme: 'bancodobrasil://',
         intent: 'intent://#Intent;scheme=bancodobrasil;package=br.com.bb.ipad;end',
         color: 'linear-gradient(135deg, #F2E307, #003399)',
-        initials: 'BB'
+        initials: 'BB',
+        domain: 'bb.com.br'
     },
     {
         name: 'Caixa',
         scheme: 'caixadireto://',
         intent: 'intent://#Intent;scheme=caixadireto;package=br.gov.caixa.unico;end',
         color: 'linear-gradient(135deg, #005CA9, #F58220)',
-        initials: 'X'
+        initials: 'X',
+        domain: 'caixa.gov.br'
     },
     {
         name: 'Santander',
         scheme: 'santander://',
         intent: 'intent://#Intent;scheme=santander;package=com.santander.app;end',
         color: 'linear-gradient(135deg, #EC0000, #B30000)',
-        initials: 'Sant'
+        initials: 'Sant',
+        domain: 'santander.com.br'
     },
     {
         name: 'Inter',
         scheme: 'bancointer://',
         intent: 'intent://#Intent;scheme=bancointer;package=br.com.intermedium;end',
         color: 'linear-gradient(135deg, #FF7A00, #FF5500)',
-        initials: 'Inter'
+        initials: 'Inter',
+        domain: 'bancointer.com.br'
     },
     {
         name: 'PagBank',
         scheme: 'pagseguro://',
         intent: 'intent://#Intent;scheme=pagseguro;package=br.com.uol.ps.seb;end',
         color: 'linear-gradient(135deg, #00C69E, #BFE02C)',
-        initials: 'Pag'
+        initials: 'Pag',
+        domain: 'pagseguro.com.br'
     },
     {
         name: 'Mercado Pago',
         scheme: 'mercadopago://',
         intent: 'intent://#Intent;scheme=mercadopago;package=com.mercadopago.wallet;end',
         color: 'linear-gradient(135deg, #00B1EA, #00A650)',
-        initials: 'MP'
+        initials: 'MP',
+        domain: 'mercadopago.com.br'
     },
     {
         name: 'PicPay',
         scheme: 'picpay://',
         intent: 'intent://#Intent;scheme=picpay;package=com.picpay;end',
         color: 'linear-gradient(135deg, #21C25E, #117F3D)',
-        initials: 'Pic'
+        initials: 'Pic',
+        domain: 'picpay.com'
     },
     {
         name: 'Sicredi',
         scheme: 'sicredi://',
         intent: 'intent://#Intent;scheme=sicredi;package=br.com.sicredi.mobile.cooperado;end',
         color: 'linear-gradient(135deg, #3EA124, #66BB3F)',
-        initials: 'Sic'
+        initials: 'Sic',
+        domain: 'sicredi.com.br'
     },
     {
         name: 'Sicoob',
         scheme: 'sicoob://',
         intent: 'intent://#Intent;scheme=sicoob;package=br.com.sicoob.coopmobile;end',
         color: 'linear-gradient(135deg, #00363A, #005F60)',
-        initials: 'Sico'
+        initials: 'Sico',
+        domain: 'sicoob.com.br'
     },
     {
         name: 'BTG Pactual',
         scheme: 'btg://',
         intent: 'intent://#Intent;scheme=btg;package=com.btg.pactual.banking;end',
         color: 'linear-gradient(135deg, #0B2343, #000B1A)',
-        initials: 'BTG'
+        initials: 'BTG',
+        domain: 'btgpactual.com'
     },
     {
         name: 'C6 Bank',
         scheme: 'c6bank://',
         intent: 'intent://#Intent;scheme=c6bank;package=com.c6bank.app;end',
         color: 'linear-gradient(135deg, #1E1E1E, #000000)',
-        initials: 'C6'
+        initials: 'C6',
+        domain: 'c6bank.com.br'
     },
     {
         name: 'Neon',
         scheme: 'neon://',
         intent: 'intent://#Intent;scheme=neon;package=br.com.neon;end',
         color: 'linear-gradient(135deg, #00E5FF, #0055FF)',
-        initials: 'Neon'
+        initials: 'Neon',
+        domain: 'neon.com.br'
     },
     {
         name: 'Next',
         scheme: 'nextbank://',
         intent: 'intent://#Intent;scheme=nextbank;package=br.com.next.app;end',
         color: 'linear-gradient(135deg, #00FF5F, #000000)',
-        initials: 'next'
+        initials: 'next',
+        domain: 'next.me'
     },
     {
         name: 'Original',
         scheme: 'bancooriginal://',
         intent: 'intent://#Intent;scheme=bancooriginal;package=br.com.original.bp;end',
         color: 'linear-gradient(135deg, #1E3C3E, #2ECC71)',
-        initials: 'Orig'
+        initials: 'Orig',
+        domain: 'bancooriginal.com.br'
     },
     {
         name: 'Banrisul',
         scheme: 'banrisul://',
         intent: 'intent://#Intent;scheme=banrisul;package=br.com.banrisul.celsul;end',
         color: 'linear-gradient(135deg, #00519E, #0076D6)',
-        initials: 'Ban'
+        initials: 'Ban',
+        domain: 'banrisul.com.br'
     }
 ];
 
@@ -894,7 +912,10 @@ function renderBankGrid() {
         
         item.innerHTML = `
             ${badgeHTML}
-            <div class="bank-icon" style="background: ${bank.color}">${bank.initials}</div>
+            <div class="bank-icon" style="background: ${bank.color}">
+                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128" alt="${bank.name}" class="bank-logo-img" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <span class="bank-initials">${bank.initials}</span>
+            </div>
             <div class="bank-name">${bank.name}</div>
         `;
         

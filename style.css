@@ -1469,6 +1469,20 @@ body {
     font-size: 18px;
     margin-bottom: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.bank-logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bank-initials {
+    z-index: 1;
 }
 
 .bank-name {
