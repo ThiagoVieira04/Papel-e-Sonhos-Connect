@@ -28,6 +28,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7fbff; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
     color: var(--gray-dark);
     line-height: 1.6;
@@ -49,6 +50,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: #f7fbff; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 70%);
     opacity: 1;
     z-index: -1;
@@ -128,6 +130,7 @@ body {
 .logo {
     width: 80px;
     height: 80px;
+    background-color: #FFD966; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, var(--accent-yellow), #ffed4e);
     border-radius: 15px;
     display: flex;
@@ -194,6 +197,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    background-color: #eaf2ff; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, rgba(234, 242, 255, 0.6), rgba(247, 251, 255, 0.6));
     color: var(--gray-dark);
     padding: 10px 20px;
@@ -236,6 +240,7 @@ body {
     overflow: hidden;
     border: 1px solid var(--gray-medium);
     font-family: inherit;
+    will-change: transform, box-shadow;
 }
 
 .link-button::before {
@@ -251,24 +256,6 @@ body {
 
 .link-button:hover::before {
     left: 100%;
-}
-
-..link-button {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 18px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: var(--white);
-    transition: var(--transition);
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--gray-medium);
-    font-family: inherit;
-    will-change: transform, box-shadow;
 }
 
 .link-button:hover {
@@ -588,6 +575,7 @@ body {
 
 .copy-btn {
     padding: 10px 15px;
+    background-color: #0a2463; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
     color: var(--white);
     border: none;
@@ -635,6 +623,7 @@ body {
 .action-btn {
     width: 100%;
     padding: 12px 20px;
+    background-color: #ffb300; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, var(--accent-yellow), #ffb300);
     color: var(--primary-dark);
     border: none;
@@ -668,6 +657,7 @@ body {
     top: 30px;
     left: 50%;
     transform: translateX(-50%) translateY(-100px);
+    background-color: #4caf50; /* Fallback para dispositivos antigos */
     background: linear-gradient(135deg, #4caf50, #66bb6a);
     color: var(--white);
     padding: 15px 30px;
@@ -1329,6 +1319,7 @@ body {
    BANK MODAL SPECIFICS
    ===================== */
 .bank-modal-content {
+    background-color: #1a1a1a !important; /* Fallback para dispositivos sem suporte a transparência/rgba */
     background: rgba(26, 26, 26, 0.95) !important;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
@@ -1438,6 +1429,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 12px 8px;
+    background-color: #262626; /* Fallback para dispositivos antigos */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
@@ -1560,6 +1552,7 @@ body {
     }
 
     body {
+        background-color: #0a2463; /* Fallback para tema escuro em dispositivos antigos */
         background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%);
         color: var(--gray-dark);
     }
