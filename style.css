@@ -1544,24 +1544,95 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
+    body:not(.light-theme) {
         --white: #1a1a1a;
         --gray-light: #2d2d2d;
         --gray-medium: #3d3d3d;
         --gray-dark: #e0e0e0;
     }
 
-    body {
-        background-color: #0a2463; /* Fallback para tema escuro em dispositivos antigos */
-        background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%);
+    body:not(.light-theme) {
+        background-color: #0a2463;
+        background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%) !important;
         color: var(--gray-dark);
     }
 
-    .modal-content {
+    body:not(.light-theme) .modal-content {
         background: #1a1a1a;
     }
 
-    .link-button {
+    body:not(.light-theme) .link-button {
         background: #2d2d2d;
+    }
+
+    body:not(.light-theme) .background-gradient {
+        background-color: #0a2463;
+        background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%) !important;
+    }
+}
+
+/* Forçado via JS */
+body.dark-theme {
+    --white: #1a1a1a;
+    --gray-light: #2d2d2d;
+    --gray-medium: #3d3d3d;
+    --gray-dark: #e0e0e0;
+    
+    background-color: #0a2463;
+    background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%) !important;
+    color: var(--gray-dark);
+}
+
+body.dark-theme .modal-content {
+    background: #1a1a1a;
+}
+
+body.dark-theme .link-button {
+    background: #2d2d2d;
+}
+
+body.dark-theme .background-gradient {
+    background-color: #0a2463;
+    background: linear-gradient(135deg, #0a2463 0%, #1a4d7f 50%, #247ba0 100%) !important;
+}
+
+/* Botão de Alternar Tema (Theme Toggle) */
+.theme-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 1px solid var(--gray-medium);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--gray-dark);
+    z-index: 999;
+    transition: var(--transition);
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsividade do Botão de Tema */
+@media (max-width: 600px) {
+    .theme-toggle-btn {
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
     }
 }

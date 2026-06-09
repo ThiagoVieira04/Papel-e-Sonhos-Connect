@@ -37,6 +37,7 @@ const bankNotice = document.getElementById('bankNotice');
 // =====================
 
 document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
     initEventListeners();
     optimizeForMobile();
     detectAccessMethod();
@@ -987,3 +988,41 @@ window.openBankModal = openBankModal;
 window.getAnalytics = function() {
     return JSON.parse(localStorage.getItem('pageEvents') || '[]');
 };
+
+// =====================
+// THEME TOGGLE FUNCTION
+// =====================
+function initTheme() {
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (!themeToggleBtn) return;
+
+    const currentTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Set initial state
+    if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
+        document.body.classList.add('dark-theme');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme');
+        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-theme')) {
+            document.body.classList.remove('dark-theme');
+            document.body.classList.add('light-theme');
+            localStorage.setItem('theme', 'light');
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            trackEvent('theme_changed', { theme: 'light' });
+        } else {
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            trackEvent('theme_changed', { theme: 'dark' });
+        }
+    });
+}
+
