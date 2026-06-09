@@ -407,29 +407,11 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 215, 0, 0.2);
-    border-radius: 50%;
-    color: var(--accent-yellow);
-    transition: var(--transition);
-    border: 2px solid transparent;
-}
-
-.social-icon:hover {
-    background: rgba(255, 215, 0, 0.3);
-    transform: translateY(-4px) scale(1.1);
-    border-color: var(--accent-yellow);
+.footer-credits {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
 }
 
 /* =====================
