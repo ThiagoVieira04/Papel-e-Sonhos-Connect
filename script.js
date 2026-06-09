@@ -948,30 +948,47 @@ function copyPixKeySilent() {
 
 function handleBankRedirect(bank) {
     trackEvent('bank_redirect_attempt', { bankName: bank.name });
-    
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isAndroid = /android/.test(userAgent);
-    
+
     // Copy the pix key silently first
     copyPixKeySilent();
-    showToast('Chave Pix copiada automaticamente!', 'success');
-    
-    if (isAndroid && bank.intent) {
-        // On Android, use the Intent URL. If installed, opens app. If not, opens Google Play.
-        window.location.href = bank.intent;
-    } else {
-        // On iOS or fallback, try opening the custom scheme
-        window.location.href = bank.scheme;
-        
-        // Timeout to check if they left the browser. If not, show fallback message.
-        setTimeout(() => {
-            if (document.hidden || document.webkitHidden) {
-                return; // App opened successfully
-            }
-            
-            showToast('Abra seu aplicativo bancário e cole a chave Pix copiada automaticamente.', 'info');
-        }, 2000);
-    }
+    showToast('Chave Pix copiada! Abrindo seu banco...', 'success');
+
+    // Tenta abrir o app pelo custom scheme (funciona em Android e iOS se instalado)
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Marca o momento do clique
+    const start = Date.now();
+
+    // Tenta abrir via custom scheme usando iframe (não redireciona a página)
+    try {
+        iframe.src = bank.scheme;
+    } catch(e) {}
+
+    // Fallback: se o app não abrir em 1.5s, a página continua normalmente
+    setTimeout(() => {
+        document.body.removeChild(iframe);
+
+        const elapsed = Date.now() - start;
+        // Se a página ficou em foco durante todo o tempo, o app pode não ter aberto
+        if (!document.hidden && !document.webkitHidden) {
+            // Tenta via window.location como segunda tentativa
+            const schemeAttempt = document.createElement('a');
+            schemeAttempt.href = bank.scheme;
+            schemeAttempt.style.display = 'none';
+            document.body.appendChild(schemeAttempt);
+            schemeAttempt.click();
+            document.body.removeChild(schemeAttempt);
+
+            // Se ainda não abrir, mostra mensagem orientando o usuário
+            setTimeout(() => {
+                if (!document.hidden && !document.webkitHidden) {
+                    showToast(`App ${bank.name} não encontrado. Cole a chave Pix no seu banco manualmente.`, 'info');
+                }
+            }, 1500);
+        }
+    }, 1500);
 }
 
 // =====================
