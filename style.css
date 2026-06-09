@@ -1474,9 +1474,9 @@ body {
 }
 
 .bank-logo-img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     pointer-events: none;
     z-index: 2;
 }

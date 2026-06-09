@@ -913,7 +913,7 @@ function renderBankGrid() {
         item.innerHTML = `
             ${badgeHTML}
             <div class="bank-icon" style="background: ${bank.color}">
-                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128" alt="${bank.name}" class="bank-logo-img" onload="this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128" alt="${bank.name}" class="bank-logo-img" onload="this.parentElement.style.background='transparent'; this.parentElement.style.boxShadow='none'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
                 <span class="bank-initials">${bank.initials}</span>
             </div>
             <div class="bank-name">${bank.name}</div>
