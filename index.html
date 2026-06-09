@@ -180,6 +180,36 @@
                 <i class="fas fa-info-circle"></i>
                 Copie a chave acima para fazer o pagamento via Pix.
             </p>
+            
+            <button class="action-btn" id="openBankBtn" style="margin-top: 15px; background: linear-gradient(135deg, #00c69e, #00b1ea); color: #ffffff;">
+                <i class="fas fa-university"></i> Abrir meu banco
+            </button>
+        </div>
+    </div>
+
+    <!-- Bank Selector Modal -->
+    <div class="modal" id="bankModal">
+        <div class="modal-content bank-modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>🏦 Escolha seu banco</h2>
+            <p class="bank-modal-description">Selecione o aplicativo bancário para concluir seu pagamento Pix.</p>
+            
+            <!-- Loading state -->
+            <div class="bank-loading-container" id="bankLoading">
+                <div class="bank-spinner"></div>
+                <div class="bank-scanner"></div>
+                <p>Detectando aplicativos instalados...</p>
+            </div>
+            
+            <!-- Grid list of banks -->
+            <div class="bank-grid-container" id="bankGrid" style="display: none;">
+                <div class="bank-detection-notice" id="bankNotice">
+                    <i class="fas fa-check-circle"></i> Dispositivos compatíveis detectados
+                </div>
+                <div class="bank-grid" id="bankGridList">
+                    <!-- Bank items dynamically loaded -->
+                </div>
+            </div>
         </div>
     </div>
 

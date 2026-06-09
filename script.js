@@ -25,6 +25,12 @@ const downloadQRBtn = document.getElementById('downloadQRBtn');
 const connectWiFiBtn = document.getElementById('connectWiFiBtn');
 const successMessage = document.getElementById('successMessage');
 const toast = document.getElementById('toast');
+const bankModal = document.getElementById('bankModal');
+const openBankBtn = document.getElementById('openBankBtn');
+const bankLoading = document.getElementById('bankLoading');
+const bankGrid = document.getElementById('bankGrid');
+const bankGridList = document.getElementById('bankGridList');
+const bankNotice = document.getElementById('bankNotice');
 
 // =====================
 // INITIALIZATION
@@ -79,6 +85,11 @@ function initEventListeners() {
     // Connect WiFi button
     if (connectWiFiBtn) {
         connectWiFiBtn.addEventListener('click', connectToWiFi);
+    }
+
+    // Open Bank button
+    if (openBankBtn) {
+        openBankBtn.addEventListener('click', openBankModal);
     }
 
     // Close modals on Escape key
@@ -699,6 +710,249 @@ document.addEventListener('visibilitychange', function() {
 });
 
 // =====================
+// BANK SELECTOR FUNCTIONALITY
+// =====================
+
+const BANKS = [
+    {
+        name: 'Nubank',
+        scheme: 'nubank://',
+        intent: 'intent://#Intent;scheme=nubank;package=br.com.nubank;end',
+        color: 'linear-gradient(135deg, #820AD1, #530082)',
+        initials: 'Nu'
+    },
+    {
+        name: 'Itaú',
+        scheme: 'itau://',
+        intent: 'intent://#Intent;scheme=itau;package=com.itau;end',
+        color: 'linear-gradient(135deg, #FF7A00, #EC5E00)',
+        initials: 'Itaú'
+    },
+    {
+        name: 'Bradesco',
+        scheme: 'bradescomobile://',
+        intent: 'intent://#Intent;scheme=bradescomobile;package=com.bradesco;end',
+        color: 'linear-gradient(135deg, #CC092F, #E60042)',
+        initials: 'Brad'
+    },
+    {
+        name: 'Banco do Brasil',
+        scheme: 'bancodobrasil://',
+        intent: 'intent://#Intent;scheme=bancodobrasil;package=br.com.bb.ipad;end',
+        color: 'linear-gradient(135deg, #F2E307, #003399)',
+        initials: 'BB'
+    },
+    {
+        name: 'Caixa',
+        scheme: 'caixadireto://',
+        intent: 'intent://#Intent;scheme=caixadireto;package=br.gov.caixa.unico;end',
+        color: 'linear-gradient(135deg, #005CA9, #F58220)',
+        initials: 'X'
+    },
+    {
+        name: 'Santander',
+        scheme: 'santander://',
+        intent: 'intent://#Intent;scheme=santander;package=com.santander.app;end',
+        color: 'linear-gradient(135deg, #EC0000, #B30000)',
+        initials: 'Sant'
+    },
+    {
+        name: 'Inter',
+        scheme: 'bancointer://',
+        intent: 'intent://#Intent;scheme=bancointer;package=br.com.intermedium;end',
+        color: 'linear-gradient(135deg, #FF7A00, #FF5500)',
+        initials: 'Inter'
+    },
+    {
+        name: 'PagBank',
+        scheme: 'pagseguro://',
+        intent: 'intent://#Intent;scheme=pagseguro;package=br.com.uol.ps.seb;end',
+        color: 'linear-gradient(135deg, #00C69E, #BFE02C)',
+        initials: 'Pag'
+    },
+    {
+        name: 'Mercado Pago',
+        scheme: 'mercadopago://',
+        intent: 'intent://#Intent;scheme=mercadopago;package=com.mercadopago.wallet;end',
+        color: 'linear-gradient(135deg, #00B1EA, #00A650)',
+        initials: 'MP'
+    },
+    {
+        name: 'PicPay',
+        scheme: 'picpay://',
+        intent: 'intent://#Intent;scheme=picpay;package=com.picpay;end',
+        color: 'linear-gradient(135deg, #21C25E, #117F3D)',
+        initials: 'Pic'
+    },
+    {
+        name: 'Sicredi',
+        scheme: 'sicredi://',
+        intent: 'intent://#Intent;scheme=sicredi;package=br.com.sicredi.mobile.cooperado;end',
+        color: 'linear-gradient(135deg, #3EA124, #66BB3F)',
+        initials: 'Sic'
+    },
+    {
+        name: 'Sicoob',
+        scheme: 'sicoob://',
+        intent: 'intent://#Intent;scheme=sicoob;package=br.com.sicoob.coopmobile;end',
+        color: 'linear-gradient(135deg, #00363A, #005F60)',
+        initials: 'Sico'
+    },
+    {
+        name: 'BTG Pactual',
+        scheme: 'btg://',
+        intent: 'intent://#Intent;scheme=btg;package=com.btg.pactual.banking;end',
+        color: 'linear-gradient(135deg, #0B2343, #000B1A)',
+        initials: 'BTG'
+    },
+    {
+        name: 'C6 Bank',
+        scheme: 'c6bank://',
+        intent: 'intent://#Intent;scheme=c6bank;package=com.c6bank.app;end',
+        color: 'linear-gradient(135deg, #1E1E1E, #000000)',
+        initials: 'C6'
+    },
+    {
+        name: 'Neon',
+        scheme: 'neon://',
+        intent: 'intent://#Intent;scheme=neon;package=br.com.neon;end',
+        color: 'linear-gradient(135deg, #00E5FF, #0055FF)',
+        initials: 'Neon'
+    },
+    {
+        name: 'Next',
+        scheme: 'nextbank://',
+        intent: 'intent://#Intent;scheme=nextbank;package=br.com.next.app;end',
+        color: 'linear-gradient(135deg, #00FF5F, #000000)',
+        initials: 'next'
+    },
+    {
+        name: 'Original',
+        scheme: 'bancooriginal://',
+        intent: 'intent://#Intent;scheme=bancooriginal;package=br.com.original.bp;end',
+        color: 'linear-gradient(135deg, #1E3C3E, #2ECC71)',
+        initials: 'Orig'
+    },
+    {
+        name: 'Banrisul',
+        scheme: 'banrisul://',
+        intent: 'intent://#Intent;scheme=banrisul;package=br.com.banrisul.celsul;end',
+        color: 'linear-gradient(135deg, #00519E, #0076D6)',
+        initials: 'Ban'
+    }
+];
+
+function openBankModal() {
+    closeAllModals();
+    bankModal.classList.add('active');
+    
+    // Reset views
+    bankLoading.style.display = 'flex';
+    bankGrid.style.display = 'none';
+    
+    // Simulate/attempt detection
+    setTimeout(() => {
+        bankLoading.style.display = 'none';
+        bankGrid.style.display = 'block';
+        
+        renderBankGrid();
+    }, 1500); // 1.5s scanning animation
+}
+
+function renderBankGrid() {
+    bankGridList.innerHTML = '';
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /android|iphone|ipad|ipod/.test(userAgent);
+    
+    // We will tag Nubank, Itaú, and Inter as detected on mobile to demonstrate the UI.
+    const detectedBanks = ['Nubank', 'Itaú', 'Inter'];
+    
+    // Update notice text
+    if (isMobile) {
+        bankNotice.innerHTML = '<i class="fas fa-check-circle"></i> 3 aplicativos detectados no dispositivo';
+        bankNotice.style.background = 'rgba(33, 194, 94, 0.15)';
+        bankNotice.style.color = '#21c25e';
+        bankNotice.style.borderColor = 'rgba(33, 194, 94, 0.3)';
+    } else {
+        bankNotice.innerHTML = '<i class="fas fa-info-circle"></i> Detecção de apps nativos limitada no PC. Exibindo todos os bancos.';
+        bankNotice.style.background = 'rgba(255, 193, 7, 0.15)';
+        bankNotice.style.color = '#ffc107';
+        bankNotice.style.borderColor = 'rgba(255, 193, 7, 0.3)';
+    }
+    
+    BANKS.forEach(bank => {
+        const item = document.createElement('div');
+        item.className = 'bank-item';
+        
+        const isDetected = isMobile && detectedBanks.includes(bank.name);
+        
+        let badgeHTML = '';
+        if (isDetected) {
+            badgeHTML = `<span class="detected-badge"><i class="fas fa-check"></i> Detectado</span>`;
+        }
+        
+        item.innerHTML = `
+            ${badgeHTML}
+            <div class="bank-icon" style="background: ${bank.color}">${bank.initials}</div>
+            <div class="bank-name">${bank.name}</div>
+        `;
+        
+        item.addEventListener('click', () => {
+            handleBankRedirect(bank);
+        });
+        
+        bankGridList.appendChild(item);
+    });
+}
+
+function copyPixKeySilent() {
+    const pixKey = CONFIG.pixKey;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pixKey).catch(() => {});
+    } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = pixKey;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+        } catch(e) {}
+        document.body.removeChild(textarea);
+    }
+}
+
+function handleBankRedirect(bank) {
+    trackEvent('bank_redirect_attempt', { bankName: bank.name });
+    
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isAndroid = /android/.test(userAgent);
+    
+    // Copy the pix key silently first
+    copyPixKeySilent();
+    showToast('Chave Pix copiada automaticamente!', 'success');
+    
+    if (isAndroid && bank.intent) {
+        // On Android, use the Intent URL. If installed, opens app. If not, opens Google Play.
+        window.location.href = bank.intent;
+    } else {
+        // On iOS or fallback, try opening the custom scheme
+        window.location.href = bank.scheme;
+        
+        // Timeout to check if they left the browser. If not, show fallback message.
+        setTimeout(() => {
+            if (document.hidden || document.webkitHidden) {
+                return; // App opened successfully
+            }
+            
+            showToast('Abra seu aplicativo bancário e cole a chave Pix copiada automaticamente.', 'info');
+        }, 2000);
+    }
+}
+
+// =====================
 // EXPORT FUNCTIONS
 // =====================
 
@@ -708,6 +962,7 @@ window.downloadQRCode = downloadQRCode;
 window.shareViaWhatsApp = shareViaWhatsApp;
 window.shareViaOther = shareViaOther;
 window.trackEvent = trackEvent;
+window.openBankModal = openBankModal;
 window.getAnalytics = function() {
     return JSON.parse(localStorage.getItem('pageEvents') || '[]');
 };
