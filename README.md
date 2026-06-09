@@ -96,7 +96,8 @@ Papel-e-Sonhos-Connect/
 ├── 🎨 style.css           ← Visual e cores da página
 ├── ⚙️  script.js           ← Lógica, QR Codes e configurações
 │
-├── 🖼️  logo.jpg            ← Logo da loja
+├── 🖼️  logo.jpg            ← Logo da loja (versão original)
+├── 🖼️  logo.png            ← Ícone da página (favicon) e redes sociais
 ├── 🖼️  logo-google.png     ← Ícone do botão Google
 ├── 🖼️  pix.png             ← Ícone do botão Pix
 ├── 🖼️  local.gif           ← Ícone animado de localização
