@@ -695,6 +695,18 @@ body {
     transform: translateX(0);
 }
 
+.toast.info {
+    background: #0a2463;
+}
+
+.toast.success {
+    background: #21c25e;
+}
+
+.toast.error {
+    background: #d32f2f;
+}
+
 /* =====================
    RESPONSIVE DESIGN
    ===================== */
@@ -1429,6 +1441,17 @@ body {
 
 .bank-item:active {
     transform: scale(0.95);
+}
+
+.bank-loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-yellow);
+    font-size: 20px;
+    z-index: 10;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .bank-icon {

@@ -714,220 +714,274 @@ document.addEventListener('visibilitychange', function() {
 // BANK SELECTOR FUNCTIONALITY
 // =====================
 
+// Package names oficiais + lojas + web fallback para cada banco.
 const BANKS = [
     {
         name: 'Nubank',
         scheme: 'nubank://',
-        intent: 'intent://#Intent;scheme=nubank;package=br.com.nubank;end',
+        packageName: 'com.nu.production',
         color: 'linear-gradient(135deg, #820AD1, #530082)',
         initials: 'Nu',
-        domain: 'nubank.com.br'
+        domain: 'nubank.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.nu.production',
+        appStore: 'https://apps.apple.com/app/nubank/id814572894',
+        webUrl: 'https://nubank.com.br'
     },
     {
         name: 'Itaú',
         scheme: 'itau://',
-        intent: 'intent://#Intent;scheme=itau;package=com.itau;end',
+        packageName: 'com.itau',
         color: 'linear-gradient(135deg, #FF7A00, #EC5E00)',
         initials: 'Itaú',
-        domain: 'itau.com.br'
+        domain: 'itau.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.itau',
+        appStore: 'https://apps.apple.com/app/itau/id503168593',
+        webUrl: 'https://www.itau.com.br'
     },
     {
         name: 'Bradesco',
         scheme: 'bradescomobile://',
-        intent: 'intent://#Intent;scheme=bradescomobile;package=com.bradesco;end',
+        packageName: 'com.bradesco',
         color: 'linear-gradient(135deg, #CC092F, #E60042)',
         initials: 'Brad',
-        domain: 'bradesco.com.br'
+        domain: 'bradesco.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.bradesco',
+        appStore: 'https://apps.apple.com/app/bradesco/id495329932',
+        webUrl: 'https://banco.bradesco'
     },
     {
         name: 'Banco do Brasil',
         scheme: 'bancodobrasil://',
-        intent: 'intent://#Intent;scheme=bancodobrasil;package=br.com.bb.ipad;end',
+        packageName: 'br.com.bb.android',
         color: 'linear-gradient(135deg, #F2E307, #003399)',
         initials: 'BB',
-        domain: 'bb.com.br'
+        domain: 'bb.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.bb.android',
+        appStore: 'https://apps.apple.com/app/banco-do-brasil/id485729790',
+        webUrl: 'https://www.bb.com.br'
     },
     {
         name: 'Caixa',
         scheme: 'caixadireto://',
-        intent: 'intent://#Intent;scheme=caixadireto;package=br.gov.caixa.unico;end',
+        packageName: 'br.com.gabba.Caixa',
         color: 'linear-gradient(135deg, #005CA9, #F58220)',
         initials: 'X',
-        domain: 'caixa.gov.br'
+        domain: 'caixa.gov.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.gabba.Caixa',
+        appStore: 'https://apps.apple.com/app/caixa/id494956025',
+        webUrl: 'https://www.caixa.gov.br'
     },
     {
         name: 'Santander',
         scheme: 'santander://',
-        intent: 'intent://#Intent;scheme=santander;package=com.santander.app;end',
+        packageName: 'com.santander.app',
         color: 'linear-gradient(135deg, #EC0000, #B30000)',
         initials: 'Sant',
-        domain: 'santander.com.br'
+        domain: 'santander.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.santander.app',
+        appStore: 'https://apps.apple.com/app/santander/id544045818',
+        webUrl: 'https://www.santander.com.br'
     },
     {
         name: 'Inter',
         scheme: 'bancointer://',
-        intent: 'intent://#Intent;scheme=bancointer;package=br.com.intermedium;end',
+        packageName: 'br.com.intermedium',
         color: 'linear-gradient(135deg, #FF7A00, #FF5500)',
         initials: 'Inter',
-        domain: 'bancointer.com.br'
+        domain: 'bancointer.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.intermedium',
+        appStore: 'https://apps.apple.com/app/inter&id894135880',
+        webUrl: 'https://www.bancointer.com.br'
     },
     {
         name: 'PagBank',
         scheme: 'pagseguro://',
-        intent: 'intent://#Intent;scheme=pagseguro;package=br.com.uol.ps.seb;end',
+        packageName: 'br.com.pagseguro.app',
         color: 'linear-gradient(135deg, #00C69E, #BFE02C)',
         initials: 'Pag',
-        domain: 'pagseguro.com.br'
+        domain: 'pagseguro.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.pagseguro.app',
+        appStore: 'https://apps.apple.com/app/pagbank/id1014025623',
+        webUrl: 'https://pagseguro.uol.com.br'
     },
     {
         name: 'Mercado Pago',
         scheme: 'mercadopago://',
-        intent: 'intent://#Intent;scheme=mercadopago;package=com.mercadopago.wallet;end',
+        packageName: 'com.mercadopago.wallet',
         color: 'linear-gradient(135deg, #00B1EA, #00A650)',
         initials: 'MP',
-        domain: 'mercadopago.com.br'
+        domain: 'mercadopago.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.mercadopago.wallet',
+        appStore: 'https://apps.apple.com/app/mercado-pago/id921999318',
+        webUrl: 'https://www.mercadopago.com.br'
     },
     {
         name: 'PicPay',
         scheme: 'picpay://',
-        intent: 'intent://#Intent;scheme=picpay;package=com.picpay;end',
+        packageName: 'com.picpay',
         color: 'linear-gradient(135deg, #21C25E, #117F3D)',
         initials: 'Pic',
-        domain: 'picpay.com'
+        domain: 'picpay.com',
+        playStore: 'https://play.google.com/store/apps/details?id=com.picpay',
+        appStore: 'https://apps.apple.com/app/picpay/id824695593',
+        webUrl: 'https://picpay.com'
     },
     {
         name: 'Sicredi',
         scheme: 'sicredi://',
-        intent: 'intent://#Intent;scheme=sicredi;package=br.com.sicredi.mobile.cooperado;end',
+        packageName: 'br.com.sicredi.mobile.cooperado',
         color: 'linear-gradient(135deg, #3EA124, #66BB3F)',
         initials: 'Sic',
-        domain: 'sicredi.com.br'
+        domain: 'sicredi.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.sicredi.mobile.cooperado',
+        appStore: 'https://apps.apple.com/app/sicredi/id1108959623',
+        webUrl: 'https://www.sicredi.com.br'
     },
     {
         name: 'Sicoob',
         scheme: 'sicoob://',
-        intent: 'intent://#Intent;scheme=sicoob;package=br.com.sicoob.coopmobile;end',
+        packageName: 'br.com.sicoob.coopmobile',
         color: 'linear-gradient(135deg, #00363A, #005F60)',
         initials: 'Sico',
-        domain: 'sicoob.com.br'
+        domain: 'sicoob.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.sicoob.coopmobile',
+        appStore: 'https://apps.apple.com/app/sicoob/id1146028271',
+        webUrl: 'https://www.sicoob.com.br'
     },
     {
         name: 'BTG Pactual',
         scheme: 'btg://',
-        intent: 'intent://#Intent;scheme=btg;package=com.btg.pactual.banking;end',
+        packageName: 'com.btg.pactual.banking',
         color: 'linear-gradient(135deg, #0B2343, #000B1A)',
         initials: 'BTG',
-        domain: 'btgpactual.com'
+        domain: 'btgpactual.com',
+        playStore: 'https://play.google.com/store/apps/details?id=com.btg.pactual.banking',
+        appStore: 'https://apps.apple.com/app/btg-pactual/id1113426498',
+        webUrl: 'https://www.btgpactual.com'
     },
     {
         name: 'C6 Bank',
         scheme: 'c6bank://',
-        intent: 'intent://#Intent;scheme=c6bank;package=com.c6bank.app;end',
+        packageName: 'com.c6bank.app',
         color: 'linear-gradient(135deg, #1E1E1E, #000000)',
         initials: 'C6',
-        domain: 'c6bank.com.br'
+        domain: 'c6bank.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=com.c6bank.app',
+        appStore: 'https://apps.apple.com/app/c6-bank/id1200405240',
+        webUrl: 'https://www.c6bank.com.br'
     },
     {
         name: 'Neon',
         scheme: 'neon://',
-        intent: 'intent://#Intent;scheme=neon;package=br.com.neon;end',
+        packageName: 'br.com.neon',
         color: 'linear-gradient(135deg, #00E5FF, #0055FF)',
         initials: 'Neon',
-        domain: 'neon.com.br'
+        domain: 'neon.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.neon',
+        appStore: 'https://apps.apple.com/app/neon-conta-digital/id1071413408',
+        webUrl: 'https://www.neon.com.br'
     },
     {
         name: 'Next',
         scheme: 'nextbank://',
-        intent: 'intent://#Intent;scheme=nextbank;package=br.com.next.app;end',
+        packageName: 'br.com.next.app',
         color: 'linear-gradient(135deg, #00FF5F, #000000)',
         initials: 'next',
-        domain: 'next.me'
+        domain: 'next.me',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.next.app',
+        appStore: 'https://apps.apple.com/app/next-banco-digital/id1254603911',
+        webUrl: 'https://next.me'
     },
     {
         name: 'Original',
         scheme: 'bancooriginal://',
-        intent: 'intent://#Intent;scheme=bancooriginal;package=br.com.original.bp;end',
+        packageName: 'br.com.original.bp',
         color: 'linear-gradient(135deg, #1E3C3E, #2ECC71)',
         initials: 'Orig',
-        domain: 'bancooriginal.com.br'
+        domain: 'bancooriginal.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.original.bp',
+        appStore: 'https://apps.apple.com/app/banco-original/id1107051060',
+        webUrl: 'https://www.bancooriginal.com.br'
     },
     {
         name: 'Banrisul',
         scheme: 'banrisul://',
-        intent: 'intent://#Intent;scheme=banrisul;package=br.com.banrisul.celsul;end',
+        packageName: 'br.com.banrisul.celsul',
         color: 'linear-gradient(135deg, #00519E, #0076D6)',
         initials: 'Ban',
-        domain: 'banrisul.com.br'
+        domain: 'banrisul.com.br',
+        playStore: 'https://play.google.com/store/apps/details?id=br.com.banrisul.celsul',
+        appStore: 'https://apps.apple.com/app/banrisul/id1071972384',
+        webUrl: 'https://www.banrisul.com.br'
     }
 ];
+
+// Detecta se o dispositivo é Android, iOS ou desktop
+function detectPlatform() {
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = /android/.test(ua);
+    const isIOS = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isMobile = isAndroid || isIOS;
+    return { isAndroid, isIOS, isMobile };
+}
 
 function openBankModal() {
     closeAllModals();
     bankModal.classList.add('active');
-    
+
     // Reset views
     bankLoading.style.display = 'flex';
     bankGrid.style.display = 'none';
-    
-    // Simulate/attempt detection
+
+    // Simula tempo de detecção com animação
     setTimeout(() => {
         bankLoading.style.display = 'none';
         bankGrid.style.display = 'block';
-        
         renderBankGrid();
-    }, 1500); // 1.5s scanning animation
+    }, 1500);
 }
 
 function renderBankGrid() {
     bankGridList.innerHTML = '';
-    
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobile = /android|iphone|ipad|ipod/.test(userAgent);
-    
-    // We will tag Nubank, Itaú, and Inter as detected on mobile to demonstrate the UI.
-    const detectedBanks = ['Nubank', 'Itaú', 'Inter'];
-    
-    // Update notice text
+    const { isMobile, isAndroid } = detectPlatform();
+
     if (isMobile) {
-        bankNotice.innerHTML = '<i class="fas fa-check-circle"></i> 3 aplicativos detectados no dispositivo';
+        const platformLabel = isAndroid ? 'Android' : 'iOS';
+        bankNotice.innerHTML = `<i class="fas fa-info-circle"></i> Toque no banco para abrir o aplicativo (${platformLabel})`;
         bankNotice.style.background = 'rgba(33, 194, 94, 0.15)';
         bankNotice.style.color = '#21c25e';
         bankNotice.style.borderColor = 'rgba(33, 194, 94, 0.3)';
     } else {
-        bankNotice.innerHTML = '<i class="fas fa-info-circle"></i> Detecção de apps nativos limitada no PC. Exibindo todos os bancos.';
+        bankNotice.innerHTML = '<i class="fas fa-info-circle"></i> No computador, você será redirecionado ao site do banco.';
         bankNotice.style.background = 'rgba(255, 193, 7, 0.15)';
         bankNotice.style.color = '#ffc107';
         bankNotice.style.borderColor = 'rgba(255, 193, 7, 0.3)';
     }
-    
+
     BANKS.forEach(bank => {
         const item = document.createElement('div');
         item.className = 'bank-item';
-        
-        const isDetected = isMobile && detectedBanks.includes(bank.name);
-        
-        let badgeHTML = '';
-        if (isDetected) {
-            badgeHTML = `<span class="detected-badge"><i class="fas fa-check"></i> Detectado</span>`;
-        }
-        
+
         item.innerHTML = `
-            ${badgeHTML}
             <div class="bank-icon" style="background: ${bank.color}">
-                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128" alt="${bank.name}" class="bank-logo-img" onload="this.parentElement.style.background='transparent'; this.parentElement.style.boxShadow='none'; this.nextElementSibling.style.display='none';" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128"
+                     alt="${bank.name}" class="bank-logo-img"
+                     onload="this.parentElement.style.background='transparent'; this.parentElement.style.boxShadow='none'; this.nextElementSibling.style.display='none';"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
                 <span class="bank-initials">${bank.initials}</span>
             </div>
             <div class="bank-name">${bank.name}</div>
         `;
-        
+
         item.addEventListener('click', () => {
-            handleBankRedirect(bank);
+            handleBankRedirect(bank, item);
         });
-        
+
         bankGridList.appendChild(item);
     });
 }
 
+// Copia a chave Pix silenciosamente (sem feedback visual)
 function copyPixKeySilent() {
     const pixKey = CONFIG.pixKey;
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -946,49 +1000,206 @@ function copyPixKeySilent() {
     }
 }
 
-function handleBankRedirect(bank) {
+/**
+ * Abre o aplicativo bancário ou redireciona para loja/site.
+ *
+ * Fluxo:
+ * 1. Copia a chave Pix para a área de transferência.
+ * 2. Android: usa intent:// URI → tenta abrir o app. Se falhar, abre Play Store.
+ * 3. iOS: tenta abrir via custom scheme. Se falhar, abre App Store.
+ * 4. Desktop: redireciona direto para o site do banco.
+ *
+ * A detecção de "falha" é feita observando se a janela perdeu foco
+ * (indicando que um app externo foi aberto) ou se o timer expirou.
+ */
+function handleBankRedirect(bank, itemElement) {
     trackEvent('bank_redirect_attempt', { bankName: bank.name });
 
-    // Copy the pix key silently first
+    // Copia a chave Pix para o clipboard antes de redirecionar
     copyPixKeySilent();
-    showToast('Chave Pix copiada! Abrindo seu banco...', 'success');
 
-    // Tenta abrir o app pelo custom scheme (funciona em Android e iOS se instalado)
+    const { isAndroid, isIOS } = detectPlatform();
+
+    // Estado visual de carregamento no item clicado
+    const originalContent = itemElement.innerHTML;
+    itemElement.style.opacity = '0.6';
+    itemElement.style.pointerEvents = 'none';
+    itemElement.innerHTML += '<span class="bank-loading-indicator"><i class="fas fa-spinner fa-spin"></i></span>';
+
+    showToast('Chave Pix copiada! Abrindo banco...', 'success');
+
+    // Registra momento do clique para medir se o app abriu
+    const clickTimestamp = Date.now();
+
+    if (isAndroid) {
+        openBankAndroid(bank, itemElement, originalContent, clickTimestamp);
+    } else if (isIOS) {
+        openBankIOS(bank, itemElement, originalContent, clickTimestamp);
+    } else {
+        openBankDesktop(bank, itemElement, originalContent);
+    }
+}
+
+/**
+ * Android: Utiliza Intent URI para abrir o app bancário.
+ * Formato: intent://#Intent;package=<pkg>;scheme=<scheme>;end
+ * Se o app não estiver instalado, o Android ignorará o intent silenciosamente.
+ * Detectamos isso monitorando foco da janela e timer.
+ */
+function openBankAndroid(bank, itemElement, originalContent, clickTimestamp) {
+    // Constrói a Intent URI corretamente
+    const intentUri = `intent://#Intent;package=${bank.packageName};scheme=${bank.scheme.replace('://', '')};end`;
+
+    // Cria iframe invisível para tentar o intent (não redireciona a página)
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
     document.body.appendChild(iframe);
 
-    // Marca o momento do clique
-    const start = Date.now();
-
-    // Tenta abrir via custom scheme usando iframe (não redireciona a página)
     try {
-        iframe.src = bank.scheme;
+        iframe.src = intentUri;
     } catch(e) {}
 
-    // Fallback: se o app não abrir em 1.5s, a página continua normalmente
+    // Também tenta via window.location como alternativa
     setTimeout(() => {
-        document.body.removeChild(iframe);
+        try {
+            window.location.href = intentUri;
+        } catch(e) {}
+    }, 300);
 
-        const elapsed = Date.now() - start;
-        // Se a página ficou em foco durante todo o tempo, o app pode não ter aberto
-        if (!document.hidden && !document.webkitHidden) {
-            // Tenta via window.location como segunda tentativa
-            const schemeAttempt = document.createElement('a');
-            schemeAttempt.href = bank.scheme;
-            schemeAttempt.style.display = 'none';
-            document.body.appendChild(schemeAttempt);
-            schemeAttempt.click();
-            document.body.removeChild(schemeAttempt);
+    // Monitora se a janela perdeu foco (app abriu) ou se o timer expirou
+    let appOpened = false;
 
-            // Se ainda não abrir, mostra mensagem orientando o usuário
-            setTimeout(() => {
-                if (!document.hidden && !document.webkitHidden) {
-                    showToast(`App ${bank.name} não encontrado. Cole a chave Pix no seu banco manualmente.`, 'info');
-                }
-            }, 1500);
+    const onVisibilityChange = () => {
+        if (document.hidden || document.webkitHidden) {
+            appOpened = true;
+            cleanup();
+            restoreItem(itemElement, originalContent);
         }
-    }, 1500);
+    };
+
+    const onFocusChange = () => {
+        // Se a janela ganhou foco novamente após perder, pode ter voltado do app
+        if (appOpened) {
+            cleanup();
+            restoreItem(itemElement, originalContent);
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onFocusChange);
+        clearTimeout(fallbackTimer);
+        try { document.body.removeChild(iframe); } catch(e) {}
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', onFocusChange);
+
+    // Fallback: se após 2.5s a janela ainda estiver em foco, o app provavelmente não existe
+    const fallbackTimer = setTimeout(() => {
+        cleanup();
+
+        if (!document.hidden && !document.webkitHidden) {
+            // App não abriu — redireciona para a Play Store
+            showToast(`${bank.name} não instalado. Abrindo Play Store...`, 'info');
+            setTimeout(() => {
+                window.open(bank.playStore, '_blank', 'noopener,noreferrer');
+                restoreItem(itemElement, originalContent);
+            }, 800);
+        } else {
+            restoreItem(itemElement, originalContent);
+        }
+    }, 2500);
+
+    // Se em 800ms não perdeu foco, limpa visualmente (o intent pode estar processando)
+    setTimeout(() => {
+        if (!appOpened) {
+            restoreItem(itemElement, originalContent);
+        }
+    }, 800);
+}
+
+/**
+ * iOS: Tenta abrir via custom URL scheme (Safari suporta melhor que Chrome).
+ * Se o app não estiver instalado, Safari mostrará um alert genérico.
+ * Fallback: App Store.
+ */
+function openBankIOS(bank, itemElement, originalContent, clickTimestamp) {
+    // No iOS, tentamos via window.location (Safari trata custom schemes)
+    let appOpened = false;
+
+    const onVisibilityChange = () => {
+        if (document.hidden || document.webkitHidden) {
+            appOpened = true;
+            cleanup();
+            restoreItem(itemElement, originalContent);
+        }
+    };
+
+    const onFocusChange = () => {
+        if (appOpened) {
+            cleanup();
+            restoreItem(itemElement, originalContent);
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        window.removeEventListener('blur', onFocusChange);
+        clearTimeout(fallbackTimer);
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('blur', onFocusChange);
+
+    // Tenta abrir o app via custom scheme
+    try {
+        window.location.href = bank.scheme;
+    } catch(e) {
+        // Se lançar erro, vai direto para o fallback
+    }
+
+    // Fallback: se após 2.5s nada aconteceu, vai para a App Store
+    const fallbackTimer = setTimeout(() => {
+        cleanup();
+
+        if (!document.hidden && !document.webkitHidden) {
+            showToast(`${bank.name} não instalado. Abrindo App Store...`, 'info');
+            setTimeout(() => {
+                window.open(bank.appStore, '_blank', 'noopener,noreferrer');
+                restoreItem(itemElement, originalContent);
+            }, 800);
+        } else {
+            restoreItem(itemElement, originalContent);
+        }
+    }, 2500);
+
+    setTimeout(() => {
+        if (!appOpened) {
+            restoreItem(itemElement, originalContent);
+        }
+    }, 800);
+}
+
+/**
+ * Desktop: Redireciona para o site oficial do banco.
+ */
+function openBankDesktop(bank, itemElement, originalContent) {
+    showToast('Redirecionando para o site do banco...', 'info');
+    setTimeout(() => {
+        window.open(bank.webUrl, '_blank', 'noopener,noreferrer');
+        restoreItem(itemElement, originalContent);
+    }, 500);
+}
+
+/** Restaura o visual do item bancário após tentativa de abertura */
+function restoreItem(itemElement, originalContent) {
+    itemElement.style.opacity = '1';
+    itemElement.style.pointerEvents = 'auto';
+    const indicator = itemElement.querySelector('.bank-loading-indicator');
+    if (indicator) indicator.remove();
 }
 
 // =====================
