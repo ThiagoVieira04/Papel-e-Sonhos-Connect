@@ -267,140 +267,266 @@ function downloadQRCode() {
 function openWiFiModal() {
     closeAllModals();
     wifiModal.classList.add('active');
-    generateWiFiQRCode();
     
     if (window.innerWidth < 768) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-function generateWiFiQRCode() {
-    const container = document.getElementById('wifiQRCode');
-    
-    // Clear previous QR code
-    container.innerHTML = '';
-    
-    // WiFi data in standard format
-    // Format: WIFI:T:WPA;S:SSID;P:PASSWORD;;
-    const wifiString = 'WIFI:T:WPA;S:TSDINFORMATICA;P:t04101986;;';
-    
-    try {
-        new QRCode(container, {
-            text: wifiString,
-            width: 200,
-            height: 200,
-            colorDark: '#0a2463',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.H
-        });
-    } catch(e) {
-        console.error('Erro ao gerar QR Code WiFi:', e);
-        container.innerHTML = '<p style="color: #d32f2f;">Erro ao gerar QR Code</p>';
-    }
-}
+// =====================
+// WiFi CREDENTIALS (centralizadas)
+// =====================
+const WIFI_CONFIG = {
+    ssid: 'TSDINFORMATICA',
+    password: 't04101986',
+    security: 'WPA2'
+};
 
+/**
+ * Conecta ao WiFi: detecta plataforma e abre configurações ou exibe instruções.
+ *
+ * Android (Chrome 6+): Intent URI intent:// abre diretamente as configurações de Wi-Fi.
+ * iOS (Safari): Apple bloqueia a abertura programática das configurações de Wi-Fi
+ *   a partir do navegador. Exibe modal com instruções e opção de copiar a senha.
+ * Desktop: Exibe mensagem informativa de que o recurso é apenas para móvel.
+ */
 function connectToWiFi() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(userAgent);
-    const isAndroid = /android/.test(userAgent);
-    const wifiSSID = 'TSDINFORMATICA';
-    const wifiPassword = 't04101986';
-    
     trackEvent('wifi_connect_button_clicked', {});
-    
+    const { isAndroid, isIOS, isMobile } = detectPlatform();
+
     if (isAndroid) {
-        connectAndroid();
+        openAndroidWifiSettings();
     } else if (isIOS) {
-        connectIOS();
+        openIOSWifiSettings();
     } else {
-        showWiFiInstructions(wifiSSID, wifiPassword);
+        showDesktopWifiMessage();
     }
 }
 
-function connectAndroid() {
-    const wifiSSID = 'TSDINFORMATICA';
-    const wifiPassword = 't04101986';
-    
-    // Método 1: Intent específico para Settings WiFi
-    const intents = [
-        'intent://net.settings.Wireless#Intent;action=android.intent.action.MAIN;end',
-        'intent://net.settings.Settings#Intent;action=android.intent.action.MAIN;end',
-        'android-app://com.android.settings/net/wifi',
-        'android-app://com.android.settings/',
-    ];
-    
-    let intentIndex = 0;
-    
-    function tryNextIntent() {
-        if (intentIndex < intents.length) {
+/**
+ * Android: Abre as configurações de Wi-Fi via Intent URI.
+ *
+ * O Intent "android.settings.WIFI_SETTINGS" é o oficial do Android
+ * e funciona no Chrome para Android (navegador e PWA instalada).
+ * Formato correto: intent://#Intent;action=<ACTION>;end
+ *
+ * Referência: https://developer.android.com/reference/android/provider/Settings#ACTION_WIFI_SETTINGS
+ */
+function openAndroidWifiSettings() {
+    const wifiIntent = 'intent://#Intent;action=android.settings.WIFI_SETTINGS;end';
+    let opened = false;
+
+    // Monitora se a janela perdeu foco (indicando que as configurações abriram)
+    const onVisibilityChange = () => {
+        if (document.hidden || document.webkitHidden) {
+            opened = true;
+            cleanup();
+            showToast('Configurações de Wi-Fi abertas!', 'success');
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        clearTimeout(fallbackTimer);
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    // Tenta abrir o Intent
+    try {
+        window.location.href = wifiIntent;
+    } catch(e) {
+        // Se lançar erro, vai direto para o fallback
+        cleanup();
+        showWifiFallbackModal();
+        return;
+    }
+
+    // Fallback: se após 2s a janela ainda estiver visível, o Intent não funcionou
+    const fallbackTimer = setTimeout(() => {
+        cleanup();
+
+        if (!document.hidden && !document.webkitHidden) {
+            showWifiFallbackModal();
+        }
+    }, 2000);
+}
+
+/**
+ * iOS: Tenta abrir os Ajustes via URL schemes.
+ *
+ * LIMITAÇÃO DO iOS: A Apple bloqueou os schemes "App-Prefs:root=WIFI" e
+ * "prefs:root=WIFI" a partir do iOS 10. Esses schemes NÃO funcionam mais
+ * em Safari ou PWAs no iOS. Não existe alternativa programática para abrir
+ * diretamente a tela de Wi-Fi no iOS a partir de uma página web.
+ *
+ * Estratégia:
+ * 1. Tenta "App-Prefs:root=WIFI" (pode funcionar em alguns WebViews)
+ * 2. Tenta "App-Prefs:" (abre os Ajustes gerais)
+ * 3. Exibe modal com instruções + botão para copiar senha
+ */
+function openIOSWifiSettings() {
+    let opened = false;
+
+    const onVisibilityChange = () => {
+        if (document.hidden || document.webkitHidden) {
+            opened = true;
+            cleanup();
+        }
+    };
+
+    const cleanup = () => {
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+        clearTimeout(fallbackTimer);
+        clearTimeout(iOSFallback2);
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    // Tentativa 1: Abrir diretamente a página de Wi-Fi (bloqueado no iOS 10+)
+    try {
+        window.location.href = 'App-Prefs:root=WIFI';
+    } catch(e) {}
+
+    // Tentativa 2: Abrir os Ajustes gerais (pode funcionar em alguns contextos)
+    const iOSFallback2 = setTimeout(() => {
+        if (!opened) {
             try {
-                window.location.href = intents[intentIndex];
-                intentIndex++;
-                setTimeout(tryNextIntent, 800);
-            } catch (e) {
-                intentIndex++;
-                tryNextIntent();
+                window.location.href = 'App-Prefs:';
+            } catch(e) {}
+        }
+    }, 800);
+
+    // Fallback: exibe modal com instruções
+    const fallbackTimer = setTimeout(() => {
+        cleanup();
+
+        if (!document.hidden && !document.webkitHidden) {
+            showWifiFallbackModal();
+        }
+    }, 2000);
+}
+
+/**
+ * Desktop: Exibe mensagem informando que o recurso é apenas para móveis.
+ * Não tenta abrir nada do sistema operacional.
+ */
+function showDesktopWifiMessage() {
+    showWifiFallbackModal();
+}
+
+/**
+ * Modal de fallback WiFi: exibe instruções e permite copiar a senha.
+ * Usado quando não é possível abrir as configurações automaticamente.
+ */
+function showWifiFallbackModal() {
+    const { ssid, password, security } = WIFI_CONFIG;
+
+    // Fecha outros modais antes de abrir o de fallback
+    closeAllModals();
+
+    // Cria o modal de fallback dinamicamente
+    let fallbackModal = document.getElementById('wifiFallbackModal');
+    if (!fallbackModal) {
+        fallbackModal = document.createElement('div');
+        fallbackModal.id = 'wifiFallbackModal';
+        fallbackModal.className = 'modal';
+        fallbackModal.innerHTML = `
+            <div class="modal-content">
+                <button class="modal-close" id="wifiFallbackClose">&times;</button>
+                <h2>Conectar ao WiFi</h2>
+
+                <div class="wifi-info" style="margin-bottom: 16px;">
+                    <p><strong>Rede:</strong> ${ssid}</p>
+                    <p><strong>Senha:</strong> ${password}</p>
+                    <p><strong>Segurança:</strong> ${security}</p>
+                </div>
+
+                <p style="font-size: 13px; color: var(--gray-dark); opacity: 0.8; margin-bottom: 16px; line-height: 1.6;">
+                    Não foi possível abrir as configurações de Wi-Fi automaticamente.<br>
+                    Siga os passos abaixo para se conectar:
+                </p>
+
+                <div class="wifi-steps" style="margin-bottom: 16px;">
+                    <ol class="steps-list">
+                        <li>Abra <strong>Ajustes</strong> no seu dispositivo</li>
+                        <li>Toque em <strong>Wi-Fi</strong></li>
+                        <li>Procure por <strong>${ssid}</strong></li>
+                        <li>Digite a senha: <strong>${password}</strong></li>
+                    </ol>
+                </div>
+
+                <button class="action-btn" id="wifiFallbackCopyBtn" style="background: linear-gradient(135deg, #3498db, #2980b9); color: #fff;">
+                    <i class="fas fa-copy"></i> Copiar Senha
+                </button>
+            </div>
+        `;
+        document.body.appendChild(fallbackModal);
+
+        // Event listeners do modal de fallback
+        document.getElementById('wifiFallbackClose').addEventListener('click', () => {
+            fallbackModal.classList.remove('active');
+        });
+
+        fallbackModal.addEventListener('click', (e) => {
+            if (e.target === fallbackModal) {
+                fallbackModal.classList.remove('active');
             }
-        } else {
-            // Nenhum intent funcionou - mostrar instruções
-            showWiFiInstructions(wifiSSID, wifiPassword);
+        });
+
+        document.getElementById('wifiFallbackCopyBtn').addEventListener('click', () => {
+            copyToClipboard(password)
+                .then(() => {
+                    showSuccessMessage('Senha copiada! Vá em Ajustes > Wi-Fi e conecte-se.');
+                    document.getElementById('wifiFallbackCopyBtn').innerHTML =
+                        '<i class="fas fa-check"></i> Copiado!';
+                    setTimeout(() => {
+                        document.getElementById('wifiFallbackCopyBtn').innerHTML =
+                            '<i class="fas fa-copy"></i> Copiar Senha';
+                    }, 2000);
+                })
+                .catch(() => {
+                    showToast('Copie manualmente: ' + password, 'info');
+                });
+        });
+    } else {
+        // Reutiliza modal existente e atualiza conteúdo
+        const ssidEl = fallbackModal.querySelector('.wifi-info');
+        if (ssidEl) {
+            ssidEl.innerHTML = `
+                <p><strong>Rede:</strong> ${ssid}</p>
+                <p><strong>Senha:</strong> ${password}</p>
+                <p><strong>Segurança:</strong> ${security}</p>
+            `;
         }
     }
-    
-    tryNextIntent();
+
+    fallbackModal.classList.add('active');
 }
 
-function connectIOS() {
-    const wifiSSID = 'TSDINFORMATICA';
-    const wifiPassword = 't04101986';
-    
-    // Métodos em ordem de prioridade
-    const methods = [
-        'App-Prefs:root=WIFI',  // iOS 15.1+
-        'prefs:root=WIFI',      // iOS antigo
-    ];
-    
-    let methodIndex = 0;
-    
-    function tryNextMethod() {
-        if (methodIndex < methods.length) {
-            try {
-                window.location.href = methods[methodIndex];
-                methodIndex++;
-                setTimeout(tryNextMethod, 800);
-            } catch (e) {
-                methodIndex++;
-                tryNextMethod();
-            }
-        } else {
-            // Nenhum método funcionou
-            showWiFiInstructions(wifiSSID, wifiPassword);
+/**
+ * Copia texto para a área de transferência com fallback para browsers antigos.
+ */
+function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise((resolve, reject) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            resolve();
+        } catch(e) {
+            reject(e);
         }
-    }
-    
-    tryNextMethod();
-}
-
-function showWiFiInstructions(ssid, password) {
-    let title = '📶 Conectar ao WiFi';
-    let instructions = `\n\nRede: ${ssid}\n`;
-    instructions += `Senha: ${password}\n\n`;
-    instructions += `Passos:\n`;
-    instructions += `1️⃣  Abra as Configurações\n`;
-    instructions += `2️⃣  Selecione WiFi\n`;
-    instructions += `3️⃣  Procure por: ${ssid}\n`;
-    instructions += `4️⃣  Digite a senha\n\n`;
-    instructions += `Deseja copiar a senha?`;
-    
-    if (confirm(title + instructions)) {
-        navigator.clipboard.writeText(password)
-            .then(() => {
-                showSuccessMessage('✅ Senha copiada! Conecte às configurações WiFi.');
-            })
-            .catch(() => {
-                showToast('Abra as configurações manualmente', 'info');
-            });
-    }
+        document.body.removeChild(textarea);
+    });
 }
 
 // =====================
