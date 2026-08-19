@@ -1,517 +1,1057 @@
-// =====================
-// CONFIGURATION
-// =====================
+// ==========================================
+// PAPEL E SONHOS INFORMÁTICA - SCRIPT PRINCIPAL
+// Bio + Catálogo Commercial + Orçamento WhatsApp
+// ==========================================
 
 const CONFIG = {
-    pixKey: '+5521987172463', // Chave Pix (celular)
     whatsappPhone: '5521987172463',
-    googleReviewUrl: 'https://www.google.com/search?q=Papel+e+Sonhos+Informática',
-    instagramUrl: 'https://www.instagram.com',
-    facebookUrl: 'https://www.facebook.com',
-    pageUrl: 'https://papel-e-sonhos-connect.vercel.app/',
+    whatsappFormatted: '+55 21 98717-2463',
+    pixKey: '+5521987172463',
+    pixOwner: 'Thiago Samuel',
+    pixBank: 'PagSeguro',
+    googleReviewUrl: 'https://g.page/r/CXUQrjKh4lJtEAE/review',
+    instagramUrl: 'https://www.instagram.com/papel_e_sonhos0504/',
+    facebookUrl: 'https://www.facebook.com/biancathiago0504',
+    locationUrl: 'https://maps.app.goo.gl/gK2X9JmyqhsShQe49',
+    pageUrl: 'https://papel-e-sonhos-connect.vercel.app/'
 };
 
-// =====================
-// DOM ELEMENTS
-// =====================
+// ==========================================
+// CATÁLOGO DE SERVIÇOS (ESTRUTURA JS ESTRUTURADA)
+// ==========================================
 
-const pixModal = document.getElementById('pixModal');
-const qrcodeModal = document.getElementById('qrcodeModal');
-const wifiModal = document.getElementById('wifiModal');
-const linkButtons = document.querySelectorAll('.link-button');
-const modalCloseButtons = document.querySelectorAll('.modal-close');
-const copyPixBtn = document.getElementById('copyPixBtn');
-const downloadQRBtn = document.getElementById('downloadQRBtn');
-const connectWiFiBtn = document.getElementById('connectWiFiBtn');
-const successMessage = document.getElementById('successMessage');
-const toast = document.getElementById('toast');
-const bankModal = document.getElementById('bankModal');
-const openBankBtn = document.getElementById('openBankBtn');
-const bankLoading = document.getElementById('bankLoading');
-const bankGrid = document.getElementById('bankGrid');
-const bankGridList = document.getElementById('bankGridList');
-const bankNotice = document.getElementById('bankNotice');
+const CATEGORIES_DATA = {
+    documentos: {
+        id: 'documentos',
+        title: 'Documentos & Serviços Online',
+        icon: 'fa-file-contract',
+        badge: 'Praticidade Digital',
+        description: 'Resolva seus documentos, certidões e serviços digitais com rapidez e praticidade sem sair de casa.'
+    },
+    impressao: {
+        id: 'impressao',
+        title: 'Impressão & Papelaria',
+        icon: 'fa-print',
+        badge: 'Qualidade Gráfica',
+        description: 'Impressões em alta definição, cópias, encadernações, adesivos e itens essenciais de papelaria.'
+    },
+    personalizados: {
+        id: 'personalizados',
+        title: 'Personalizados & Presentes',
+        icon: 'fa-gift',
+        badge: 'Exclusivo para Você',
+        description: 'Transforme ideias, imagens e frases em presentes inesquecíveis, canecas, camisas e brindes marcantes.'
+    },
+    informatica: {
+        id: 'informatica',
+        title: 'Informática & Suporte',
+        icon: 'fa-laptop-code',
+        badge: 'Assistência Técnica',
+        description: 'Manutenção, formatação, configuração de equipamentos, rede e suporte técnico especializado.'
+    }
+};
 
-// =====================
-// INITIALIZATION
-// =====================
+const SERVICES_DATA = [
+    // --- DOCUMENTOS & SERVIÇOS ONLINE ---
+    {
+        id: 'curriculos',
+        category: 'documentos',
+        name: 'Elaboração de Currículos',
+        shortDescription: 'Currículos profissionais e modernos formatados para destacar suas habilidades.',
+        description: 'Elaboração e atualização de currículos com layout profissional e atrativo para processos seletivos. Entrega em PDF e cópia impressa se desejar.',
+        benefits: ['Layout moderno e legível', 'Destaque de competências', 'Pronto para enviar por e-mail/WhatsApp ou imprimir'],
+        price: 'A partir de R$ 15,00',
+        icon: 'fa-file-invoice',
+        featured: true
+    },
+    {
+        id: 'recuperacao-gov',
+        category: 'documentos',
+        name: 'Recuperação de Conta Gov.br',
+        shortDescription: 'Recupere o acesso à sua conta Gov.br com total segurança e agilidade.',
+        description: 'Auxílio especializado para desbloquear, redefinir senhas e nivelar a conta Gov.br (Prata/Ouro) para acesso a serviços federais.',
+        benefits: ['Processo 100% seguro', 'Resolução rápida', 'Acesso garantido aos portais oficiais'],
+        price: 'Sob consulta',
+        icon: 'fa-user-shield',
+        featured: true
+    },
+    {
+        id: 'imposto-renda',
+        category: 'documentos',
+        name: 'Declaração de Imposto de Renda',
+        shortDescription: 'Envio e regularização do seu Imposto de Renda sem complicações.',
+        description: 'Auxílio completo para preenchimento e transmissão da declaração IRPF, evitando pendências com a Receita Federal.',
+        benefits: ['Evita malha fina', 'Conferência detalhada', 'Comprovante emitido na hora'],
+        price: 'Sob consulta',
+        icon: 'fa-calculator',
+        featured: false
+    },
+    {
+        id: 'declaração-mei',
+        category: 'documentos',
+        name: 'Declaração e Abertura de MEI',
+        shortDescription: 'Abertura, DAS mensal, declaração anual (DASN) e regularização para Microempreendedores.',
+        description: 'Serviço especializado para abrir seu MEI, emitir guia DAS, transmitir a declaração anual obrigatoria e manter seu CNPJ em dia.',
+        benefits: ['CNPJ ativo e regularizado', 'Suporte a dúvidas', 'Emissão de DAS rápida'],
+        price: 'Sob consulta',
+        icon: 'fa-briefcase',
+        featured: false
+    },
+    {
+        id: 'certidoes',
+        category: 'documentos',
+        name: 'Emissão de Certidões',
+        shortDescription: 'Certidões negativas, quitar débitos, certidão de nascimento/casamento/antecedentes.',
+        description: 'Emissão e busca de certidões da Justiça, Receita Federal, Polícia Federal e órgãos estaduais/municipais.',
+        benefits: ['Agilidade e praticidade', 'Arquivos em PDF prontos para uso'],
+        price: 'Sob consulta',
+        icon: 'fa-certificate',
+        featured: false
+    },
+    {
+        id: 'inss-servicos',
+        category: 'documentos',
+        name: 'Serviços INSS & Auxílios',
+        shortDescription: 'Agendamentos, extratos de pagamento, consulta de benefícios e seguro-desemprego.',
+        description: 'Auxílio digital para agendamento no INSS, requisição de auxílio-doença, seguro-desemprego e consulta ao Meu INSS.',
+        benefits: ['Orientação clara', 'Sem necessidade de encarar filas'],
+        price: 'Sob consulta',
+        icon: 'fa-hands-holding-circle',
+        featured: false
+    },
+    {
+        id: 'digitalizacao-boletos',
+        category: 'documentos',
+        name: 'Digitalização & 2ª Via de Boletos',
+        shortDescription: 'Digitalização de documentos físicos para PDF e emissão de 2ª via de contas.',
+        description: 'Escanear fotos/documentos com alta nitidez e emitir 2ª via de luz, água, telefone e boletos bancários.',
+        benefits: ['PDFs nítidos e organizados', 'Pagamento facilitado'],
+        price: 'A partir de R$ 2,00',
+        icon: 'fa-scanner-keyboard',
+        featured: false
+    },
 
-document.addEventListener('DOMContentLoaded', function() {
+    // --- IMPRESSÃO & PAPELARIA ---
+    {
+        id: 'xerox-impressao',
+        category: 'impressao',
+        name: 'Impressão & Xerox',
+        shortDescription: 'Impressões em preto e branco e coloridas de altíssima definição.',
+        description: 'Impressão de trabalhos escolares, apostilas, documentos, fotos e contratos com papel de gramatura ideal e cores vivas.',
+        benefits: ['Papel de excelente qualidade', 'Opção P&B ou Colorido', 'Desconto para grande quantidade'],
+        price: 'A partir de R$ 0,50',
+        icon: 'fa-print',
+        featured: true
+    },
+    {
+        id: 'foto-3x4',
+        category: 'impressao',
+        name: 'Foto 3x4 na Hora',
+        shortDescription: 'Fotos para documentos, carteiras e passaportes com impressão fotográfica.',
+        description: 'Tire sua foto 3x4 no local com iluminação adequada e tratamento leve, pronta para uso imediato em documentos.',
+        benefits: ['Pronta na hora', 'Papel fotográfico de alto brilho', 'Recorte preciso'],
+        price: 'R$ 15,00 (Kit 4 fotos)',
+        icon: 'fa-id-card',
+        featured: true
+    },
+    {
+        id: 'encadernacao-plastificacao',
+        category: 'impressao',
+        name: 'Encadernação & Plastificação',
+        shortDescription: 'Organize e proteja seus documentos, apostilas e certidões com acabamento durável.',
+        description: 'Encadernação em espiral para cadernos/trabalhos e plastificação polaseal transparente e resistente.',
+        benefits: ['Protege contra água e rasgões', 'Capa transparente e contra-capa resistente'],
+        price: 'A partir de R$ 5,00',
+        icon: 'fa-book-open',
+        featured: false
+    },
+    {
+        id: 'agendas-cadernetas',
+        category: 'impressao',
+        name: 'Agendas & Cadernetas de Vacina',
+        shortDescription: 'Cadernetas de vacinação infantil personalizadas e agendas corporativas/pessoais.',
+        description: 'Confecção e reforma de cadernetas de saúde com capa dura personalizada, bolso interno e páginas oficiais do SUS.',
+        benefits: ['Capa dura com laminação', 'Nome e tema à sua escolha', 'Alta durabilidade'],
+        price: 'Sob consulta',
+        icon: 'fa-book-bookmark',
+        featured: false
+    },
+    {
+        id: 'banners-adesivos',
+        category: 'impressao',
+        name: 'Banners & Adesivos',
+        shortDescription: 'Banners em lona com bastão e adesivos em vinil ou papel para eventos e marcas.',
+        description: 'Impressão comercial em grande formato. Banners promocionais, lonas para eventos e adesivos recortados.',
+        benefits: ['Resistente a ambientes internos e externos', 'Cores vibrantes'],
+        price: 'Sob consulta',
+        icon: 'fa-scroll',
+        featured: false
+    },
+
+    // --- PERSONALIZADOS & PRESENTES ---
+    {
+        id: 'canecas-personalizadas',
+        category: 'personalizados',
+        name: 'Canecas Personalizadas',
+        shortDescription: 'Transforme uma foto, frase ou ideia em uma caneca de cerâmica exclusiva.',
+        description: 'Canecas de cerâmica com sublimação em alta definição. Perfeitas para datas comemorativas, lembranças e brindes corporativos.',
+        benefits: ['Pode ir ao micro-ondas', 'Estampa com brilho intenso e durável', 'Embalada para presente'],
+        price: 'A partir de R$ 35,00',
+        icon: 'fa-mug-hot',
+        featured: true
+    },
+    {
+        id: 'camisas-personalizadas',
+        category: 'personalizados',
+        name: 'Camisas & Almofadas Personalizadas',
+        shortDescription: 'Camisas e itens de tecido estampados com sua marca, arte ou foto preferida.',
+        description: 'Camisas personalizadas para eventos, aniversários, empresas e presentes com estampas confortáveis que não desbotam.',
+        benefits: ['Tecido macio e fresco', 'Cores fiéis à arte', 'Vários tamanhos disponíveis'],
+        price: 'A partir de R$ 40,00',
+        icon: 'fa-shirt',
+        featured: false
+    },
+    {
+        id: 'azulejos-lembrancinhas',
+        category: 'personalizados',
+        name: 'Azulejos & Quadros Decorativos',
+        shortDescription: 'Azulejos estampados com suporte para mesa ou parede e topos de bolo.',
+        description: 'Quadros de azulejo resinado com suporte de apoio, lembrancinhas de festas, topos de bolo em papel fotográfico e chaveiros.',
+        benefits: ['Item decorativo afetivo e elegante', 'Acabamento premium'],
+        price: 'A partir de R$ 25,00',
+        icon: 'fa-images',
+        featured: false
+    },
+    {
+        id: 'papelaria-personalizada',
+        category: 'personalizados',
+        name: 'Papelaria Personalizada para Festas',
+        shortDescription: 'Caixinhas milks, topos de bolo, adesivos e mimos personalizados para aniversários.',
+        description: 'Kits de papelaria de festa confeccionados em papel offset de alta gramatura com corte preciso e cores alegres.',
+        benefits: ['Deixa sua festa inesquecível', 'Montagem cuidadosa'],
+        price: 'Sob consulta',
+        icon: 'fa-cake-candles',
+        featured: false
+    },
+
+    // --- INFORMÁTICA & SUPORTE ---
+    {
+        id: 'formatacao-pc',
+        category: 'informatica',
+        name: 'Formatação de PC & Notebook',
+        shortDescription: 'Deixe seu computador como novo, rápido e livre de vírus.',
+        description: 'Formatação limpa com Windows 10/11 ativado, instalação de drivers atualizados, pacote Office, antivírus e cópia de segurança (backup) de seus arquivos.',
+        benefits: ['Velocidade máxima restaurada', 'Backup seguro de fotos e documentos', 'Garantia de serviço'],
+        price: 'A partir de R$ 80,00',
+        icon: 'fa-laptop-medical',
+        featured: true
+    },
+    {
+        id: 'conserto-hardware',
+        category: 'informatica',
+        name: 'Manutenção & Consertos',
+        shortDescription: 'Limpeza interna, troca de pasta térmica, substituição de peças e upgrade SSD.',
+        description: 'Diagnóstico e reparo de computadores e notebooks lentos ou com problemas de componentes. Instalação de SSD para turbinar a inicialização.',
+        benefits: ['Diagnóstico transparente', 'Peças de qualidade', 'Até 10x mais rápido com SSD'],
+        price: 'Sob consulta',
+        icon: 'fa-microchip',
+        featured: false
+    },
+    {
+        id: 'impressoras-config',
+        category: 'informatica',
+        name: 'Instalação de Impressoras & Redes',
+        shortDescription: 'Configuração de impressoras Wi-Fi, redes domésticas e compartilhamentos.',
+        description: 'Instalação correta dos drivers de impressoras HP, Epson, Canon e Brother, configuração de Wi-Fi e auxílio remoto ou presencial.',
+        benefits: ['Imprima direto do celular ou PC', 'Sem erros de comunicação'],
+        price: 'Sob consulta',
+        icon: 'fa-network-wired',
+        featured: false
+    },
+    {
+        id: 'musicas-pendrive',
+        category: 'informatica',
+        name: 'Músicas e Vídeos para Pendrive',
+        shortDescription: 'Sua seleção musical favorita pronta para tocar no carro, som de casa ou TV.',
+        description: 'Montagem de coletâneas de músicas e vídeos em pendrive ou cartão de memória organizadas por gênero, cantor ou época.',
+        benefits: ['Áudio em alta qualidade', 'Organização por pastas', 'Testado antes da entrega'],
+        price: 'A partir de R$ 20,00',
+        icon: 'fa-compact-disc',
+        featured: false
+    },
+    {
+        id: 'desenvolvimento-suporte',
+        category: 'informatica',
+        name: 'Suporte Técnico & Apps',
+        shortDescription: 'Solução de dúvidas de tecnologia, desenvolvimento simples e suporte geral.',
+        description: 'Atendimento consultivo para resolver problemas em computadores, instalação de programas, suporte a pequenos negócios e sistemas.',
+        benefits: ['Atendimento paciente e didático', 'Solução rápida'],
+        price: 'Sob consulta',
+        icon: 'fa-headset',
+        featured: false
+    }
+];
+
+// ==========================================
+// DADOS DO PORTFÓLIO ("NOSSOS TRABALHOS")
+// ==========================================
+
+const PORTFOLIO_DATA = [
+    {
+        id: 'port-1',
+        title: 'Caneca Personalizada com Foto e Frase',
+        category: 'personalizados',
+        image: 'logo.jpg',
+        badge: 'Caneca Sublimada',
+        description: 'Acabamento brilhante e estampa de alta definição produzida na Papel e Sonhos.'
+    },
+    {
+        id: 'port-2',
+        title: 'Impressão de Apostilas e Encadernação',
+        category: 'impressao',
+        image: 'preview.png',
+        badge: 'Impressão Gráfica',
+        description: 'Materiais didáticos encadernados com capa de proteção e espiral reforçado.'
+    },
+    {
+        id: 'port-3',
+        title: 'Caderneta de Vacinação Infantil',
+        category: 'papelaria',
+        image: 'logo.png',
+        badge: 'Papelaria Afetiva',
+        description: 'Capa dura personalizada com nome da criança e miolo atualizado do SUS.'
+    },
+    {
+        id: 'port-4',
+        title: 'Formatação e Upgrade de Notebook',
+        category: 'informatica',
+        image: 'preview.png',
+        badge: 'Manutenção',
+        description: 'Notebook restaurado com instalação de SSD de alta performance e Windows 11.'
+    },
+    {
+        id: 'port-5',
+        title: 'Currículos Otimizados e Formatados',
+        category: 'design',
+        image: 'logo.jpg',
+        badge: 'Serviços Digitais',
+        description: 'Currículos atraentes desenvolvidos para processos seletivos locais e online.'
+    },
+    {
+        id: 'port-6',
+        title: 'Kits de Lembrancinhas e Topos de Bolo',
+        category: 'personalizados',
+        image: 'logo.png',
+        badge: 'Festas',
+        description: 'Papelaria personalizada recortada para eventos com excelente acabamento.'
+    }
+];
+
+// ==========================================
+// INICIALIZAÇÃO DA APLICAÇÃO
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    renderCategories();
+    renderTopServices();
+    renderCatalogServices('todos');
+    renderPortfolio('todos');
     initEventListeners();
+    initBottomNavScroll();
     optimizeForMobile();
-    detectAccessMethod();
 });
 
-// =====================
-// EVENT LISTENERS
-// =====================
+// ==========================================
+// TEMA CLARO / ESCURO (LIGHT DEFAULT)
+// ==========================================
 
-function initEventListeners() {
-    // Link buttons
-    linkButtons.forEach(button => {
-        button.addEventListener('click', handleButtonClick);
-        button.addEventListener('touchstart', function() {
-            this.style.transform = 'translateY(-2px)';
+function initTheme() {
+    const savedTheme = localStorage.getItem('ps_theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        updateThemeIcon(true);
+    } else {
+        document.body.classList.remove('dark-theme');
+        updateThemeIcon(false);
+    }
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+}
+
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-theme');
+    localStorage.setItem('ps_theme', isDark ? 'dark' : 'light');
+    updateThemeIcon(isDark);
+    showToast(isDark ? 'Modo Escuro ativado' : 'Modo Claro ativado', 'info');
+}
+
+function updateThemeIcon(isDark) {
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) {
+        themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        themeBtn.setAttribute('aria-label', isDark ? 'Mudar para modo claro' : 'Mudar para modo escuro');
+    }
+}
+
+// ==========================================
+// RENDERIZAÇÃO DAS CATEGORIAS ("O QUE VOCÊ PROCURA?")
+// ==========================================
+
+function renderCategories() {
+    const container = document.getElementById('categoriesGrid');
+    if (!container) return;
+
+    container.innerHTML = Object.values(CATEGORIES_DATA).map(cat => `
+        <div class="category-card" data-category="${cat.id}" role="button" tabindex="0">
+            <div class="category-icon-wrapper">
+                <i class="fas ${cat.icon}"></i>
+            </div>
+            <div class="category-info">
+                <span class="category-badge">${cat.badge}</span>
+                <h3>${cat.title}</h3>
+                <p>${cat.description}</p>
+            </div>
+            <div class="category-action">
+                <span>Ver opções <i class="fas fa-arrow-right"></i></span>
+            </div>
+        </div>
+    `).join('');
+
+    // Event listeners dos cards de categoria
+    container.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const catId = card.getAttribute('data-category');
+            openCatalogCategoryModal(catId);
         });
-        button.addEventListener('touchend', function() {
-            this.style.transform = '';
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const catId = card.getAttribute('data-category');
+                openCatalogCategoryModal(catId);
+            }
+        });
+    });
+}
+
+// ==========================================
+// RENDERIZAÇÃO DOS SERVIÇOS MAIS PROCURADOS
+// ==========================================
+
+function renderTopServices() {
+    const container = document.getElementById('topServicesGrid');
+    if (!container) return;
+
+    const featuredServices = SERVICES_DATA.filter(s => s.featured);
+
+    container.innerHTML = featuredServices.map(service => `
+        <div class="service-card featured-service-card" data-id="${service.id}">
+            <div class="service-icon-box">
+                <i class="fas ${service.icon}"></i>
+            </div>
+            <div class="service-card-body">
+                <span class="service-category-tag">${CATEGORIES_DATA[service.category]?.title || 'Serviço'}</span>
+                <h4>${service.name}</h4>
+                <p>${service.shortDescription}</p>
+            </div>
+            <div class="service-card-footer">
+                <button class="btn btn-sm btn-primary open-service-modal-btn" data-id="${service.id}">
+                    <i class="fas fa-eye"></i> Quero este serviço
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // Listeners
+    container.querySelectorAll('.open-service-modal-btn, .featured-service-card').forEach(elem => {
+        elem.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const serviceId = elem.getAttribute('data-id') || elem.closest('[data-id]')?.getAttribute('data-id');
+            if (serviceId) openServiceDetailModal(serviceId);
+        });
+    });
+}
+
+// ==========================================
+// RENDERIZAÇÃO DO CATÁLOGO DE SERVIÇOS (COM FILTROS)
+// ==========================================
+
+function renderCatalogServices(categoryFilter = 'todos') {
+    const container = document.getElementById('catalogServicesGrid');
+    if (!container) return;
+
+    let filtered = SERVICES_DATA;
+    if (categoryFilter !== 'todos') {
+        filtered = SERVICES_DATA.filter(s => s.category === categoryFilter);
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<p class="empty-msg">Nenhum serviço encontrado nesta categoria.</p>`;
+        return;
+    }
+
+    container.innerHTML = filtered.map(service => `
+        <div class="catalog-item-card">
+            <div class="catalog-item-header">
+                <div class="catalog-item-icon">
+                    <i class="fas ${service.icon}"></i>
+                </div>
+                <div class="catalog-item-titles">
+                    <h4>${service.name}</h4>
+                    <span class="price-tag">${service.price}</span>
+                </div>
+            </div>
+            <p class="catalog-item-desc">${service.shortDescription}</p>
+            <div class="catalog-item-actions">
+                <button class="btn btn-outline btn-sm view-details-btn" data-id="${service.id}">
+                    <i class="fas fa-circle-info"></i> Detalhes
+                </button>
+                <button class="btn btn-whatsapp btn-sm order-direct-btn" data-id="${service.id}">
+                    <i class="fab fa-whatsapp"></i> Orçamento
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // Attach click handlers
+    container.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            openServiceDetailModal(id);
         });
     });
 
-    // Modal close buttons
-    modalCloseButtons.forEach(btn => {
+    container.querySelectorAll('.order-direct-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-id');
+            const service = SERVICES_DATA.find(s => s.id === id);
+            if (service) sendServiceWhatsAppQuote(service.name);
+        });
+    });
+}
+
+// ==========================================
+// RENDERIZAÇÃO DO PORTFÓLIO
+// ==========================================
+
+function renderPortfolio(filterCategory = 'todos') {
+    const container = document.getElementById('portfolioGrid');
+    if (!container) return;
+
+    let items = PORTFOLIO_DATA;
+    if (filterCategory !== 'todos') {
+        items = PORTFOLIO_DATA.filter(item => item.category === filterCategory);
+    }
+
+    container.innerHTML = items.map(item => `
+        <div class="portfolio-item-card" data-category="${item.category}" data-id="${item.id}">
+            <div class="portfolio-image-wrapper">
+                <img src="${item.image}" alt="${item.title}" loading="lazy" />
+                <span class="portfolio-badge">${item.badge}</span>
+                <div class="portfolio-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <span>Ampliar</span>
+                </div>
+            </div>
+            <div class="portfolio-info">
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+            </div>
+        </div>
+    `).join('');
+
+    // Attach click handlers to open lightbox
+    container.querySelectorAll('.portfolio-item-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            const item = PORTFOLIO_DATA.find(p => p.id === id);
+            if (item) openLightboxModal(item);
+        });
+    });
+}
+
+// ==========================================
+// MODAL DE CATEGORIA / VISUALIZAR CATÁLOGO FILTRADO
+// ==========================================
+
+function openCatalogCategoryModal(categoryId) {
+    const category = CATEGORIES_DATA[categoryId];
+    if (!category) return;
+
+    // Filter catalog section and scroll smoothly to catalog
+    const filterButtons = document.querySelectorAll('#catalogFilterTabs .filter-btn');
+    filterButtons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === categoryId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    renderCatalogServices(categoryId);
+
+    const catalogSection = document.getElementById('catalogo');
+    if (catalogSection) {
+        catalogSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// ==========================================
+// MODAL DETALHES DO SERVIÇO
+// ==========================================
+
+function openServiceDetailModal(serviceId) {
+    const service = SERVICES_DATA.find(s => s.id === serviceId);
+    if (!service) return;
+
+    const modal = document.getElementById('serviceDetailModal');
+    if (!modal) return;
+
+    const categoryTitle = CATEGORIES_DATA[service.category]?.title || 'Serviço';
+
+    modal.querySelector('#modalServiceTitle').textContent = service.name;
+    modal.querySelector('#modalServiceCategory').textContent = categoryTitle;
+    modal.querySelector('#modalServiceIcon').className = `fas ${service.icon}`;
+    modal.querySelector('#modalServiceDesc').textContent = service.description;
+    modal.querySelector('#modalServicePrice').textContent = service.price;
+
+    const benefitsList = modal.querySelector('#modalServiceBenefits');
+    if (benefitsList) {
+        benefitsList.innerHTML = service.benefits.map(b => `<li><i class="fas fa-check-circle"></i> ${b}</li>`).join('');
+    }
+
+    const whatsappBtn = modal.querySelector('#modalServiceWhatsAppBtn');
+    if (whatsappBtn) {
+        whatsappBtn.onclick = () => {
+            sendServiceWhatsAppQuote(service.name);
+            closeAllModals();
+        };
+    }
+
+    closeAllModals();
+    modal.classList.add('active');
+}
+
+// ==========================================
+// GERADOR DE MENSAGENS WHATSAPP
+// ==========================================
+
+function sendServiceWhatsAppQuote(serviceName) {
+    const message = `Olá! Vi o serviço "${serviceName}" no site da Papel e Sonhos e gostaria de solicitar um orçamento.`;
+    openWhatsAppWithMessage(message);
+}
+
+function openWhatsAppWithMessage(messageText) {
+    const encoded = encodeURIComponent(messageText);
+    const url = `https://wa.me/${CONFIG.whatsappPhone}?text=${encoded}`;
+    trackEvent('whatsapp_click', { text: messageText });
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+// ==========================================
+// EVENT LISTENERS & MODAIS
+// ==========================================
+
+function initEventListeners() {
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) {
+        themeBtn.addEventListener('click', toggleTheme);
+    }
+
+    // Modal Close Buttons
+    document.querySelectorAll('.modal-close, [data-dismiss="modal"]').forEach(btn => {
         btn.addEventListener('click', closeAllModals);
     });
 
-    // Close modal on background click
+    // Close Modal on Overlay Click
     document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
                 closeAllModals();
             }
         });
     });
 
-    // Copy Pix button
-    if (copyPixBtn) {
-        copyPixBtn.addEventListener('click', copyPixKey);
-    }
-
-    // Download QR Code button
-    if (downloadQRBtn) {
-        downloadQRBtn.addEventListener('click', downloadQRCode);
-    }
-
-    // Connect WiFi button
-    if (connectWiFiBtn) {
-        connectWiFiBtn.addEventListener('click', connectToWiFi);
-    }
-
-    // Open Bank button
-    if (openBankBtn) {
-        openBankBtn.addEventListener('click', openBankModal);
-    }
-
-    // Close modals on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeAllModals();
-        }
+    // ESC Key to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllModals();
     });
-}
 
-// =====================
-// BUTTON HANDLERS
-// =====================
+    // Catalog Filter Buttons
+    document.querySelectorAll('#catalogFilterTabs .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#catalogFilterTabs .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+            renderCatalogServices(filter);
+        });
+    });
 
-function handleButtonClick(e) {
-    const button = e.currentTarget;
-    const action = button.getAttribute('data-action');
+    // Portfolio Filter Buttons
+    document.querySelectorAll('#portfolioFilterTabs .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#portfolioFilterTabs .filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+            renderPortfolio(filter);
+        });
+    });
 
-    switch(action) {
-        case 'open-link':
-            openLink(button.getAttribute('data-link'));
-            break;
-        case 'pix-modal':
-            openPixModal();
-            break;
-        case 'qrcode-modal':
-            openQRCodeModal();
-            break;
-        case 'wifi-modal':
-            openWiFiModal();
-            break;
-        default:
-            break;
-    }
-}
-
-// =====================
-// LINK HANDLING
-// =====================
-
-function openLink(url) {
-    if (!url) {
-        showToast('Link não configurado', 'error');
-        return;
+    // Hero CTA WhatsApp Button
+    const heroWhatsappBtn = document.getElementById('heroWhatsappBtn');
+    if (heroWhatsappBtn) {
+        heroWhatsappBtn.addEventListener('click', () => {
+            openWhatsAppWithMessage("Olá! Vim pelo site da Papel e Sonhos e gostaria de informações sobre um serviço.");
+        });
     }
 
-    // Track the click (analytics)
-    trackEvent('link_click', { url: url });
+    // Floating WhatsApp Button
+    const floatingWhatsappBtn = document.getElementById('floatingWhatsappBtn');
+    if (floatingWhatsappBtn) {
+        floatingWhatsappBtn.addEventListener('click', () => {
+            openWhatsAppWithMessage("Olá! Vim pelo site da Papel e Sonhos e gostaria de tirar uma dúvida.");
+        });
+    }
 
-    // Open link
-    window.open(url, '_blank', 'noopener,noreferrer');
+    // "Tenho uma Ideia" Form & Modal Triggers
+    const openIdeaModalBtn = document.getElementById('openIdeaModalBtn');
+    if (openIdeaModalBtn) {
+        openIdeaModalBtn.addEventListener('click', () => {
+            closeAllModals();
+            const modal = document.getElementById('ideaModal');
+            if (modal) modal.classList.add('active');
+        });
+    }
+
+    const ideaForm = document.getElementById('ideaForm');
+    if (ideaForm) {
+        ideaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('ideaName').value.trim();
+            const phone = document.getElementById('ideaPhone').value.trim();
+            const category = document.getElementById('ideaCategory').value;
+            const description = document.getElementById('ideaDescription').value.trim();
+
+            const message = `Olá! Vim pelo site da Papel e Sonhos e tenho uma ideia de projeto:\n- Nome: ${name}\n- WhatsApp: ${phone}\n- Categoria: ${category}\n- Ideia: ${description}`;
+
+            openWhatsAppWithMessage(message);
+            closeAllModals();
+            showSuccessMessage('Ideia enviada! Abrindo WhatsApp...');
+        });
+    }
+
+    // Form Orçamento Global
+    const globalQuoteForm = document.getElementById('globalQuoteForm');
+    const quoteCategorySelect = document.getElementById('quoteCategory');
+    const quoteServiceSelect = document.getElementById('quoteService');
+
+    if (quoteCategorySelect && quoteServiceSelect) {
+        quoteCategorySelect.addEventListener('change', () => {
+            populateQuoteServices(quoteCategorySelect.value);
+        });
+
+        // Initialize select options
+        populateQuoteServices('todos');
+    }
+
+    if (globalQuoteForm) {
+        globalQuoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const serviceName = quoteServiceSelect.options[quoteServiceSelect.selectedIndex]?.text || 'Serviço Geral';
+            const quantity = document.getElementById('quoteQuantity').value || '1';
+            const notes = document.getElementById('quoteNotes').value.trim() || 'Sem observações adicionais';
+
+            const message = `Olá! Vim pelo site da Papel e Sonhos. Gostaria de solicitar um orçamento.\nServiço: ${serviceName}\nQuantidade: ${quantity}\nObservações: ${notes}`;
+
+            openWhatsAppWithMessage(message);
+            showSuccessMessage('Solicitação pronta! Abrindo WhatsApp...');
+        });
+    }
+
+    // Action buttons (Pix, QR, WiFi)
+    const openPixBtn = document.getElementById('openPixBtn');
+    if (openPixBtn) openPixBtn.addEventListener('click', openPixModal);
+
+    const openQrBtn = document.getElementById('openQrBtn');
+    if (openQrBtn) openQrBtn.addEventListener('click', openQRCodeModal);
+
+    const openWifiBtn = document.getElementById('openWifiBtn');
+    if (openWifiBtn) openWifiBtn.addEventListener('click', openWiFiModal);
+
+    // Copy Pix Key
+    const copyPixBtn = document.getElementById('copyPixBtn');
+    if (copyPixBtn) copyPixBtn.addEventListener('click', copyPixKey);
+
+    // Download QR Code
+    const downloadQRBtn = document.getElementById('downloadQRBtn');
+    if (downloadQRBtn) downloadQRBtn.addEventListener('click', downloadQRCode);
+
+    // Connect WiFi
+    const connectWiFiBtn = document.getElementById('connectWiFiBtn');
+    if (connectWiFiBtn) connectWiFiBtn.addEventListener('click', connectToWiFi);
+
+    // Open Bank Selector Modal
+    const openBankBtn = document.getElementById('openBankBtn');
+    if (openBankBtn) openBankBtn.addEventListener('click', openBankModal);
 }
 
-// =====================
-// PIX MODAL
-// =====================
+// Popula os serviços no formulário de orçamento
+function populateQuoteServices(category) {
+    const select = document.getElementById('quoteService');
+    if (!select) return;
+
+    let items = SERVICES_DATA;
+    if (category !== 'todos') {
+        items = SERVICES_DATA.filter(s => s.category === category);
+    }
+
+    select.innerHTML = items.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+}
+
+// ==========================================
+// MODAL LIGHTBOX DO PORTFÓLIO
+// ==========================================
+
+function openLightboxModal(item) {
+    const modal = document.getElementById('lightboxModal');
+    if (!modal) return;
+
+    modal.querySelector('#lightboxImage').src = item.image;
+    modal.querySelector('#lightboxImage').alt = item.title;
+    modal.querySelector('#lightboxTitle').textContent = item.title;
+    modal.querySelector('#lightboxDesc').textContent = item.description;
+
+    const quoteBtn = modal.querySelector('#lightboxQuoteBtn');
+    if (quoteBtn) {
+        quoteBtn.onclick = () => {
+            sendServiceWhatsAppQuote(item.title);
+            closeAllModals();
+        };
+    }
+
+    closeAllModals();
+    modal.classList.add('active');
+}
+
+// ==========================================
+// MODAIS UTILITÁRIOS (PIX, QR CODE, WIFI, BANCO)
+// ==========================================
 
 function openPixModal() {
     closeAllModals();
-    pixModal.classList.add('active');
-    
-    // Scroll to ensure modal is visible
-    if (window.innerWidth < 768) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const modal = document.getElementById('pixModal');
+    if (modal) modal.classList.add('active');
 }
 
 function copyPixKey() {
     const pixKey = CONFIG.pixKey;
-    
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(pixKey)
-            .then(() => {
-                showSuccessMessage('Chave Pix copiada!');
-                copyPixBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+    copyToClipboard(pixKey)
+        .then(() => {
+            showSuccessMessage('Chave Pix copiada com sucesso!');
+            const btn = document.getElementById('copyPixBtn');
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                 setTimeout(() => {
-                    copyPixBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copiar Chave';
                 }, 2000);
-                trackEvent('pix_key_copied', {});
-            })
-            .catch(() => {
-                fallbackCopyToClipboard(pixKey);
-            });
-    } else {
-        fallbackCopyToClipboard(pixKey);
-    }
+            }
+            trackEvent('pix_copied', {});
+        })
+        .catch(() => {
+            showToast('Chave Pix: ' + pixKey, 'info');
+        });
 }
-
-function fallbackCopyToClipboard(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    
-    try {
-        document.execCommand('copy');
-        showSuccessMessage('Chave Pix copiada!');
-        trackEvent('pix_key_copied_fallback', {});
-    } catch(e) {
-        console.error('Erro ao copiar:', e);
-        showToast('Erro ao copiar a chave', 'error');
-    }
-    
-    document.body.removeChild(textarea);
-}
-
-// =====================
-// QR CODE MODAL
-// =====================
 
 function openQRCodeModal() {
     closeAllModals();
-    qrcodeModal.classList.add('active');
-    generatePageQRCode();
-    
-    if (window.innerWidth < 768) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const modal = document.getElementById('qrcodeModal');
+    if (modal) {
+        modal.classList.add('active');
+        generatePageQRCode();
     }
 }
 
 function generatePageQRCode() {
     const container = document.getElementById('pageQRCode');
-    
-    // Clear previous QR code
+    if (!container) return;
     container.innerHTML = '';
-    
-    // Use the Vercel page URL if provided, otherwise use current location
     const pageUrl = CONFIG.pageUrl || window.location.href;
-    
+
     try {
         new QRCode(container, {
             text: pageUrl,
             width: 200,
             height: 200,
-            colorDark: '#0a2463',
+            colorDark: '#0F4C5C',
             colorLight: '#ffffff',
             correctLevel: QRCode.CorrectLevel.H
         });
     } catch(e) {
-        console.error('Erro ao gerar QR Code:', e);
-        container.innerHTML = '<p style="color: #d32f2f;">Erro ao gerar QR Code</p>';
+        container.innerHTML = '<p class="error-msg">Erro ao gerar código QR.</p>';
     }
 }
 
 function downloadQRCode() {
     const canvas = document.querySelector('#pageQRCode canvas');
-    
     if (!canvas) {
         showToast('QR Code não gerado', 'error');
         return;
     }
-    
-    // Convert canvas to image
     const image = canvas.toDataURL('image/png');
-    
-    // Create download link
     const link = document.createElement('a');
     link.href = image;
-    link.download = 'papel-e-sonhos-qrcode.png';
+    link.download = 'qrcode-papel-e-sonhos.png';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
-    showSuccessMessage('QR Code baixado!');
-    trackEvent('qrcode_downloaded', {});
+    showSuccessMessage('Download do QR Code iniciado!');
 }
-
-// =====================
-// WiFi MODAL
-// =====================
 
 function openWiFiModal() {
     closeAllModals();
-    wifiModal.classList.add('active');
-    
-    if (window.innerWidth < 768) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    const modal = document.getElementById('wifiModal');
+    if (modal) modal.classList.add('active');
 }
 
-// =====================
-// WiFi CREDENTIALS (centralizadas)
-// =====================
 const WIFI_CONFIG = {
     ssid: 'TSDINFORMATICA',
     password: 't04101986',
     security: 'WPA2'
 };
 
-/**
- * Conecta ao WiFi: detecta plataforma e abre configurações ou exibe instruções.
- *
- * Android (Chrome 6+): Intent URI intent:// abre diretamente as configurações de Wi-Fi.
- * iOS (Safari): Apple bloqueia a abertura programática das configurações de Wi-Fi
- *   a partir do navegador. Exibe modal com instruções e opção de copiar a senha.
- * Desktop: Exibe mensagem informativa de que o recurso é apenas para móvel.
- */
 function connectToWiFi() {
-    trackEvent('wifi_connect_button_clicked', {});
-    const { isAndroid, isIOS, isMobile } = detectPlatform();
+    const { isAndroid, isIOS } = detectPlatform();
+    if (isAndroid) {
+        try {
+            window.location.href = 'intent://#Intent;action=android.settings.WIFI_SETTINGS;end';
+        } catch(e) {
+            showWifiFallbackModal();
+        }
+    } else {
+        showWifiFallbackModal();
+    }
+}
+
+function showWifiFallbackModal() {
+    copyToClipboard(WIFI_CONFIG.password)
+        .then(() => {
+            showSuccessMessage(`Senha Wi-Fi ("${WIFI_CONFIG.password}") copiada! Conecte-se na rede ${WIFI_CONFIG.ssid}.`);
+        })
+        .catch(() => {
+            showToast(`Rede: ${WIFI_CONFIG.ssid} | Senha: ${WIFI_CONFIG.password}`, 'info');
+        });
+}
+
+// ==========================================
+// SELETOR DE BANCOS DO PIX
+// ==========================================
+
+const BANKS = [
+    { name: 'Nubank', scheme: 'nubank://', packageName: 'com.nu.production', color: 'linear-gradient(135deg, #820AD1, #530082)', initials: 'Nu', webUrl: 'https://nubank.com.br' },
+    { name: 'Itaú', scheme: 'itau://', packageName: 'com.itau', color: 'linear-gradient(135deg, #FF7A00, #EC5E00)', initials: 'Itaú', webUrl: 'https://www.itau.com.br' },
+    { name: 'Bradesco', scheme: 'bradescomobile://', packageName: 'com.bradesco', color: 'linear-gradient(135deg, #CC092F, #E60042)', initials: 'Brad', webUrl: 'https://banco.bradesco' },
+    { name: 'Banco do Brasil', scheme: 'bancodobrasil://', packageName: 'br.com.bb.android', color: 'linear-gradient(135deg, #F2E307, #003399)', initials: 'BB', webUrl: 'https://www.bb.com.br' },
+    { name: 'Caixa', scheme: 'caixadireto://', packageName: 'br.com.gabba.Caixa', color: 'linear-gradient(135deg, #005CA9, #F58220)', initials: 'X', webUrl: 'https://www.caixa.gov.br' },
+    { name: 'Santander', scheme: 'santanderpass://', packageName: 'com.santander.app', color: 'linear-gradient(135deg, #EC0000, #990000)', initials: 'San', webUrl: 'https://www.santander.com.br' },
+    { name: 'Inter', scheme: 'bancointer://', packageName: 'br.com.intermedium', color: 'linear-gradient(135deg, #FF7A00, #FF5000)', initials: 'Inter', webUrl: 'https://www.bancointer.com.br' },
+    { name: 'PicPay', scheme: 'picpay://', packageName: 'com.picpay', color: 'linear-gradient(135deg, #11C76F, #0A8B4C)', initials: 'Pic', webUrl: 'https://picpay.com' },
+    { name: 'Mercado Pago', scheme: 'mercadopago://', packageName: 'com.mercadopago.wallet', color: 'linear-gradient(135deg, #009EE3, #007EA7)', initials: 'MP', webUrl: 'https://www.mercadopago.com.br' },
+    { name: 'PagBank', scheme: 'pagbank://', packageName: 'br.com.uol.ps.myaccount', color: 'linear-gradient(135deg, #00C69E, #008F72)', initials: 'Pag', webUrl: 'https://pagbank.com.br' },
+    { name: 'C6 Bank', scheme: 'c6bank://', packageName: 'com.c6bank.app', color: 'linear-gradient(135deg, #242424, #121212)', initials: 'C6', webUrl: 'https://www.c6bank.com.br' }
+];
+
+function openBankModal() {
+    closeAllModals();
+    const modal = document.getElementById('bankModal');
+    if (!modal) return;
+    modal.classList.add('active');
+
+    const bankGridList = document.getElementById('bankGridList');
+    if (!bankGridList) return;
+
+    bankGridList.innerHTML = BANKS.map(bank => `
+        <div class="bank-item" style="background: ${bank.color};" onclick="openBankApp('${bank.scheme}', '${bank.packageName}', '${bank.webUrl}')">
+            <span class="bank-initials">${bank.initials}</span>
+            <span class="bank-name">${bank.name}</span>
+        </div>
+    `).join('');
+}
+
+function openBankApp(scheme, packageName, webUrl) {
+    const { isAndroid, isIOS } = detectPlatform();
+    let opened = false;
+
+    const onBlur = () => { opened = true; };
+    window.addEventListener('blur', onBlur);
 
     if (isAndroid) {
-        openAndroidWifiSettings();
-    } else if (isIOS) {
-        openIOSWifiSettings();
+        window.location.href = `intent://open#Intent;scheme=${scheme.replace('://', '')};package=${packageName};end`;
     } else {
-        showDesktopWifiMessage();
-    }
-}
-
-/**
- * Android: Abre as configurações de Wi-Fi via Intent URI.
- *
- * O Intent "android.settings.WIFI_SETTINGS" é o oficial do Android
- * e funciona no Chrome para Android (navegador e PWA instalada).
- * Formato correto: intent://#Intent;action=<ACTION>;end
- *
- * Referência: https://developer.android.com/reference/android/provider/Settings#ACTION_WIFI_SETTINGS
- */
-function openAndroidWifiSettings() {
-    const wifiIntent = 'intent://#Intent;action=android.settings.WIFI_SETTINGS;end';
-    let opened = false;
-
-    // Monitora se a janela perdeu foco (indicando que as configurações abriram)
-    const onVisibilityChange = () => {
-        if (document.hidden || document.webkitHidden) {
-            opened = true;
-            cleanup();
-            showToast('Configurações de Wi-Fi abertas!', 'success');
-        }
-    };
-
-    const cleanup = () => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        clearTimeout(fallbackTimer);
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-
-    // Tenta abrir o Intent
-    try {
-        window.location.href = wifiIntent;
-    } catch(e) {
-        // Se lançar erro, vai direto para o fallback
-        cleanup();
-        showWifiFallbackModal();
-        return;
+        window.location.href = scheme;
     }
 
-    // Fallback: se após 2s a janela ainda estiver visível, o Intent não funcionou
-    const fallbackTimer = setTimeout(() => {
-        cleanup();
-
-        if (!document.hidden && !document.webkitHidden) {
-            showWifiFallbackModal();
-        }
-    }, 2000);
-}
-
-/**
- * iOS: Tenta abrir os Ajustes via URL schemes.
- *
- * LIMITAÇÃO DO iOS: A Apple bloqueou os schemes "App-Prefs:root=WIFI" e
- * "prefs:root=WIFI" a partir do iOS 10. Esses schemes NÃO funcionam mais
- * em Safari ou PWAs no iOS. Não existe alternativa programática para abrir
- * diretamente a tela de Wi-Fi no iOS a partir de uma página web.
- *
- * Estratégia:
- * 1. Tenta "App-Prefs:root=WIFI" (pode funcionar em alguns WebViews)
- * 2. Tenta "App-Prefs:" (abre os Ajustes gerais)
- * 3. Exibe modal com instruções + botão para copiar senha
- */
-function openIOSWifiSettings() {
-    let opened = false;
-
-    const onVisibilityChange = () => {
-        if (document.hidden || document.webkitHidden) {
-            opened = true;
-            cleanup();
-        }
-    };
-
-    const cleanup = () => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        clearTimeout(fallbackTimer);
-        clearTimeout(iOSFallback2);
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-
-    // Tentativa 1: Abrir diretamente a página de Wi-Fi (bloqueado no iOS 10+)
-    try {
-        window.location.href = 'App-Prefs:root=WIFI';
-    } catch(e) {}
-
-    // Tentativa 2: Abrir os Ajustes gerais (pode funcionar em alguns contextos)
-    const iOSFallback2 = setTimeout(() => {
+    setTimeout(() => {
+        window.removeEventListener('blur', onBlur);
         if (!opened) {
-            try {
-                window.location.href = 'App-Prefs:';
-            } catch(e) {}
+            window.open(webUrl, '_blank');
         }
-    }, 800);
-
-    // Fallback: exibe modal com instruções
-    const fallbackTimer = setTimeout(() => {
-        cleanup();
-
-        if (!document.hidden && !document.webkitHidden) {
-            showWifiFallbackModal();
-        }
-    }, 2000);
+    }, 1500);
 }
 
-/**
- * Desktop: Exibe mensagem informando que o recurso é apenas para móveis.
- * Não tenta abrir nada do sistema operacional.
- */
-function showDesktopWifiMessage() {
-    showWifiFallbackModal();
-}
+// ==========================================
+// SUPORTE A NAVEGAÇÃO BOTTOM BAR E SCROLL
+// ==========================================
 
-/**
- * Modal de fallback WiFi: exibe instruções e permite copiar a senha.
- * Usado quando não é possível abrir as configurações automaticamente.
- */
-function showWifiFallbackModal() {
-    const { ssid, password, security } = WIFI_CONFIG;
+function initBottomNavScroll() {
+    const navItems = document.querySelectorAll('.bottom-nav-item, .nav-link');
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const targetId = item.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElem = document.querySelector(targetId);
+                if (targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth' });
 
-    // Fecha outros modais antes de abrir o de fallback
-    closeAllModals();
-
-    // Cria o modal de fallback dinamicamente
-    let fallbackModal = document.getElementById('wifiFallbackModal');
-    if (!fallbackModal) {
-        fallbackModal = document.createElement('div');
-        fallbackModal.id = 'wifiFallbackModal';
-        fallbackModal.className = 'modal';
-        fallbackModal.innerHTML = `
-            <div class="modal-content">
-                <button class="modal-close" id="wifiFallbackClose">&times;</button>
-                <h2>Conectar ao WiFi</h2>
-
-                <div class="wifi-info" style="margin-bottom: 16px;">
-                    <p><strong>Rede:</strong> ${ssid}</p>
-                    <p><strong>Senha:</strong> ${password}</p>
-                    <p><strong>Segurança:</strong> ${security}</p>
-                </div>
-
-                <p style="font-size: 13px; color: var(--gray-dark); opacity: 0.8; margin-bottom: 16px; line-height: 1.6;">
-                    Não foi possível abrir as configurações de Wi-Fi automaticamente.<br>
-                    Siga os passos abaixo para se conectar:
-                </p>
-
-                <div class="wifi-steps" style="margin-bottom: 16px;">
-                    <ol class="steps-list">
-                        <li>Abra <strong>Ajustes</strong> no seu dispositivo</li>
-                        <li>Toque em <strong>Wi-Fi</strong></li>
-                        <li>Procure por <strong>${ssid}</strong></li>
-                        <li>Digite a senha: <strong>${password}</strong></li>
-                    </ol>
-                </div>
-
-                <button class="action-btn" id="wifiFallbackCopyBtn" style="background: linear-gradient(135deg, #3498db, #2980b9); color: #fff;">
-                    <i class="fas fa-copy"></i> Copiar Senha
-                </button>
-            </div>
-        `;
-        document.body.appendChild(fallbackModal);
-
-        // Event listeners do modal de fallback
-        document.getElementById('wifiFallbackClose').addEventListener('click', () => {
-            fallbackModal.classList.remove('active');
-        });
-
-        fallbackModal.addEventListener('click', (e) => {
-            if (e.target === fallbackModal) {
-                fallbackModal.classList.remove('active');
+                    // Update active state
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                }
             }
         });
-
-        document.getElementById('wifiFallbackCopyBtn').addEventListener('click', () => {
-            copyToClipboard(password)
-                .then(() => {
-                    showSuccessMessage('Senha copiada! Vá em Ajustes > Wi-Fi e conecte-se.');
-                    document.getElementById('wifiFallbackCopyBtn').innerHTML =
-                        '<i class="fas fa-check"></i> Copiado!';
-                    setTimeout(() => {
-                        document.getElementById('wifiFallbackCopyBtn').innerHTML =
-                            '<i class="fas fa-copy"></i> Copiar Senha';
-                    }, 2000);
-                })
-                .catch(() => {
-                    showToast('Copie manualmente: ' + password, 'info');
-                });
-        });
-    } else {
-        // Reutiliza modal existente e atualiza conteúdo
-        const ssidEl = fallbackModal.querySelector('.wifi-info');
-        if (ssidEl) {
-            ssidEl.innerHTML = `
-                <p><strong>Rede:</strong> ${ssid}</p>
-                <p><strong>Senha:</strong> ${password}</p>
-                <p><strong>Segurança:</strong> ${security}</p>
-            `;
-        }
-    }
-
-    fallbackModal.classList.add('active');
+    });
 }
 
-/**
- * Copia texto para a área de transferência com fallback para browsers antigos.
- */
+// ==========================================
+// FUNÇÕES AUXILIARES
+// ==========================================
+
+function closeAllModals() {
+    document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+}
+
+function showSuccessMessage(msg) {
+    showToast(msg, 'success');
+}
+
+function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => {
+        toast.className = 'toast';
+    }, 3500);
+}
+
 function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         return navigator.clipboard.writeText(text);
     }
-
     return new Promise((resolve, reject) => {
         const textarea = document.createElement('textarea');
         textarea.value = text;
@@ -529,854 +1069,21 @@ function copyToClipboard(text) {
     });
 }
 
-// =====================
-// MODAL MANAGEMENT
-// =====================
-
-function closeAllModals() {
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.classList.remove('active');
-    });
+function detectPlatform() {
+    const ua = navigator.userAgent;
+    return {
+        isAndroid: /Android/i.test(ua),
+        isIOS: /iPhone|iPad|iPod/i.test(ua)
+    };
 }
-
-// =====================
-// NOTIFICATIONS
-// =====================
-
-function showSuccessMessage(text) {
-    const messageElement = document.getElementById('successText');
-    messageElement.textContent = text;
-    
-    successMessage.classList.add('show');
-    
-    setTimeout(() => {
-        successMessage.classList.remove('show');
-    }, 3000);
-}
-
-function showToast(message, type = 'info') {
-    toast.textContent = message;
-    toast.className = `toast show ${type}`;
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
-// =====================
-// MOBILE OPTIMIZATION
-// =====================
 
 function optimizeForMobile() {
-    // Add iOS web app meta tags
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isAndroid = /Android/.test(navigator.userAgent);
-    
-    if (isIOS || isAndroid) {
-        // Mobile device detected
-        document.documentElement.classList.add('is-mobile');
-        
-        // Disable zoom on input focus
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-                // Trigger ripple effect
-                const button = e.target.closest('button');
-                if (button) {
-                    button.classList.add('active');
-                }
-            }
-        }, { passive: true });
-    }
-    
-    // Detect if accessed via QR Code or NFC
-    detectAccessMethod();
-}
-
-// =====================
-// ACCESS METHOD DETECTION
-// =====================
-
-function detectAccessMethod() {
-    // Check if accessed via NFC or QR Code
-    const params = new URLSearchParams(window.location.search);
-    const accessMethod = params.get('utm_source');
-    
-    if (accessMethod === 'nfc' || accessMethod === 'qrcode') {
-        // Log analytics
-        trackEvent('page_access', { method: accessMethod });
-    }
-    
-    // Check referer for QR Code readers
-    const referer = document.referrer;
-    if (referer && (referer.includes('zxing') || referer.includes('qrcode'))) {
-        trackEvent('qrcode_scan', {});
-    }
-}
-
-// =====================
-// SHARE FUNCTIONALITY
-// =====================
-
-function shareViaWhatsApp() {
-    const text = encodeURIComponent('Conheça a Papel e Sonhos Informática! Serviços digitais, impressão e documentos. ' + window.location.href);
-    window.open(`https://wa.me/?text=${text}`, '_blank');
-}
-
-function shareViaOther() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Papel e Sonhos Informática',
-            text: 'Conheça nossos serviços!',
-            url: window.location.href
-        }).catch(err => console.log('Erro ao compartilhar:', err));
-    } else {
-        showToast('Compartilhamento não suportado', 'error');
-    }
-}
-
-// =====================
-// ANALYTICS & TRACKING
-// =====================
-
-function trackEvent(eventName, eventData = {}) {
-    // Send to analytics service (Google Analytics, Mixpanel, etc.)
-    // For now, just log to console
-    console.log('Event tracked:', eventName, eventData);
-    
-    // If Google Analytics is available
-    if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
-    }
-    
-    // Store in localStorage for later analysis
-    const events = JSON.parse(localStorage.getItem('pageEvents') || '[]');
-    events.push({
-        name: eventName,
-        data: eventData,
-        timestamp: new Date().toISOString()
-    });
-    
-    // Keep only last 50 events
-    if (events.length > 50) {
-        events.shift();
-    }
-    
-    localStorage.setItem('pageEvents', JSON.stringify(events));
-}
-
-// =====================
-// PERFORMANCE OPTIMIZATION
-// =====================
-
-// Lazy load images
-if ('IntersectionObserver' in window) {
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    
-    lazyImages.forEach(img => {
-        img.loading = 'lazy';
-    });
-}
-
-// Preload resources
-function preloadResources() {
-    // Preload font awesome
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-    document.head.appendChild(link);
-}
-
-// Service Worker registration (for PWA)
-if ('serviceWorker' in navigator) {
-    // navigator.serviceWorker.register('sw.js').catch(err => {
-    //     console.log('Service Worker registration failed:', err);
-    // });
-}
-
-// =====================
-// KEYBOARD NAVIGATION
-// =====================
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Tab') {
-        document.body.classList.add('using-keyboard');
-    }
-});
-
-document.addEventListener('mousedown', function() {
-    document.body.classList.remove('using-keyboard');
-});
-
-// =====================
-// PWA & MANIFEST
-// =====================
-
-// Add manifest link dynamically
-function addManifest() {
-    const manifest = {
-        name: 'Papel e Sonhos Informática',
-        short_name: 'P&S Informática',
-        description: 'Serviços digitais, impressão, documentos e atendimento rápido pelo WhatsApp.',
-        start_url: '/',
-        scope: '/',
-        display: 'standalone',
-        background_color: '#ffffff',
-        theme_color: '#0a2463',
-        orientation: 'portrait-primary',
-        icons: [
-            {
-                src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect fill="%230a2463" width="192" height="192"/><text x="96" y="130" font-size="120" fill="%23FFD700" text-anchor="middle" font-weight="bold">P</text></svg>',
-                sizes: '192x192',
-                type: 'image/svg+xml',
-                purpose: 'any'
-            },
-            {
-                src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect fill="%230a2463" width="512" height="512"/><text x="256" y="350" font-size="320" fill="%23FFD700" text-anchor="middle" font-weight="bold">P</text></svg>',
-                sizes: '512x512',
-                type: 'image/svg+xml',
-                purpose: 'maskable'
-            }
-        ],
-        screenshots: [
-            {
-                src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 720"><rect fill="%230a2463" width="540" height="720"/></svg>',
-                sizes: '540x720',
-                type: 'image/svg+xml',
-                form_factor: 'narrow'
-            }
-        ],
-        categories: ['business', 'shopping'],
-        shortcuts: [
-            {
-                name: 'WhatsApp',
-                short_name: 'Chat',
-                description: 'Abrir WhatsApp',
-                url: '/?utm_source=shortcut&utm_medium=app_shortcut&utm_campaign=whatsapp',
-                icons: [{ src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect fill="%2325d366" width="96" height="96"/></svg>', sizes: '96x96' }]
-            },
-            {
-                name: 'Pix',
-                short_name: 'Pagar',
-                description: 'Ver QR Code Pix',
-                url: '/?utm_source=shortcut&utm_medium=app_shortcut&utm_campaign=pix',
-                icons: [{ src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect fill="%23FFD700" width="96" height="96"/></svg>', sizes: '96x96' }]
-            }
-        ]
-    };
-    
-    const manifestString = JSON.stringify(manifest);
-    const blob = new Blob([manifestString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    const link = document.createElement('link');
-    link.rel = 'manifest';
-    link.href = url;
-    document.head.appendChild(link);
-}
-
-// Initialize manifest when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addManifest);
-} else {
-    addManifest();
-}
-
-// =====================
-// UTILITY FUNCTIONS
-// =====================
-
-function formatPhoneNumber(phone) {
-    // Format: (21) 98717-2463
-    const cleaned = phone.replace(/\D/g, '');
-    const match = cleaned.match(/(\d{2})(\d{5})(\d{4})/);
-    if (match) {
-        return `(${match[1]}) ${match[2]}-${match[3]}`;
-    }
-    return phone;
-}
-
-function getDeviceInfo() {
-    return {
-        userAgent: navigator.userAgent,
-        viewport: `${window.innerWidth}x${window.innerHeight}`,
-        online: navigator.onLine,
-        language: navigator.language
-    };
-}
-
-// =====================
-// ERROR HANDLING
-// =====================
-
-window.addEventListener('error', function(e) {
-    console.error('Error:', e.error);
-    trackEvent('javascript_error', {
-        message: e.error.message,
-        stack: e.error.stack
-    });
-});
-
-window.addEventListener('unhandledrejection', function(event) {
-    console.error('Unhandled Promise rejection:', event.reason);
-    trackEvent('unhandled_rejection', {
-        reason: event.reason
-    });
-});
-
-// =====================
-// PAGE VISIBILITY
-// =====================
-
-document.addEventListener('visibilitychange', function() {
-    if (document.hidden) {
-        trackEvent('page_hidden', {});
-    } else {
-        trackEvent('page_visible', {});
-    }
-});
-
-// =====================
-// BANK SELECTOR FUNCTIONALITY
-// =====================
-
-// Package names oficiais + lojas + web fallback para cada banco.
-const BANKS = [
-    {
-        name: 'Nubank',
-        scheme: 'nubank://',
-        packageName: 'com.nu.production',
-        color: 'linear-gradient(135deg, #820AD1, #530082)',
-        initials: 'Nu',
-        domain: 'nubank.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.nu.production',
-        appStore: 'https://apps.apple.com/app/nubank/id814572894',
-        webUrl: 'https://nubank.com.br'
-    },
-    {
-        name: 'Itaú',
-        scheme: 'itau://',
-        packageName: 'com.itau',
-        color: 'linear-gradient(135deg, #FF7A00, #EC5E00)',
-        initials: 'Itaú',
-        domain: 'itau.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.itau',
-        appStore: 'https://apps.apple.com/app/itau/id503168593',
-        webUrl: 'https://www.itau.com.br'
-    },
-    {
-        name: 'Bradesco',
-        scheme: 'bradescomobile://',
-        packageName: 'com.bradesco',
-        color: 'linear-gradient(135deg, #CC092F, #E60042)',
-        initials: 'Brad',
-        domain: 'bradesco.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.bradesco',
-        appStore: 'https://apps.apple.com/app/bradesco/id495329932',
-        webUrl: 'https://banco.bradesco'
-    },
-    {
-        name: 'Banco do Brasil',
-        scheme: 'bancodobrasil://',
-        packageName: 'br.com.bb.android',
-        color: 'linear-gradient(135deg, #F2E307, #003399)',
-        initials: 'BB',
-        domain: 'bb.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.bb.android',
-        appStore: 'https://apps.apple.com/app/banco-do-brasil/id485729790',
-        webUrl: 'https://www.bb.com.br'
-    },
-    {
-        name: 'Caixa',
-        scheme: 'caixadireto://',
-        packageName: 'br.com.gabba.Caixa',
-        color: 'linear-gradient(135deg, #005CA9, #F58220)',
-        initials: 'X',
-        domain: 'caixa.gov.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.gabba.Caixa',
-        appStore: 'https://apps.apple.com/app/caixa/id494956025',
-        webUrl: 'https://www.caixa.gov.br'
-    },
-    {
-        name: 'Santander',
-        scheme: 'santander://',
-        packageName: 'com.santander.app',
-        color: 'linear-gradient(135deg, #EC0000, #B30000)',
-        initials: 'Sant',
-        domain: 'santander.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.santander.app',
-        appStore: 'https://apps.apple.com/app/santander/id544045818',
-        webUrl: 'https://www.santander.com.br'
-    },
-    {
-        name: 'Inter',
-        scheme: 'bancointer://',
-        packageName: 'br.com.intermedium',
-        color: 'linear-gradient(135deg, #FF7A00, #FF5500)',
-        initials: 'Inter',
-        domain: 'bancointer.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.intermedium',
-        appStore: 'https://apps.apple.com/app/inter&id894135880',
-        webUrl: 'https://www.bancointer.com.br'
-    },
-    {
-        name: 'PagBank',
-        scheme: 'pagseguro://',
-        packageName: 'br.com.pagseguro.app',
-        color: 'linear-gradient(135deg, #00C69E, #BFE02C)',
-        initials: 'Pag',
-        domain: 'pagseguro.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.pagseguro.app',
-        appStore: 'https://apps.apple.com/app/pagbank/id1014025623',
-        webUrl: 'https://pagseguro.uol.com.br'
-    },
-    {
-        name: 'Mercado Pago',
-        scheme: 'mercadopago://',
-        packageName: 'com.mercadopago.wallet',
-        color: 'linear-gradient(135deg, #00B1EA, #00A650)',
-        initials: 'MP',
-        domain: 'mercadopago.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.mercadopago.wallet',
-        appStore: 'https://apps.apple.com/app/mercado-pago/id921999318',
-        webUrl: 'https://www.mercadopago.com.br'
-    },
-    {
-        name: 'PicPay',
-        scheme: 'picpay://',
-        packageName: 'com.picpay',
-        color: 'linear-gradient(135deg, #21C25E, #117F3D)',
-        initials: 'Pic',
-        domain: 'picpay.com',
-        playStore: 'https://play.google.com/store/apps/details?id=com.picpay',
-        appStore: 'https://apps.apple.com/app/picpay/id824695593',
-        webUrl: 'https://picpay.com'
-    },
-    {
-        name: 'Sicredi',
-        scheme: 'sicredi://',
-        packageName: 'br.com.sicredi.mobile.cooperado',
-        color: 'linear-gradient(135deg, #3EA124, #66BB3F)',
-        initials: 'Sic',
-        domain: 'sicredi.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.sicredi.mobile.cooperado',
-        appStore: 'https://apps.apple.com/app/sicredi/id1108959623',
-        webUrl: 'https://www.sicredi.com.br'
-    },
-    {
-        name: 'Sicoob',
-        scheme: 'sicoob://',
-        packageName: 'br.com.sicoob.coopmobile',
-        color: 'linear-gradient(135deg, #00363A, #005F60)',
-        initials: 'Sico',
-        domain: 'sicoob.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.sicoob.coopmobile',
-        appStore: 'https://apps.apple.com/app/sicoob/id1146028271',
-        webUrl: 'https://www.sicoob.com.br'
-    },
-    {
-        name: 'BTG Pactual',
-        scheme: 'btg://',
-        packageName: 'com.btg.pactual.banking',
-        color: 'linear-gradient(135deg, #0B2343, #000B1A)',
-        initials: 'BTG',
-        domain: 'btgpactual.com',
-        playStore: 'https://play.google.com/store/apps/details?id=com.btg.pactual.banking',
-        appStore: 'https://apps.apple.com/app/btg-pactual/id1113426498',
-        webUrl: 'https://www.btgpactual.com'
-    },
-    {
-        name: 'C6 Bank',
-        scheme: 'c6bank://',
-        packageName: 'com.c6bank.app',
-        color: 'linear-gradient(135deg, #1E1E1E, #000000)',
-        initials: 'C6',
-        domain: 'c6bank.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=com.c6bank.app',
-        appStore: 'https://apps.apple.com/app/c6-bank/id1200405240',
-        webUrl: 'https://www.c6bank.com.br'
-    },
-    {
-        name: 'Neon',
-        scheme: 'neon://',
-        packageName: 'br.com.neon',
-        color: 'linear-gradient(135deg, #00E5FF, #0055FF)',
-        initials: 'Neon',
-        domain: 'neon.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.neon',
-        appStore: 'https://apps.apple.com/app/neon-conta-digital/id1071413408',
-        webUrl: 'https://www.neon.com.br'
-    },
-    {
-        name: 'Next',
-        scheme: 'nextbank://',
-        packageName: 'br.com.next.app',
-        color: 'linear-gradient(135deg, #00FF5F, #000000)',
-        initials: 'next',
-        domain: 'next.me',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.next.app',
-        appStore: 'https://apps.apple.com/app/next-banco-digital/id1254603911',
-        webUrl: 'https://next.me'
-    },
-    {
-        name: 'Original',
-        scheme: 'bancooriginal://',
-        packageName: 'br.com.original.bp',
-        color: 'linear-gradient(135deg, #1E3C3E, #2ECC71)',
-        initials: 'Orig',
-        domain: 'bancooriginal.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.original.bp',
-        appStore: 'https://apps.apple.com/app/banco-original/id1107051060',
-        webUrl: 'https://www.bancooriginal.com.br'
-    },
-    {
-        name: 'Banrisul',
-        scheme: 'banrisul://',
-        packageName: 'br.com.banrisul.celsul',
-        color: 'linear-gradient(135deg, #00519E, #0076D6)',
-        initials: 'Ban',
-        domain: 'banrisul.com.br',
-        playStore: 'https://play.google.com/store/apps/details?id=br.com.banrisul.celsul',
-        appStore: 'https://apps.apple.com/app/banrisul/id1071972384',
-        webUrl: 'https://www.banrisul.com.br'
-    }
-];
-
-// Detecta se o dispositivo é Android, iOS ou desktop
-function detectPlatform() {
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = /android/.test(ua);
-    const isIOS = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const isMobile = isAndroid || isIOS;
-    return { isAndroid, isIOS, isMobile };
-}
-
-function openBankModal() {
-    closeAllModals();
-    bankModal.classList.add('active');
-
-    // Reset views
-    bankLoading.style.display = 'flex';
-    bankGrid.style.display = 'none';
-
-    // Simula tempo de detecção com animação
-    setTimeout(() => {
-        bankLoading.style.display = 'none';
-        bankGrid.style.display = 'block';
-        renderBankGrid();
-    }, 1500);
-}
-
-function renderBankGrid() {
-    bankGridList.innerHTML = '';
-    const { isMobile, isAndroid } = detectPlatform();
-
-    if (isMobile) {
-        const platformLabel = isAndroid ? 'Android' : 'iOS';
-        bankNotice.innerHTML = `<i class="fas fa-info-circle"></i> Toque no banco para abrir o aplicativo (${platformLabel})`;
-        bankNotice.style.background = 'rgba(33, 194, 94, 0.15)';
-        bankNotice.style.color = '#21c25e';
-        bankNotice.style.borderColor = 'rgba(33, 194, 94, 0.3)';
-    } else {
-        bankNotice.innerHTML = '<i class="fas fa-info-circle"></i> No computador, você será redirecionado ao site do banco.';
-        bankNotice.style.background = 'rgba(255, 193, 7, 0.15)';
-        bankNotice.style.color = '#ffc107';
-        bankNotice.style.borderColor = 'rgba(255, 193, 7, 0.3)';
-    }
-
-    BANKS.forEach(bank => {
-        const item = document.createElement('div');
-        item.className = 'bank-item';
-
-        item.innerHTML = `
-            <div class="bank-icon" style="background: ${bank.color}">
-                <img src="https://www.google.com/s2/favicons?domain=${bank.domain}&sz=128"
-                     alt="${bank.name}" class="bank-logo-img"
-                     onload="this.parentElement.style.background='transparent'; this.parentElement.style.boxShadow='none'; this.nextElementSibling.style.display='none';"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                <span class="bank-initials">${bank.initials}</span>
-            </div>
-            <div class="bank-name">${bank.name}</div>
-        `;
-
-        item.addEventListener('click', () => {
-            handleBankRedirect(bank, item);
-        });
-
-        bankGridList.appendChild(item);
-    });
-}
-
-// Copia a chave Pix silenciosamente (sem feedback visual)
-function copyPixKeySilent() {
-    const pixKey = CONFIG.pixKey;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(pixKey).catch(() => {});
-    } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = pixKey;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            document.execCommand('copy');
-        } catch(e) {}
-        document.body.removeChild(textarea);
-    }
-}
-
-/**
- * Abre o aplicativo bancário ou redireciona para loja/site.
- *
- * Fluxo:
- * 1. Copia a chave Pix para a área de transferência.
- * 2. Android: usa intent:// URI → tenta abrir o app. Se falhar, abre Play Store.
- * 3. iOS: tenta abrir via custom scheme. Se falhar, abre App Store.
- * 4. Desktop: redireciona direto para o site do banco.
- *
- * A detecção de "falha" é feita observando se a janela perdeu foco
- * (indicando que um app externo foi aberto) ou se o timer expirou.
- */
-function handleBankRedirect(bank, itemElement) {
-    trackEvent('bank_redirect_attempt', { bankName: bank.name });
-
-    // Copia a chave Pix para o clipboard antes de redirecionar
-    copyPixKeySilent();
-
     const { isAndroid, isIOS } = detectPlatform();
-
-    // Estado visual de carregamento no item clicado
-    const originalContent = itemElement.innerHTML;
-    itemElement.style.opacity = '0.6';
-    itemElement.style.pointerEvents = 'none';
-    itemElement.innerHTML += '<span class="bank-loading-indicator"><i class="fas fa-spinner fa-spin"></i></span>';
-
-    showToast('Chave Pix copiada! Abrindo banco...', 'success');
-
-    // Registra momento do clique para medir se o app abriu
-    const clickTimestamp = Date.now();
-
-    if (isAndroid) {
-        openBankAndroid(bank, itemElement, originalContent, clickTimestamp);
-    } else if (isIOS) {
-        openBankIOS(bank, itemElement, originalContent, clickTimestamp);
-    } else {
-        openBankDesktop(bank, itemElement, originalContent);
+    if (isAndroid || isIOS) {
+        document.documentElement.classList.add('is-mobile');
     }
 }
 
-/**
- * Android: Utiliza Intent URI para abrir o app bancário.
- * Formato: intent://#Intent;package=<pkg>;scheme=<scheme>;end
- * Se o app não estiver instalado, o Android ignorará o intent silenciosamente.
- * Detectamos isso monitorando foco da janela e timer.
- */
-function openBankAndroid(bank, itemElement, originalContent, clickTimestamp) {
-    // Constrói a Intent URI corretamente
-    const intentUri = `intent://#Intent;package=${bank.packageName};scheme=${bank.scheme.replace('://', '')};end`;
-
-    // Cria iframe invisível para tentar o intent (não redireciona a página)
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
-    document.body.appendChild(iframe);
-
-    try {
-        iframe.src = intentUri;
-    } catch(e) {}
-
-    // Também tenta via window.location como alternativa
-    setTimeout(() => {
-        try {
-            window.location.href = intentUri;
-        } catch(e) {}
-    }, 300);
-
-    // Monitora se a janela perdeu foco (app abriu) ou se o timer expirou
-    let appOpened = false;
-
-    const onVisibilityChange = () => {
-        if (document.hidden || document.webkitHidden) {
-            appOpened = true;
-            cleanup();
-            restoreItem(itemElement, originalContent);
-        }
-    };
-
-    const onFocusChange = () => {
-        // Se a janela ganhou foco novamente após perder, pode ter voltado do app
-        if (appOpened) {
-            cleanup();
-            restoreItem(itemElement, originalContent);
-        }
-    };
-
-    const cleanup = () => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onFocusChange);
-        clearTimeout(fallbackTimer);
-        try { document.body.removeChild(iframe); } catch(e) {}
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onFocusChange);
-
-    // Fallback: se após 2.5s a janela ainda estiver em foco, o app provavelmente não existe
-    const fallbackTimer = setTimeout(() => {
-        cleanup();
-
-        if (!document.hidden && !document.webkitHidden) {
-            // App não abriu — redireciona para a Play Store
-            showToast(`${bank.name} não instalado. Abrindo Play Store...`, 'info');
-            setTimeout(() => {
-                window.open(bank.playStore, '_blank', 'noopener,noreferrer');
-                restoreItem(itemElement, originalContent);
-            }, 800);
-        } else {
-            restoreItem(itemElement, originalContent);
-        }
-    }, 2500);
-
-    // Se em 800ms não perdeu foco, limpa visualmente (o intent pode estar processando)
-    setTimeout(() => {
-        if (!appOpened) {
-            restoreItem(itemElement, originalContent);
-        }
-    }, 800);
+function trackEvent(name, data) {
+    console.log('[Analytics]', name, data);
 }
-
-/**
- * iOS: Tenta abrir via custom URL scheme (Safari suporta melhor que Chrome).
- * Se o app não estiver instalado, Safari mostrará um alert genérico.
- * Fallback: App Store.
- */
-function openBankIOS(bank, itemElement, originalContent, clickTimestamp) {
-    // No iOS, tentamos via window.location (Safari trata custom schemes)
-    let appOpened = false;
-
-    const onVisibilityChange = () => {
-        if (document.hidden || document.webkitHidden) {
-            appOpened = true;
-            cleanup();
-            restoreItem(itemElement, originalContent);
-        }
-    };
-
-    const onFocusChange = () => {
-        if (appOpened) {
-            cleanup();
-            restoreItem(itemElement, originalContent);
-        }
-    };
-
-    const cleanup = () => {
-        document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('blur', onFocusChange);
-        clearTimeout(fallbackTimer);
-    };
-
-    document.addEventListener('visibilitychange', onVisibilityChange);
-    window.addEventListener('blur', onFocusChange);
-
-    // Tenta abrir o app via custom scheme
-    try {
-        window.location.href = bank.scheme;
-    } catch(e) {
-        // Se lançar erro, vai direto para o fallback
-    }
-
-    // Fallback: se após 2.5s nada aconteceu, vai para a App Store
-    const fallbackTimer = setTimeout(() => {
-        cleanup();
-
-        if (!document.hidden && !document.webkitHidden) {
-            showToast(`${bank.name} não instalado. Abrindo App Store...`, 'info');
-            setTimeout(() => {
-                window.open(bank.appStore, '_blank', 'noopener,noreferrer');
-                restoreItem(itemElement, originalContent);
-            }, 800);
-        } else {
-            restoreItem(itemElement, originalContent);
-        }
-    }, 2500);
-
-    setTimeout(() => {
-        if (!appOpened) {
-            restoreItem(itemElement, originalContent);
-        }
-    }, 800);
-}
-
-/**
- * Desktop: Redireciona para o site oficial do banco.
- */
-function openBankDesktop(bank, itemElement, originalContent) {
-    showToast('Redirecionando para o site do banco...', 'info');
-    setTimeout(() => {
-        window.open(bank.webUrl, '_blank', 'noopener,noreferrer');
-        restoreItem(itemElement, originalContent);
-    }, 500);
-}
-
-/** Restaura o visual do item bancário após tentativa de abertura */
-function restoreItem(itemElement, originalContent) {
-    itemElement.style.opacity = '1';
-    itemElement.style.pointerEvents = 'auto';
-    const indicator = itemElement.querySelector('.bank-loading-indicator');
-    if (indicator) indicator.remove();
-}
-
-// =====================
-// EXPORT FUNCTIONS
-// =====================
-
-// These can be used in console or called from HTML
-window.copyPixKey = copyPixKey;
-window.downloadQRCode = downloadQRCode;
-window.shareViaWhatsApp = shareViaWhatsApp;
-window.shareViaOther = shareViaOther;
-window.trackEvent = trackEvent;
-window.openBankModal = openBankModal;
-window.getAnalytics = function() {
-    return JSON.parse(localStorage.getItem('pageEvents') || '[]');
-};
-
-// =====================
-// THEME TOGGLE FUNCTION
-// =====================
-function initTheme() {
-    const themeToggleBtn = document.getElementById('themeToggle');
-    if (!themeToggleBtn) return;
-
-    const currentTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Set initial state
-    if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
-        document.body.classList.add('dark-theme');
-        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-        document.body.classList.remove('dark-theme');
-        document.body.classList.add('light-theme');
-        themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-        if (document.body.classList.contains('dark-theme')) {
-            document.body.classList.remove('dark-theme');
-            document.body.classList.add('light-theme');
-            localStorage.setItem('theme', 'light');
-            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            trackEvent('theme_changed', { theme: 'light' });
-        } else {
-            document.body.classList.remove('light-theme');
-            document.body.classList.add('dark-theme');
-            localStorage.setItem('theme', 'dark');
-            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-            trackEvent('theme_changed', { theme: 'dark' });
-        }
-    });
-}
-

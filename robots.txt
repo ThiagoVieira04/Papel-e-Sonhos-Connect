@@ -1,14 +1,5 @@
-# robots.txt
-# Arquivo de instruções para search engines (Google, Bing, etc)
-
-# Permitir todos os bots
+# robots.txt para Papel e Sonhos Informática
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /private
 
-# Sitemap
-Sitemap: https://seu-dominio.com/sitemap.xml
-
-# Tempo de espera entre requisições (opcional)
-Crawl-delay: 1
+Sitemap: https://papel-e-sonhos-connect.vercel.app/sitemap.xml

@@ -3,270 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Papel e Sonhos Informática - Serviços digitais, impressão, documentos e atendimento rápido pelo WhatsApp.">
-    <meta name="keywords" content="papel, informática, impressão, documentos, WhatsApp, Rio de Janeiro">
-    <meta name="theme-color" content="#0a2463">
     
-    <!-- Open Graph para compartilhamento -->
-    <meta property="og:title" content="Papel e Sonhos Informática">
-    <meta property="og:description" content="Serviços digitais, impressão, documentos e atendimento rápido pelo WhatsApp.">
+    <!-- SEO Primário -->
+    <title>Papel e Sonhos Informática | Bio, Impressão, Personalizados & Serviços Digitais em Magé/RJ</title>
+    <meta name="description" content="Papelaria, impressão, personalizados, xerox, currículos, recuperação Gov.br e suporte de informática em Magé/RJ. Solicite seu orçamento pelo WhatsApp!">
+    <meta name="keywords" content="Papel e Sonhos Informática, papelaria em Magé, impressão em Magé, xerox em Magé, currículo em Magé, foto 3x4 em Magé, personalizados em Magé, informática em Magé, serviços digitais em Magé">
+    <meta name="author" content="Papel e Sonhos Informática">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://papel-e-sonhos-connect.vercel.app/">
+    <meta name="theme-color" content="#FAF7F2">
+
+    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630?text=Papel+e+Sonhos+Informática">
-    
+    <meta property="og:url" content="https://papel-e-sonhos-connect.vercel.app/">
+    <meta property="og:title" content="Papel e Sonhos Informática - Magé/RJ">
+    <meta property="og:description" content="Papelaria, impressão, personalizados, serviços digitais e informática em um só lugar. Orçamentos rápidos pelo WhatsApp.">
+    <meta property="og:image" content="https://papel-e-sonhos-connect.vercel.app/logo.png">
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Papel e Sonhos Informática">
-    <meta name="twitter:description" content="Serviços digitais, impressão, documentos e atendimento rápido pelo WhatsApp.">
-    
-    <title>Papel e Sonhos Informática - Serviços Digitais e Impressão</title>
+    <meta name="twitter:description" content="Transformamos ideias em memórias que encantam. Atendimento local em Magé/RJ.">
+    <meta name="twitter:image" content="https://papel-e-sonhos-connect.vercel.app/logo.png">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <!-- Schema.org JSON-LD para SEO Local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Papel e Sonhos Informática",
+      "image": "https://papel-e-sonhos-connect.vercel.app/logo.png",
+      "@id": "https://papel-e-sonhos-connect.vercel.app/",
+      "url": "https://papel-e-sonhos-connect.vercel.app/",
+      "telephone": "+5521987172463",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Magé",
+        "addressRegion": "RJ",
+        "addressCountry": "BR"
+      },
+      "sameAs": [
+        "https://www.instagram.com/papel_e_sonhos0504/",
+        "https://www.facebook.com/biancathiago0504"
+      ]
+    }
+    </script>
+
+    <!-- FontAwesome & Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-gradient"></div>
-    
-    <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar tema">
-        <i class="fas fa-moon"></i>
+
+    <!-- Header Desktop -->
+    <header class="main-header">
+        <div class="container header-nav-container">
+            <div class="header-brand">
+                <img src="logo.png" alt="Papel e Sonhos Informática Logo" class="header-logo">
+                <div class="header-title-box">
+                    <h1>PAPEL E SONHOS</h1>
+                    <span>INFORMÁTICA</span>
+                </div>
+            </div>
+
+            <nav class="header-desktop-nav">
+                <a href="#inicio" class="nav-link">Início</a>
+                <a href="#servicos" class="nav-link">Serviços</a>
+                <a href="#catalogo" class="nav-link">Catálogo</a>
+                <a href="#portfolio" class="nav-link">Portfólio</a>
+                <a href="#orcamento" class="nav-link">Orçamento</a>
+                <a href="#contato" class="nav-link">Contato</a>
+            </nav>
+
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="#inicio" class="bottom-nav-item active">
+            <i class="fas fa-house"></i>
+            <span>Início</span>
+        </a>
+        <a href="#servicos" class="bottom-nav-item">
+            <i class="fas fa-layer-group"></i>
+            <span>Serviços</span>
+        </a>
+        <a href="#portfolio" class="bottom-nav-item">
+            <i class="fas fa-images"></i>
+            <span>Portfólio</span>
+        </a>
+        <a href="#orcamento" class="bottom-nav-item">
+            <i class="fas fa-file-signature"></i>
+            <span>Orçamento</span>
+        </a>
+        <a href="#contato" class="bottom-nav-item">
+            <i class="fas fa-address-book"></i>
+            <span>Contato</span>
+        </a>
+    </nav>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <button class="floating-whatsapp" id="floatingWhatsappBtn" aria-label="Falar no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
     </button>
-    
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">
-                        <img src="logo.jpg" alt="Logo Papel e Sonhos Informática" />
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-section">
+            <div class="container">
+                <div class="hero-profile">
+                    <div class="hero-avatar-wrapper">
+                        <img src="logo.jpg" alt="Logo Papel e Sonhos" class="hero-avatar">
+                        <span class="hero-verified-badge"><i class="fas fa-check"></i></span>
                     </div>
-                    <div class="brand-info">
-                        <h1>PAPEL E SONHOS<br>INFORMÁTICA</h1>
+
+                    <span class="hero-location-badge">
+                        <i class="fas fa-location-dot"></i> Magé / RJ
+                    </span>
+
+                    <h1 class="hero-title">PAPEL E SONHOS INFORMÁTICA</h1>
+                    <p class="hero-slogan">"Transformamos ideias em memórias que encantam."</p>
+                    <p class="hero-description">Papelaria, impressão, personalizados, serviços digitais e informática em um só lugar.</p>
+
+                    <div class="hero-ctas">
+                        <button class="btn btn-whatsapp btn-lg" id="heroWhatsappBtn">
+                            <i class="fab fa-whatsapp"></i> FALAR NO WHATSAPP
+                        </button>
+                    </div>
+
+                    <!-- Quick Utility Chips -->
+                    <div class="quick-links-bar">
+                        <button class="quick-chip" id="openPixBtn">
+                            <i class="fas fa-pix" style="color: #00C69E;"></i> Pagar com Pix
+                        </button>
+                        <button class="quick-chip" id="openQrBtn">
+                            <i class="fas fa-qrcode"></i> Compartilhar Site
+                        </button>
+                        <button class="quick-chip" id="openWifiBtn">
+                            <i class="fas fa-wifi"></i> WiFi Loja
+                        </button>
                     </div>
                 </div>
-            </div>
-        </header>
-
-        <!-- Description -->
-        <section class="description">
-            <p class="main-text">Atendimento completo em impressão, digitalização, documentos, serviços online e suporte técnico, com agilidade pelo WhatsApp.</p>
-        </section>
-
-        <!-- Main Links -->
-        <section class="links-section">
-            <div class="buttons-grid">
-                <!-- Google Review Button -->
-                <button class="link-button google-btn" data-action="open-link" data-link="https://g.page/r/CXUQrjKh4lJtEAE/review">
-                    <div class="button-icon">
-                        <img src="logo-google.png" alt="Google" class="button-icon-img" />
-                    </div>
-                    <div class="button-content">
-                        <h3>Avalie no Google</h3>
-                        <p>Deixe sua avaliação</p>
-                    </div>
-                </button>
-
-                <!-- WhatsApp Button -->
-                <button class="link-button whatsapp-btn" data-action="open-link" data-link="https://wa.me/5521987172463?text=Olá%20Papel%20e%20Sonhos!%20Gostaria%20de%20informações.">
-                    <div class="button-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="button-content">
-                        <h3>WhatsApp</h3>
-                        <p>Fale conosco agora</p>
-                    </div>
-                </button>
-
-                <!-- Instagram Button -->
-                <button class="link-button instagram-btn" data-action="open-link" data-link="https://www.instagram.com/papel_e_sonhos0504/">
-                    <div class="button-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div class="button-content">
-                        <h3>Instagram</h3>
-                        <p>Acompanhe nossas atualizações</p>
-                    </div>
-                </button>
-
-                <!-- Facebook Button -->
-                <button class="link-button facebook-btn" data-action="open-link" data-link="https://www.facebook.com/biancathiago0504">
-                    <div class="button-icon">
-                        <i class="fab fa-facebook"></i>
-                    </div>
-                    <div class="button-content">
-                        <h3>Facebook</h3>
-                        <p>Nos acompanhe também</p>
-                    </div>
-                </button>
-
-                <!-- Location Button -->
-                <button class="link-button location-btn" data-action="open-link" data-link="https://maps.app.goo.gl/gK2X9JmyqhsShQe49">
-                    <div class="button-icon">
-                        <img src="local.gif" alt="Localização" class="button-icon-img" />
-                    </div>
-                    <div class="button-content">
-                        <h3>Localização</h3>
-                        <p>Veja onde estamos</p>
-                    </div>
-                </button>
-
-                <!-- Pix Button -->
-                <button class="link-button pix-btn" data-action="pix-modal">
-                    <div class="button-icon">
-                        <img src="pix.png" alt="Pix" class="button-icon-img" />
-                    </div>
-                    <div class="button-content">
-                        <h3>Pix</h3>
-                        <p>Escaneie ou copie a chave</p>
-                    </div>
-                </button>
-
-                <!-- WiFi Button -->
-                <button class="link-button wifi-btn" data-action="wifi-modal">
-                    <div class="button-icon">
-                        <i class="fas fa-wifi"></i>
-                    </div>
-                    <div class="button-content">
-                        <h3>WiFi Grátis</h3>
-                        <p>Conecte-se à rede</p>
-                    </div>
-                </button>
-
-                <!-- QR Code da Página -->
-                <button class="link-button qrcode-btn" data-action="qrcode-modal">
-                    <div class="button-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="button-content">
-                        <h3>QR Code da Página</h3>
-                        <p>Compartilhe via código QR</p>
-                    </div>
-                </button>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p class="thank-you">Obrigado pela sua visita!</p>
-                <p class="footer-credits">Desenvolvido por Papel e Sonhos Informática</p>
-            </div>
-        </footer>
-    </div>
-
-    <!-- Pix Modal -->
-    <div class="modal" id="pixModal">
-        <div class="modal-content pix-modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>Pague com Pix</h2>
-            
-            <div class="pix-key-section">
-                <p class="pix-key-label">Chave Pix (Celular):</p>
-                <div class="pix-key-display">
-                    <span id="pixKeyDisplay">+5521987172463</span>
-                    <button class="copy-btn" id="copyPixBtn">
-                        <i class="fas fa-copy"></i> Copiar
-                    </button>
+        <!-- Section: O Que Você Procura? -->
+        <section id="servicos" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Categorias Principais</span>
+                    <h2 class="section-title">O QUE VOCÊ PROCURA?</h2>
+                    <p class="section-subtitle">Escolha uma categoria e encontre a solução perfeita para você ou seu negócio.</p>
                 </div>
-                <p class="pix-bank">Banco: PagSeguro</p>
-                <p class="pix-owner" id="pixOwner">Thiago Samuel</p>
-            </div>
-            
-            <p class="pix-info">
-                <i class="fas fa-info-circle"></i>
-                Copie a chave acima para fazer o pagamento via Pix.
-            </p>
-            
-            <button class="action-btn" id="openBankBtn" style="margin-top: 15px; background: linear-gradient(135deg, #00c69e, #00b1ea); color: #ffffff;">
-                <i class="fas fa-university"></i> Abrir meu banco
-            </button>
-        </div>
-    </div>
 
-    <!-- Bank Selector Modal -->
-    <div class="modal" id="bankModal">
-        <div class="modal-content bank-modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>🏦 Escolha seu banco</h2>
-            <p class="bank-modal-description">Selecione o aplicativo bancário para concluir seu pagamento Pix.</p>
-            
-            <!-- Loading state -->
-            <div class="bank-loading-container" id="bankLoading">
-                <div class="bank-spinner"></div>
-                <div class="bank-scanner"></div>
-                <p>Detectando aplicativos instalados...</p>
-            </div>
-            
-            <!-- Grid list of banks -->
-            <div class="bank-grid-container" id="bankGrid" style="display: none;">
-                <div class="bank-detection-notice" id="bankNotice">
-                    <i class="fas fa-check-circle"></i> Dispositivos compatíveis detectados
-                </div>
-                <div class="bank-grid" id="bankGridList">
-                    <!-- Bank items dynamically loaded -->
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Preenchido via script.js -->
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- QR Code Modal -->
-    <div class="modal" id="qrcodeModal">
+        <!-- Section: Serviços Mais Procurados -->
+        <section id="procurados" class="section" style="background-color: var(--bg-surface);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Destaques da Loja</span>
+                    <h2 class="section-title">🔥 SERVIÇOS MAIS PROCURADOS</h2>
+                    <p class="section-subtitle">Os serviços favoritos de nossos clientes em Magé com atendimento rápido.</p>
+                </div>
+
+                <div class="top-services-grid" id="topServicesGrid">
+                    <!-- Preenchido via script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Catálogo Completo -->
+        <section id="catalogo" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Catálogo Comercial</span>
+                    <h2 class="section-title">📂 TODOS OS NOSSOS SERVIÇOS</h2>
+                    <p class="section-subtitle">Filtre por categoria para visualizar detalhes e solicitar um orçamento.</p>
+                </div>
+
+                <!-- Catalog Filter Tabs -->
+                <div class="filter-tabs" id="catalogFilterTabs">
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="documentos">📄 Documentos Online</button>
+                    <button class="filter-btn" data-filter="impressao">🖨️ Impressão & Papelaria</button>
+                    <button class="filter-btn" data-filter="personalizados">🎁 Personalizados</button>
+                    <button class="filter-btn" data-filter="informatica">💻 Informática</button>
+                </div>
+
+                <div class="catalog-services-grid" id="catalogServicesGrid">
+                    <!-- Preenchido via script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Tenho uma Ideia -->
+        <section id="ideia" class="section">
+            <div class="container">
+                <div class="idea-card">
+                    <div class="idea-card-content">
+                        <i class="fas fa-lightbulb idea-icon"></i>
+                        <h3>💡 TEM UMA IDEIA?</h3>
+                        <p>Não encontrou exatamente o que procura? Conte sua ideia para a gente. Vamos encontrar uma forma de transformar sua ideia em realidade.</p>
+                        <button class="btn btn-primary btn-lg" id="openIdeaModalBtn">
+                            <i class="fas fa-pen-to-square"></i> QUERO CONTAR MINHA IDEIA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Portfólio ("Nossos Trabalhos") -->
+        <section id="portfolio" class="section" style="background-color: var(--bg-surface);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Galeria de Projetos</span>
+                    <h2 class="section-title">✨ NOSSOS TRABALHOS</h2>
+                    <p class="section-subtitle">Veja alguns dos projetos e produções realizados para nossos clientes.</p>
+                </div>
+
+                <!-- Portfolio Filter Tabs -->
+                <div class="filter-tabs" id="portfolioFilterTabs">
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="impressao">Impressão</button>
+                    <button class="filter-btn" data-filter="personalizados">Personalizados</button>
+                    <button class="filter-btn" data-filter="papelaria">Papelaria</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                    <button class="filter-btn" data-filter="informatica">Informática</button>
+                </div>
+
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <!-- Preenchido via script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Solicitar Orçamento Global -->
+        <section id="orcamento" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Atendimento Rápido</span>
+                    <h2 class="section-title">📝 SOLICITAR ORÇAMENTO</h2>
+                    <p class="section-subtitle">Selecione o serviço e envie as informações direto para nosso WhatsApp.</p>
+                </div>
+
+                <div class="quote-box">
+                    <form id="globalQuoteForm">
+                        <div class="form-group">
+                            <label for="quoteCategory">1. Selecione a Categoria:</label>
+                            <select id="quoteCategory" class="form-control">
+                                <option value="todos">Todas as categorias</option>
+                                <option value="documentos">📄 Documentos & Serviços Online</option>
+                                <option value="impressao">🖨️ Impressão & Papelaria</option>
+                                <option value="personalizados">🎁 Personalizados & Presentes</option>
+                                <option value="informatica">💻 Informática & Suporte</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quoteService">2. Selecione o Serviço Desejado:</label>
+                            <select id="quoteService" class="form-control">
+                                <!-- Populado dinamicamente via JS -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quoteQuantity">3. Quantidade aproximada:</label>
+                            <input type="text" id="quoteQuantity" class="form-control" placeholder="Ex: 1 caneca, 100 cópias, 1 notebook" value="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quoteNotes">4. Observações ou Detalhes do Pedido:</label>
+                            <textarea id="quoteNotes" class="form-control" rows="3" placeholder="Descreva nomes, temas, cores, prazo desejado ou detalhes específicos..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-whatsapp btn-block btn-lg">
+                            <i class="fab fa-whatsapp"></i> ENVIAR ORÇAMENTO PELO WHATSAPP
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Redes & Localização -->
+        <section id="contato" class="section" style="background-color: var(--bg-surface);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Conecte-se Conosco</span>
+                    <h2 class="section-title">REDES & LOCALIZAÇÃO</h2>
+                </div>
+
+                <div class="social-location-grid">
+                    <!-- Instagram Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <h4>📸 SIGA A PAPEL E SONHOS</h4>
+                        <p>Acompanhe novidades, trabalhos e inspirações no nosso Instagram @papelesonhos0504.</p>
+                        <a href="https://www.instagram.com/papel_e_sonhos0504/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm btn-block">
+                            VER INSTAGRAM
+                        </a>
+                    </div>
+
+                    <!-- Google Review Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <h4>⭐ AVALIE NOSSO ATENDIMENTO</h4>
+                        <p>"Seu feedback ajuda nosso negócio a crescer." Deixe sua opinião no Google!</p>
+                        <a href="https://g.page/r/CXUQrjKh4lJtEAE/review" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm btn-block">
+                            DEIXAR AVALIAÇÃO
+                        </a>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="info-card">
+                        <div class="info-card-icon location">
+                            <i class="fas fa-map-location-dot"></i>
+                        </div>
+                        <h4>📍 ONDE ESTAMOS</h4>
+                        <p>Magé – Rio de Janeiro. Atendimento local com toda atenção e carinho.</p>
+                        <a href="https://maps.app.goo.gl/gK2X9JmyqhsShQe49" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-sm btn-block">
+                            <i class="fas fa-directions"></i> COMO CHEGAR
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Detalhes do Serviço -->
+    <div class="modal" id="serviceDetailModal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2>QR Code da Página</h2>
-            
-            <div class="qr-code-container" id="pageQRCode"></div>
-            
-            <button class="action-btn" id="downloadQRBtn">
-                <i class="fas fa-download"></i> Baixar QR Code
+            <div class="modal-header-custom">
+                <div class="modal-header-icon">
+                    <i id="modalServiceIcon" class="fas fa-concierge-bell"></i>
+                </div>
+                <div>
+                    <span id="modalServiceCategory" class="category-badge">Categoria</span>
+                    <h3 id="modalServiceTitle">Nome do Serviço</h3>
+                </div>
+            </div>
+
+            <p id="modalServiceDesc" style="margin-bottom: 12px; color: var(--text-muted);"></p>
+            <div style="margin-bottom: 14px;">
+                <strong>Preço estimado:</strong> <span id="modalServicePrice" class="price-tag">Sob consulta</span>
+            </div>
+
+            <h4 style="font-size: 0.95rem; margin-top: 10px;">Benefícios e Diferenciais:</h4>
+            <ul id="modalServiceBenefits" class="benefits-list"></ul>
+
+            <button class="btn btn-whatsapp btn-block btn-lg" id="modalServiceWhatsAppBtn" style="margin-top: 16px;">
+                <i class="fab fa-whatsapp"></i> PEDIR ORÇAMENTO NO WHATSAPP
             </button>
-            
-            <p class="qr-info">
-                <i class="fas fa-info-circle"></i>
-                Escaneie este código para acessar nossa página diretamente.
-            </p>
         </div>
     </div>
 
-    <!-- WiFi Modal -->
+    <!-- Modal "Tenho uma Ideia" -->
+    <div class="modal" id="ideaModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header-custom">
+                <div class="modal-header-icon" style="background: var(--gold-light); color: var(--gold-dark);">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.3rem;">Conte Sua Ideia!</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Vamos criar algo exclusivo para você.</p>
+                </div>
+            </div>
+
+            <form id="ideaForm">
+                <div class="form-group">
+                    <label for="ideaName">Seu Nome:</label>
+                    <input type="text" id="ideaName" class="form-control" placeholder="Digite seu nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ideaPhone">WhatsApp de Contato:</label>
+                    <input type="tel" id="ideaPhone" class="form-control" placeholder="(21) 98765-4321" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ideaCategory">Categoria Relacionada:</label>
+                    <select id="ideaCategory" class="form-control">
+                        <option value="Personalizados">Personalizados & Presentes</option>
+                        <option value="Impressão e Gráfica">Impressão & Gráfica</option>
+                        <option value="Documentos e Serviços Online">Documentos & Serviços Online</option>
+                        <option value="Informática">Informática</option>
+                        <option value="Outro Projeto">Outro Projeto Especial</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ideaDescription">Descreva sua ideia:</label>
+                    <textarea id="ideaDescription" class="form-control" rows="3" placeholder="Ex: Gostaria de uma caneca com a foto do meu pet e a frase 'Melhor Amigo'..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-whatsapp btn-block btn-lg">
+                    <i class="fab fa-whatsapp"></i> ENVIAR PELO WHATSAPP
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Pix -->
+    <div class="modal" id="pixModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div style="text-align: center; margin-bottom: 16px;">
+                <img src="pix.png" alt="Pix" style="height: 48px; margin: 0 auto 10px;">
+                <h2>Pagar com Pix</h2>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Copie a chave Pix para realizar seu pagamento.</p>
+            </div>
+
+            <div style="background: var(--bg-main); padding: 16px; border-radius: var(--border-radius-md); text-align: center; border: 1px solid var(--border-color); margin-bottom: 14px;">
+                <p style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Chave Pix (Celular):</p>
+                <div style="font-size: 1.15rem; font-weight: 900; color: var(--teal); margin: 6px 0;">+5521987172463</div>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Favorecido: Thiago Samuel | Banco: PagSeguro</p>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="copyPixBtn" style="margin-bottom: 10px;">
+                <i class="fas fa-copy"></i> Copiar Chave Pix
+            </button>
+
+            <button class="btn btn-outline btn-block" id="openBankBtn">
+                <i class="fas fa-university"></i> Abrir Aplicativo do Banco
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Seletor de Banco -->
+    <div class="modal" id="bankModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3 style="text-align: center; margin-bottom: 6px;">🏦 Escolha seu Banco</h3>
+            <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Toque no seu banco para abrir o aplicativo diretamente.</p>
+
+            <div class="bank-grid" id="bankGridList">
+                <!-- Preenchido via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal QR Code -->
+    <div class="modal" id="qrcodeModal">
+        <div class="modal-content" style="text-align: center;">
+            <button class="modal-close">&times;</button>
+            <h3>📱 QR Code da Página</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Escaneie o código abaixo para abrir o site no seu celular.</p>
+
+            <div id="pageQRCode" style="display: flex; justify-content: center; margin-bottom: 16px;"></div>
+
+            <button class="btn btn-teal btn-block" id="downloadQRBtn">
+                <i class="fas fa-download"></i> Baixar QR Code (PNG)
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal WiFi Grátis -->
     <div class="modal" id="wifiModal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
-            <h2>WiFi Grátis</h2>
-            
-            <button class="action-btn" id="connectWiFiBtn">
-                <i class="fas fa-wifi"></i> Conectar Agora
-            </button>
-            
-            <div class="wifi-info">
+            <div style="text-align: center; margin-bottom: 16px;">
+                <i class="fas fa-wifi" style="font-size: 40px; color: var(--teal); margin-bottom: 8px;"></i>
+                <h3>WiFi Grátis na Loja</h3>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">Conecte-se à nossa rede enquanto é atendido.</p>
+            </div>
+
+            <div style="background: var(--bg-main); padding: 14px; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-bottom: 16px;">
                 <p><strong>Rede:</strong> TSDINFORMATICA</p>
                 <p><strong>Senha:</strong> t04101986</p>
                 <p><strong>Segurança:</strong> WPA2</p>
             </div>
-            
-            <div class="wifi-steps">
-                <p class="steps-title">📱 Como conectar:</p>
-                <ol class="steps-list">
-                    <li>Toque em "Conectar Agora" para abrir configurações</li>
-                    <li>Procure pela rede <strong>TSDINFORMATICA</strong></li>
-                    <li>Digite a senha quando solicitado</li>
-                </ol>
-            </div>
-            
-            <p class="qr-info">
-                <i class="fas fa-info-circle"></i>
-                Se a conexão automática não funcionar, configure manualmente nas configurações de Wi-Fi.
-            </p>
+
+            <button class="btn btn-teal btn-block" id="connectWiFiBtn">
+                <i class="fas fa-wifi"></i> Copiar Senha & Conectar
+            </button>
         </div>
     </div>
 
-    <!-- Success Message -->
-    <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i>
-        <p id="successText">Operação realizada com sucesso!</p>
+    <!-- Modal Lightbox de Portfólio -->
+    <div class="modal" id="lightboxModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close">&times;</button>
+            <img id="lightboxImage" src="" alt="Projeto Portfólio" style="width: 100%; height: 280px; object-fit: cover; border-radius: var(--border-radius-md); margin-bottom: 14px;">
+            <h3 id="lightboxTitle" style="font-size: 1.2rem; margin-bottom: 6px;">Título do Projeto</h3>
+            <p id="lightboxDesc" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Descrição do projeto</p>
+
+            <button class="btn btn-whatsapp btn-block" id="lightboxQuoteBtn">
+                <i class="fab fa-whatsapp"></i> QUERO UM IGUAL
+            </button>
+        </div>
     </div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <h3 class="footer-brand">PAPEL E SONHOS INFORMÁTICA</h3>
+            <p style="font-size: 0.9rem; font-style: italic; color: var(--primary); margin-bottom: 12px;">"Transformando ideias em realidade."</p>
+
+            <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 16px; font-size: 1.2rem;">
+                <a href="https://wa.me/5521987172463" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" style="color: var(--whatsapp-green);"></i></a>
+                <a href="https://www.instagram.com/papel_e_sonhos0504/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+                <a href="https://www.facebook.com/biancathiago0504" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook" style="color: #1877F2;"></i></a>
+                <a href="https://g.page/r/CXUQrjKh4lJtEAE/review" target="_blank" rel="noopener" aria-label="Google"><i class="fab fa-google" style="color: #4285F4;"></i></a>
+            </div>
+
+            <p class="footer-credits">© 2026 Papel e Sonhos Informática • Magé - RJ. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- QRCodeJS CDN & Custom JS Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
