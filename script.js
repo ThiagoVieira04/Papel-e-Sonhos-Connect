@@ -611,7 +611,6 @@ const PORTFOLIO_DATA = [
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     renderCategories();
-    renderTopServices();
     renderCatalogServices('todos');
     renderPortfolio('todos');
     initEventListeners();
@@ -696,44 +695,6 @@ function renderCategories() {
 
 // ==========================================
 // RENDERIZAÇÃO DOS SERVIÇOS MAIS PROCURADOS
-// ==========================================
-
-function renderTopServices() {
-    const container = document.getElementById('topServicesGrid');
-    if (!container) return;
-
-    const featuredServices = SERVICES_DATA.filter(s => s.featured);
-
-    container.innerHTML = featuredServices.map(service => `
-        <div class="service-card featured-service-card" data-id="${service.id}">
-            <div class="service-icon-box">
-                <i class="fas ${service.icon}"></i>
-            </div>
-            <div class="service-card-body">
-                <span class="service-category-tag">${CATEGORIES_DATA[service.category]?.title || 'Serviço'}</span>
-                <h4>${service.name}</h4>
-                <p>${service.shortDescription}</p>
-            </div>
-            <div class="service-card-footer">
-                <button class="btn btn-sm btn-primary open-service-modal-btn" data-id="${service.id}">
-                    <i class="fas fa-eye"></i> Quero este serviço
-                </button>
-            </div>
-        </div>
-    `).join('');
-
-    // Listeners
-    container.querySelectorAll('.open-service-modal-btn, .featured-service-card').forEach(elem => {
-        elem.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const serviceId = elem.getAttribute('data-id') || elem.closest('[data-id]')?.getAttribute('data-id');
-            if (serviceId) openServiceDetailModal(serviceId);
-        });
-    });
-}
-
-// ==========================================
-// RENDERIZAÇÃO DO CATÁLOGO DE SERVIÇOS (COM FILTROS)
 // ==========================================
 
 function renderCatalogServices(categoryFilter = 'todos') {
