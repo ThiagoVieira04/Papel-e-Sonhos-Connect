@@ -515,6 +515,7 @@ body.dark-theme .hero-title {
     color: var(--text-main);
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
+    cursor: pointer;
 }
 
 .quick-chip:hover {
