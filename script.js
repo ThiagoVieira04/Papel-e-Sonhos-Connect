@@ -223,6 +223,28 @@ const SERVICES_DATA = [
         featured: false
     },
     {
+        id: 'cartoes-visita',
+        category: 'impressao',
+        name: 'Cartões de Visita',
+        shortDescription: 'Cartões profissionais em papel couché com acabamento de alta qualidade.',
+        description: 'Criação e impressão de cartões de visita personalizados com sua logo, nome e contatos. Papel couché fosco ou brilhante com recorte preciso.',
+        benefits: ['Design profissional', 'Acabamento fosco ou brilhante', 'Entrega rápida'],
+        price: 'A partir de R$ 25,00 (100 un)',
+        icon: 'fa-address-card',
+        featured: false
+    },
+    {
+        id: 'convites-casamento',
+        category: 'personalizados',
+        name: 'Convites de Casamento',
+        shortDescription: 'Convites elegantes e exclusivos para o dia mais especial da sua vida.',
+        description: 'Convites de casamento personalizados com o tema do casal, papel de alta gramatura, laços e acabamento premium. Modelos clássicos ou modernos.',
+        benefits: ['Design exclusivo do casal', 'Papel de alta gramatura', 'Acabamento premium'],
+        price: 'Sob consulta',
+        icon: 'fa-ring',
+        featured: false
+    },
+    {
         id: 'papelaria-personalizada',
         category: 'personalizados',
         name: 'Papelaria Personalizada para Festas',
