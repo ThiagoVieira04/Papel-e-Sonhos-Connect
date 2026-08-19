@@ -405,14 +405,6 @@ const PORTFOLIO_DATA = [
         description: 'Bolsinhas com estampa exclusiva para lembranças e brindes especiais.'
     },
     {
-        id: 'port-14',
-        title: 'Necessaire Personalizada',
-        category: 'personalizados',
-        image: 'preview.png',
-        badge: 'Acessórios',
-        description: 'Necessaires com estampas vibrantes para uso pessoal ou brindes.'
-    },
-    {
         id: 'port-15',
         title: 'Topos de Bolo Personalizados',
         category: 'personalizados',
