@@ -297,6 +297,7 @@ const SERVICES_DATA = [
 // ==========================================
 
 const PORTFOLIO_DATA = [
+    // --- EXISTENTES ---
     {
         id: 'port-1',
         title: 'Caneca Personalizada com Foto e Frase',
@@ -344,6 +345,262 @@ const PORTFOLIO_DATA = [
         image: 'logo.png',
         badge: 'Festas',
         description: 'Papelaria personalizada recortada para eventos com excelente acabamento.'
+    },
+
+    // --- 📚 PAPELARIA & PERSONALIZADOS ---
+    {
+        id: 'port-7',
+        title: 'Encadernação de Trabalhos e Documentos',
+        category: 'impressao',
+        image: 'logo.jpg',
+        badge: 'Acabamento',
+        description: 'Encadernação em espiral com capa transparente e contra-capa resistente.'
+    },
+    {
+        id: 'port-8',
+        title: 'Agendas Personalizadas',
+        category: 'papelaria',
+        image: 'preview.png',
+        badge: 'Papelaria',
+        description: 'Agendas pessoais e corporativas com capa personalizada e divisórias exclusivas.'
+    },
+    {
+        id: 'port-9',
+        title: 'Cadernetas de Vacina Reformadas',
+        category: 'papelaria',
+        image: 'logo.png',
+        badge: 'Papelaria Afetiva',
+        description: 'Reforma e confecção de cadernetas com capa dura e miolo atualizado do SUS.'
+    },
+    {
+        id: 'port-10',
+        title: 'Lembrancinhas para Festas e Eventos',
+        category: 'personalizados',
+        image: 'logo.jpg',
+        badge: 'Eventos',
+        description: 'Lembrancinhas personalizadas com nome, data e tema do seu evento.'
+    },
+    {
+        id: 'port-11',
+        title: 'Camisas Personalizadas',
+        category: 'personalizados',
+        image: 'preview.png',
+        badge: 'Vestuário',
+        description: 'Camisas estampadas para eventos, empresas, formaturas e aniversários.'
+    },
+    {
+        id: 'port-12',
+        title: 'Azulejos Personalizados',
+        category: 'personalizados',
+        image: 'logo.png',
+        badge: 'Decoração',
+        description: 'Azulejos estampados com suporte para mesa ou parede e acabamento resinado.'
+    },
+    {
+        id: 'port-13',
+        title: 'Bolsinhas Personalizadas',
+        category: 'personalizados',
+        image: 'logo.jpg',
+        badge: 'Acessórios',
+        description: 'Bolsinhas com estampa exclusiva para lembranças e brindes especiais.'
+    },
+    {
+        id: 'port-14',
+        title: 'Necessaire Personalizada',
+        category: 'personalizados',
+        image: 'preview.png',
+        badge: 'Acessórios',
+        description: 'Necessaires com estampas vibrantes para uso pessoal ou brindes.'
+    },
+    {
+        id: 'port-15',
+        title: 'Topos de Bolo Personalizados',
+        category: 'personalizados',
+        image: 'logo.png',
+        badge: 'Festas',
+        description: 'Topos de bolo em papel fotográfico com brilho e recorte preciso.'
+    },
+    {
+        id: 'port-16',
+        title: 'Papelaria Personalizada em Geral',
+        category: 'personalizados',
+        image: 'logo.jpg',
+        badge: 'Personalizados',
+        description: 'Papel timbrado, convites, cartões e papelaria completa com sua identidade.'
+    },
+    {
+        id: 'port-17',
+        title: 'Adesivos Personalizados',
+        category: 'personalizados',
+        image: 'preview.png',
+        badge: 'Viniil & Papel',
+        description: 'Adesivos recortados em vinil ou papel para marcas, festas e produtos.'
+    },
+    {
+        id: 'port-18',
+        title: 'Banners Promocionais',
+        category: 'impressao',
+        image: 'logo.png',
+        badge: 'Grande Formato',
+        description: 'Banners em lona com bastão, resistentes para ambientes internos e externos.'
+    },
+
+    // --- 🖨️ IMPRESSÃO E DOCUMENTOS ---
+    {
+        id: 'port-19',
+        title: 'Xerox Rápido e de Qualidade',
+        category: 'impressao',
+        image: 'logo.jpg',
+        badge: 'Cópias',
+        description: 'Cópias em preto e branco e coloridas com alto padrão de nitidez.'
+    },
+    {
+        id: 'port-20',
+        title: 'Impressão de Documentos e Fotos',
+        category: 'impressao',
+        image: 'preview.png',
+        badge: 'Impressão',
+        description: 'Impressões de trabalhos, contratos, apostilas e fotos em vários tamanhos.'
+    },
+    {
+        id: 'port-21',
+        title: 'Emissão de Boletos e 2ª Via',
+        category: 'impressao',
+        image: 'logo.png',
+        badge: 'Contas',
+        description: 'Emissão e 2ª via de contas de luz, água, telefone e boletos bancários.'
+    },
+    {
+        id: 'port-22',
+        title: 'Escaneamento para WhatsApp e E-mail',
+        category: 'impressao',
+        image: 'logo.jpg',
+        badge: 'Digitalização',
+        description: 'Documentos digitalizados com alta nitidez e enviados direto para você.'
+    },
+    {
+        id: 'port-23',
+        title: 'Certidões Negativas (Estadual, Federal e Eleitoral)',
+        category: 'documentos',
+        image: 'preview.png',
+        badge: 'Documentos',
+        description: 'Emissão de certidões negativas de débitos junto aos órgãos públicos.'
+    },
+    {
+        id: 'port-24',
+        title: 'Currículos Profissionais',
+        category: 'design',
+        image: 'logo.png',
+        badge: 'Empregabilidade',
+        description: 'Elaboração de currículos com layout profissional para vagas locais e online.'
+    },
+    {
+        id: 'port-25',
+        title: 'Fotos em Vários Tamanhos',
+        category: 'impressao',
+        image: 'logo.jpg',
+        badge: 'Fotografia',
+        description: 'Fotos 3x4, 5x7 e ampliações com impressão fotográfica de alta qualidade.'
+    },
+
+    // --- 💼 SERVIÇOS ADMINISTRATIVOS E PROFISSIONAIS ---
+    {
+        id: 'port-26',
+        title: 'Declaração de Imposto de Renda',
+        category: 'documentos',
+        image: 'preview.png',
+        badge: 'Receita Federal',
+        description: 'Elaboração e transmissão da sua declaração IRPF sem pendências.'
+    },
+    {
+        id: 'port-27',
+        title: 'Declaração de IR do MEI',
+        category: 'documentos',
+        image: 'logo.png',
+        badge: 'MEI',
+        description: 'Declaração anual do MEI (DASN-SIMEI) feita com agilidade e segurança.'
+    },
+    {
+        id: 'port-28',
+        title: 'Abertura de MEI',
+        category: 'documentos',
+        image: 'logo.jpg',
+        badge: 'Empreendedor',
+        description: 'Auxílio completo na abertura do seu MEI, do cadastro à emissão do CNPJ.'
+    },
+    {
+        id: 'port-29',
+        title: 'Recuperação de Conta GOV',
+        category: 'documentos',
+        image: 'preview.png',
+        badge: 'Gov.br',
+        description: 'Recuperação de acesso e validação da sua conta gov.br com seu documento.'
+    },
+    {
+        id: 'port-30',
+        title: 'Aposentadoria por Idade',
+        category: 'documentos',
+        image: 'logo.png',
+        badge: 'INSS',
+        description: 'Entrada e acompanhamento do processo de aposentadoria por idade no INSS.'
+    },
+    {
+        id: 'port-31',
+        title: 'Aposentadoria por Tempo de Serviço',
+        category: 'documentos',
+        image: 'logo.jpg',
+        badge: 'INSS',
+        description: 'Auxílio no requerimento de aposentadoria por tempo de contribuição.'
+    },
+    {
+        id: 'port-32',
+        title: 'Auxílio-Doença',
+        category: 'documentos',
+        image: 'preview.png',
+        badge: 'INSS',
+        description: 'Requisição de auxílio-doença com orientação sobre documentos e prazos.'
+    },
+    {
+        id: 'port-33',
+        title: 'Entrada em Seguro-Desemprego',
+        category: 'documentos',
+        image: 'logo.png',
+        badge: 'Trabalho',
+        description: 'Auxílio na solicitação e acompanhamento do seu seguro-desemprego.'
+    },
+
+    // --- 💻 TECNOLOGIA ---
+    {
+        id: 'port-34',
+        title: 'Desenvolvimento de Aplicativos',
+        category: 'informatica',
+        image: 'logo.jpg',
+        badge: 'Apps',
+        description: 'Criação de aplicativos e soluções digitais sob medida para seu negócio.'
+    },
+    {
+        id: 'port-35',
+        title: 'Consertos e Formatação de Computadores',
+        category: 'informatica',
+        image: 'preview.png',
+        badge: 'Manutenção',
+        description: 'Conserto, formatação e otimização de computadores e notebooks.'
+    },
+    {
+        id: 'port-36',
+        title: 'Gravação de Áudio para Propaganda',
+        category: 'informatica',
+        image: 'logo.png',
+        badge: 'Áudio',
+        description: 'Gravação e edição de áudio profissional para sua propaganda e spot.'
+    },
+    {
+        id: 'port-37',
+        title: 'Músicas para Pen Drive',
+        category: 'informatica',
+        image: 'logo.jpg',
+        badge: 'Música',
+        description: 'Coletâneas de músicas e vídeos organizadas por gênero, cantor ou época.'
     }
 ];
 
