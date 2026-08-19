@@ -1036,6 +1036,82 @@ body.dark-theme .section-title {
     color: #FFFFFF;
 }
 
+/* Google Review em Destaque */
+.google-review-card {
+    position: relative;
+    border: 2px solid #4285F4;
+    background: linear-gradient(180deg, #FFFFFF 0%, #E8F0FE 100%);
+    box-shadow: 0 10px 30px rgba(66, 133, 244, 0.25);
+    transform: scale(1.02);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.google-review-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+    animation: googleShine 3.5s ease-in-out infinite;
+}
+
+@keyframes googleShine {
+    0%, 60% { left: -100%; }
+    100% { left: 100%; }
+}
+
+body.dark-theme .google-review-card {
+    background: linear-gradient(180deg, #1E252B 0%, #16213A 100%);
+    box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
+}
+
+.google-review-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #4285F4, #34A853);
+    color: #FFFFFF;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: var(--border-radius-full);
+    box-shadow: 0 2px 6px rgba(66, 133, 244, 0.4);
+}
+
+.google-review-icon {
+    background: linear-gradient(135deg, #4285F4 0%, #34A853 60%, #FBBC05 100%) !important;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+    margin-top: 18px;
+    box-shadow: 0 6px 16px rgba(66, 133, 244, 0.35);
+}
+
+.google-stars {
+    display: flex;
+    gap: 3px;
+    color: #FBBC05;
+    font-size: 1.05rem;
+    filter: drop-shadow(0 2px 3px rgba(251, 188, 5, 0.4));
+}
+
+.btn-google {
+    background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);
+    color: #FFFFFF;
+    box-shadow: 0 8px 20px rgba(66, 133, 244, 0.35);
+    font-size: 0.9rem;
+}
+
+.btn-google:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 26px rgba(66, 133, 244, 0.45);
+    color: #FFFFFF;
+}
+
 .info-card-icon.location {
     background: var(--teal);
     color: #FFFFFF;
