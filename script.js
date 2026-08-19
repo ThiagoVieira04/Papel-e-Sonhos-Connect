@@ -776,8 +776,8 @@ function initEventListeners() {
     const openPixBtn = document.getElementById('openPixBtn');
     if (openPixBtn) openPixBtn.addEventListener('click', openPixModal);
 
-    const openQrBtn = document.getElementById('openQrBtn');
-    if (openQrBtn) openQrBtn.addEventListener('click', openQRCodeModal);
+    const openShareBtn = document.getElementById('openShareBtn');
+    if (openShareBtn) openShareBtn.addEventListener('click', openShareModal);
 
     const openWifiBtn = document.getElementById('openWifiBtn');
     if (openWifiBtn) openWifiBtn.addEventListener('click', openWiFiModal);
@@ -789,6 +789,13 @@ function initEventListeners() {
     // Download QR Code
     const downloadQRBtn = document.getElementById('downloadQRBtn');
     if (downloadQRBtn) downloadQRBtn.addEventListener('click', downloadQRCode);
+
+    // Share actions
+    document.querySelectorAll('.share-item').forEach(item => {
+        item.addEventListener('click', () => {
+            handleShareAction(item.getAttribute('data-share'));
+        });
+    });
 
     // Connect WiFi
     const connectWiFiBtn = document.getElementById('connectWiFiBtn');
@@ -864,6 +871,104 @@ function copyPixKey() {
         .catch(() => {
             showToast('Chave Pix: ' + pixKey, 'info');
         });
+}
+
+function openShareModal() {
+    closeAllModals();
+    const modal = document.getElementById('shareModal');
+    if (modal) modal.classList.add('active');
+}
+
+const SHARE_TEXT = 'Conheça a Papel e Sonhos Informática! Papelaria, impressão, personalizados e serviços digitais em Magé/RJ.';
+
+function getShareUrl() {
+    return CONFIG.pageUrl || window.location.href;
+}
+
+function getShareMessage() {
+    return SHARE_TEXT + '\n' + getShareUrl();
+}
+
+function handleShareAction(action) {
+    closeAllModals();
+    const url = encodeURIComponent(getShareUrl());
+    const text = encodeURIComponent(SHARE_TEXT);
+
+    switch (action) {
+        case 'whatsapp':
+            window.open('https://wa.me/?text=' + encodeURIComponent(getShareMessage()), '_blank', 'noopener');
+            break;
+        case 'facebook':
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, '_blank', 'noopener');
+            break;
+        case 'messenger':
+            window.open('fb-messenger://share/?link=' + url, '_blank', 'noopener');
+            break;
+        case 'linkedin':
+            window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + url, '_blank', 'noopener');
+            break;
+        case 'x':
+            window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank', 'noopener');
+            break;
+        case 'telegram':
+            window.open('https://t.me/share/url?url=' + url + '&text=' + text, '_blank', 'noopener');
+            break;
+        case 'email':
+            window.location.href = 'mailto:?subject=' + encodeURIComponent('Papel e Sonhos Informática') + '&body=' + encodeURIComponent(getShareMessage());
+            break;
+        case 'instagram':
+            copyShareLink();
+            showToast('Link copiado! Cole no seu Instagram ou compartilhe via Direct.', 'success');
+            break;
+        case 'copy':
+            copyShareLink();
+            break;
+        case 'qr':
+            openQRCodeModal();
+            break;
+        case 'native':
+            nativeShare();
+            break;
+        default:
+            break;
+    }
+}
+
+function copyShareLink() {
+    const pageUrl = getShareUrl();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pageUrl)
+            .then(() => showToast('Link copiado para a área de transferência!', 'success'))
+            .catch(() => fallbackCopyShareLink(pageUrl));
+    } else {
+        fallbackCopyShareLink(pageUrl);
+    }
+}
+
+function fallbackCopyShareLink(pageUrl) {
+    const textarea = document.createElement('textarea');
+    textarea.value = pageUrl;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    showToast('Link copiado para a área de transferência!', 'success');
+}
+
+function nativeShare() {
+    const pageUrl = getShareUrl();
+    if (navigator.share) {
+        navigator.share({
+            title: 'Papel e Sonhos Informática',
+            text: SHARE_TEXT,
+            url: pageUrl
+        }).catch(() => {});
+    } else {
+        copyShareLink();
+        showToast('Compartilhamento nativo não suportado. Link copiado!', 'info');
+    }
 }
 
 function openQRCodeModal() {

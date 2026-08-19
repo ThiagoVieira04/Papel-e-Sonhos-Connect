@@ -523,6 +523,85 @@ body.dark-theme .hero-title {
     color: var(--primary);
 }
 
+/* --- COMPARTILHAR SITE --- */
+.share-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+@media (min-width: 480px) {
+    .share-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.share-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background: var(--bg-surface);
+    color: var(--text-main);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.share-item i {
+    font-size: 24px;
+    transition: var(--transition);
+}
+
+.share-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-color);
+}
+
+.share-item:hover i {
+    transform: scale(1.15);
+}
+
+.share-whatsapp i { color: #25D366; }
+.share-whatsapp:hover { border-color: #25D366; }
+
+.share-facebook i { color: #1877F2; }
+.share-facebook:hover { border-color: #1877F2; }
+
+.share-messenger i { color: #0084FF; }
+.share-messenger:hover { border-color: #0084FF; }
+
+.share-instagram i { color: #E1306C; }
+.share-instagram:hover { border-color: #E1306C; }
+
+.share-linkedin i { color: #0A66C2; }
+.share-linkedin:hover { border-color: #0A66C2; }
+
+.share-x i { color: #111111; }
+body.dark-theme .share-x i { color: #E7E9EA; }
+.share-x:hover { border-color: #111111; }
+body.dark-theme .share-x:hover { border-color: #E7E9EA; }
+
+.share-telegram i { color: #26A5E4; }
+.share-telegram:hover { border-color: #26A5E4; }
+
+.share-email i { color: var(--teal); }
+.share-email:hover { border-color: var(--teal); }
+
+.share-copy i { color: var(--gold-dark); }
+.share-copy:hover { border-color: var(--gold-dark); }
+
+.share-qr i { color: var(--primary); }
+.share-qr:hover { border-color: var(--primary); }
+
 /* --- SEÇÕES PADRÃO --- */
 .section {
     padding: 40px 0;
