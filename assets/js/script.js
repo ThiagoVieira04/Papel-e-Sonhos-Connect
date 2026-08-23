@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initEventListeners();
     detectAccessMethod();
     initMediaGallery();
+    initLogoAnimation();
 });
 
 /* --------------------------------------------------------------------------
@@ -504,14 +505,24 @@ let galleryState = {
     currentIndex: 0,
     items: [],
     timer: null,
+    videoTimer: null,
     isPaused: false,
 };
+
+function initLogoAnimation() {
+    const logo = document.querySelector('.logo');
+    if (!logo) return;
+
+    logo.addEventListener('animationend', (e) => {
+        if (e.animationName === 'logoEntrance') {
+            logo.classList.add('loaded');
+        }
+    });
+}
 
 function initMediaGallery() {
     const gallery = document.getElementById('mediaGallery');
     if (!gallery || !MEDIA_GALLERY.media.length) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     MEDIA_GALLERY.media.forEach((media, index) => {
         const item = document.createElement('div');
@@ -569,14 +580,14 @@ function initMediaGallery() {
 }
 
 function showMedia(index) {
+    clearTimeout(galleryState.videoTimer);
+
     galleryState.items.forEach((item, i) => {
         item.classList.remove('active');
         const video = item.querySelector('video');
-        if (video) {
-            if (i !== index) {
-                video.pause();
-                video.currentTime = 0;
-            }
+        if (video && i !== index) {
+            video.pause();
+            video.currentTime = 0;
         }
     });
 
@@ -592,6 +603,10 @@ function showMedia(index) {
         if (playPromise) {
             playPromise.catch(() => {});
         }
+
+        galleryState.videoTimer = setTimeout(() => {
+            if (!galleryState.isPaused) advanceGallery();
+        }, MEDIA_GALLERY.videoMaxDuration);
     }
 }
 
@@ -622,6 +637,7 @@ function scheduleNext() {
 function pauseGallery() {
     galleryState.isPaused = true;
     clearTimeout(galleryState.timer);
+    clearTimeout(galleryState.videoTimer);
 
     const activeItem = galleryState.items[galleryState.currentIndex];
     if (activeItem) {
