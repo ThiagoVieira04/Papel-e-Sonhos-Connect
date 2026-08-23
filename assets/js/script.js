@@ -80,6 +80,113 @@ const BANKS = [
 ];
 
 /* --------------------------------------------------------------------------
+   1c. SERVICES CONFIGURATION
+   -------------------------------------------------------------------------- */
+
+const SERVICES = [
+    {
+        title: 'Papelaria e Encadernação',
+        icon: 'fas fa-book',
+        items: [
+            'Encadernação',
+            'Agendas',
+            'Cadernetas de vacina',
+            'Papelaria personalizada em geral',
+            'Cartão de visita',
+            'Panfletos',
+            'Convites em geral',
+            'Necessaires',
+            'Bolsinhas',
+            'Lembrancinhas',
+            'E muito mais'
+        ]
+    },
+    {
+        title: 'Impressão e Documentos',
+        icon: 'fas fa-print',
+        items: [
+            'Xerox',
+            'Impressão',
+            'Escaneamento de documentos',
+            'Envio de documentos por WhatsApp e e-mail',
+            'Boletos',
+            'Currículos',
+            'Fotos de vários tamanhos'
+        ]
+    },
+    {
+        title: 'Personalização',
+        icon: 'fas fa-palette',
+        items: [
+            'Camisas personalizadas',
+            'Azulejos personalizados',
+            'Adesivos personalizados',
+            'Topos de bolo',
+            'Banners',
+            'Lembrancinhas personalizadas'
+        ]
+    },
+    {
+        title: 'Festas e Eventos',
+        icon: 'fas fa-glass-cheers',
+        items: [
+            'Topos de bolo',
+            'Lembrancinhas',
+            'Papelaria personalizada',
+            'Bolsinhas personalizadas',
+            'Adesivos',
+            'Banners',
+            'Convites em geral',
+            'Necessaires'
+        ]
+    },
+    {
+        title: 'Informática e Tecnologia',
+        icon: 'fas fa-laptop-code',
+        items: [
+            'Consertos de computadores',
+            'Consertos de notebooks',
+            'Formatação de computadores',
+            'Formatação de notebooks',
+            'Desenvolvimento de aplicativos',
+            'Recuperação de conta GOV'
+        ]
+    },
+    {
+        title: 'Serviços para Empresas e MEI',
+        icon: 'fas fa-briefcase',
+        items: [
+            'Abertura de MEI',
+            'Declaração de Imposto de Renda',
+            'Declaração de Imposto de Renda do MEI',
+            'Emissão de certidão negativa estadual',
+            'Emissão de certidão negativa federal',
+            'Emissão de certidão negativa eleitoral',
+            'Cartão de visita',
+            'Panfletos'
+        ]
+    },
+    {
+        title: 'Serviços de Benefícios',
+        icon: 'fas fa-hands-helping',
+        items: [
+            'Entrada em processos de aposentadoria por idade',
+            'Entrada em processos de aposentadoria por tempo de serviço',
+            'Auxílio-doença',
+            'Entrada em seguro-desemprego'
+        ]
+    },
+    {
+        title: 'Áudio e Mídia',
+        icon: 'fas fa-headphones',
+        items: [
+            'Gravação de áudio para propaganda',
+            'Músicas para pen drive'
+        ]
+    }
+];
+
+/* --------------------------------------------------------------------------
    2. DOM REFERENCES
    -------------------------------------------------------------------------- */
 
@@ -103,6 +210,7 @@ const DOM = {
     bankGridList: document.getElementById('bankGridList'),
     bankNotice: document.getElementById('bankNotice'),
     themeToggle: document.getElementById('themeToggle'),
+    servicesList: document.getElementById('servicesList'),
 };
 
 /* --------------------------------------------------------------------------
@@ -115,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     detectAccessMethod();
     initMediaGallery();
     initLogoAnimation();
+    renderServices();
 });
 
 /* --------------------------------------------------------------------------
@@ -172,6 +281,68 @@ function openLink(url) {
         return;
     }
     trackEvent('link_click', { url });
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+/* --------------------------------------------------------------------------
+   5b. SERVICES
+   -------------------------------------------------------------------------- */
+
+function renderServices() {
+    const container = DOM.servicesList;
+    if (!container) return;
+
+    SERVICES.forEach((service, index) => {
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.dataset.index = index;
+
+        const header = document.createElement('div');
+        header.className = 'service-card-header';
+        header.innerHTML = `
+            <div class="service-card-icon"><i class="${service.icon}"></i></div>
+            <h3 class="service-card-title">${service.title}</h3>
+            <i class="fas fa-chevron-down service-card-arrow"></i>
+        `;
+
+        const items = document.createElement('div');
+        items.className = 'service-card-items';
+        items.innerHTML = `
+            <ul>
+                ${service.items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            <button class="service-quote-btn" data-category="${service.title}">
+                <i class="fab fa-whatsapp"></i> Solicitar orçamento
+            </button>
+        `;
+
+        card.appendChild(header);
+        card.appendChild(items);
+        container.appendChild(card);
+
+        header.addEventListener('click', () => toggleServiceCard(card));
+    });
+
+    document.querySelectorAll('.service-quote-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openServiceQuote(btn.dataset.category);
+        });
+    });
+}
+
+function toggleServiceCard(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.service-card.expanded').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+}
+
+function openServiceQuote(category) {
+    const message = encodeURIComponent(
+        `Olá! Gostaria de um orçamento para: *${category}*\n\nPode me ajudar?`
+    );
+    const url = `https://wa.me/${CONFIG.whatsappPhone}?text=${message}`;
+    trackEvent('service_quote_click', { category });
     window.open(url, '_blank', 'noopener,noreferrer');
 }
 
