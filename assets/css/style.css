@@ -112,23 +112,31 @@ body {
    5. HEADER
    -------------------------------------------------------------------------- */
 
-.header {
+/* --------------------------------------------------------------------------
+   5a. LOGO SECTION (Top)
+   -------------------------------------------------------------------------- */
+
+.logo-section {
     background: var(--color-header);
-    padding: 30px 30px 40px;
+    padding: 30px 30px 20px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-    min-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     gap: 15px;
 }
 
 /* --------------------------------------------------------------------------
-   5b. MEDIA GALLERY (Background)
+   5b. HERO MEDIA (Below Logo)
    -------------------------------------------------------------------------- */
+
+.hero-media {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background: #1a1a1a;
+}
 
 .media-gallery {
     position: absolute;
@@ -180,34 +188,11 @@ body {
     z-index: 1;
     background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.35) 0%,
-        rgba(0, 0, 0, 0.20) 50%,
-        rgba(0, 0, 0, 0.45) 100%
+        rgba(0, 0, 0, 0.25) 0%,
+        rgba(0, 0, 0, 0.10) 50%,
+        rgba(0, 0, 0, 0.30) 100%
     );
     pointer-events: none;
-}
-
-.header .logo,
-.header .brand-info {
-    position: relative;
-    z-index: 2;
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 200px;
-    height: 200px;
-    background: rgba(255, 215, 0, 0.08);
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
 }
 
 .logo {
@@ -1031,7 +1016,8 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .container { max-width: 520px; margin: 20px auto; }
-    .header { padding: 25px 25px 35px; min-height: 350px; }
+    .logo-section { padding: 25px 25px 15px; }
+    .hero-media { height: 300px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 100px; height: 100px; }
     .links-section { padding: 18px; }
@@ -1046,7 +1032,8 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 600px) and (max-width: 767px) {
     .container { max-width: 95%; margin: 15px auto; }
-    .header { padding: 22px 22px 32px; min-height: 320px; }
+    .logo-section { padding: 22px 22px 12px; }
+    .hero-media { height: 280px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 90px; height: 90px; }
     .description { padding: 24px 20px; }
@@ -1065,7 +1052,8 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 480px) and (max-width: 599px) {
     .container { border-radius: 15px; max-width: 98%; margin: 10px auto; }
-    .header { padding: 20px 20px 30px; min-height: 300px; }
+    .logo-section { padding: 20px 20px 10px; }
+    .hero-media { height: 260px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 85px; height: 85px; }
     .description { padding: 24px 18px; }
@@ -1091,7 +1079,8 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 375px) and (max-width: 479px) {
     .container { border-radius: 14px; max-width: 100%; margin: 8px; }
-    .header { padding: 18px 18px 28px; min-height: 280px; }
+    .logo-section { padding: 18px 18px 8px; }
+    .hero-media { height: 240px; }
     .brand-info h1 { font-size: 16px; line-height: 1.2; }
     .logo { width: 80px; height: 80px; }
     .description { padding: 22px 16px; }
@@ -1116,7 +1105,8 @@ body.dark-theme .background-gradient {
 
 @media (max-width: 374px) {
     .container { border-radius: 12px; max-width: 100%; margin: 5px; }
-    .header { padding: 15px 15px 24px; min-height: 260px; }
+    .logo-section { padding: 15px 15px 6px; }
+    .hero-media { height: 220px; }
     .brand-info h1 { font-size: 14px; line-height: 1.1; }
     .logo { width: 70px; height: 70px; }
     .description { padding: 20px 14px; }
@@ -1143,19 +1133,20 @@ body.dark-theme .background-gradient {
    -------------------------------------------------------------------------- */
 
 @media (max-height: 500px) and (orientation: landscape) {
-    .header { padding: 15px 20px 15px; min-height: 200px; }
+    .logo-section { padding: 10px 20px 5px; }
+    .hero-media { height: 180px; }
     .brand-info h1 { font-size: 14px; }
-    .logo { width: 60px; height: 60px; }
-    .description { padding: 15px 20px; }
+    .logo { width: 50px; height: 50px; }
+    .description { padding: 10px 20px; }
     .main-text { font-size: 12px; }
-    .links-section { padding: 10px; }
-    .buttons-grid { gap: 8px; max-height: 250px; overflow-y: auto; }
-    .link-button { padding: 12px 14px; gap: 10px; }
-    .button-content h3 { font-size: 13px; margin-bottom: 1px; }
-    .button-content p { font-size: 9px; }
-    .footer { padding: 12px 20px; }
-    .thank-you { font-size: 11px; }
-    .modal-content { padding: 20px 16px; }
+    .links-section { padding: 8px; }
+    .buttons-grid { gap: 6px; max-height: 200px; overflow-y: auto; }
+    .link-button { padding: 10px 12px; gap: 8px; }
+    .button-content h3 { font-size: 12px; margin-bottom: 1px; }
+    .button-content p { font-size: 8px; }
+    .footer { padding: 10px 15px; }
+    .thank-you { font-size: 10px; }
+    .modal-content { padding: 18px 14px; }
 }
 
 @media (max-width: 480px) {
