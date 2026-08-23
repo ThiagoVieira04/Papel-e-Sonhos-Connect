@@ -183,6 +183,43 @@ const SERVICES = [
             'Gravação de áudio para propaganda',
             'Músicas para pen drive'
         ]
+    },
+    {
+        title: 'Catálogo de Serviços',
+        icon: 'fas fa-images',
+        isMediaGallery: true,
+        media: [
+            { type: 'image', src: 'assets/media/imagens/img01.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img02.jpeg' },
+            { type: 'video', src: 'assets/media/videos/video01.mp4' },
+            { type: 'image', src: 'assets/media/imagens/img03.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img04.jpeg' },
+            { type: 'video', src: 'assets/media/videos/video02.mp4' },
+            { type: 'image', src: 'assets/media/imagens/img05.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img06.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img07.jpeg' },
+            { type: 'video', src: 'assets/media/videos/video03.mp4' },
+            { type: 'image', src: 'assets/media/imagens/img08.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img09.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img10.jpeg' },
+            { type: 'video', src: 'assets/media/videos/video04.mp4' },
+            { type: 'image', src: 'assets/media/imagens/img11.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img12.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img13.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img14.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img15.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img16.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img17.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img18.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img19.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img20.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img21.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img22.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img23.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img24.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img25.jpeg' },
+            { type: 'image', src: 'assets/media/imagens/img26.jpeg' },
+        ]
     }
 ];
 
@@ -298,14 +335,32 @@ function renderServices() {
     SERVICES.forEach(service => {
         const cat = document.createElement('div');
         cat.className = 'service-category';
-        cat.innerHTML = `
-            <h3 class="service-category-title">
-                <i class="${service.icon}"></i> ${service.title}
-            </h3>
-            <ul class="service-category-items">
-                ${service.items.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        `;
+
+        if (service.isMediaGallery) {
+            cat.innerHTML = `
+                <h3 class="service-category-title">
+                    <i class="${service.icon}"></i> ${service.title}
+                </h3>
+                <div class="service-media-grid">
+                    ${service.media.map(m => {
+                        if (m.type === 'video') {
+                            return `<div class="service-media-item"><video src="${m.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video></div>`;
+                        }
+                        return `<div class="service-media-item"><img src="${m.src}" alt="Serviço" loading="lazy"></div>`;
+                    }).join('')}
+                </div>
+            `;
+        } else {
+            cat.innerHTML = `
+                <h3 class="service-category-title">
+                    <i class="${service.icon}"></i> ${service.title}
+                </h3>
+                <ul class="service-category-items">
+                    ${service.items.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            `;
+        }
+
         list.appendChild(cat);
     });
 
