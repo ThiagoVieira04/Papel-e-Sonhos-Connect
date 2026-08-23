@@ -1,0 +1,21 @@
+{
+  "name": "Papel e Sonhos Informática",
+  "short_name": "Papel e Sonhos",
+  "description": "Papelaria, impressão, personalizados, serviços digitais e informática em Magé/RJ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a2463",
+  "icons": [
+    {
+      "src": "assets/img/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
