@@ -1,6 +1,6 @@
 # Papel e Sonhos Connect
 
-![Preview](assets/img/preview.png)
+
 
 Página de apresentação da **Papel e Sonhos Informática** — cartão de visita digital com contatos, pagamento Pix, WiFi e QR Code.
 
