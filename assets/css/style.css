@@ -209,6 +209,7 @@ body {
 }
 
 .logo.loaded {
+    opacity: 1;
     animation: logoFloat 3s ease-in-out infinite;
 }
 
@@ -217,17 +218,17 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-4px) rotate(1deg); }
+    75% { transform: translateY(4px) rotate(-1deg); }
+}
+
 .logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     border-radius: 15px;
-}
-
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-4px) rotate(1deg); }
-    75% { transform: translateY(4px) rotate(-1deg); }
 }
 
 .brand-info h1 {
