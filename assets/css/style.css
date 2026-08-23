@@ -302,7 +302,7 @@ body {
 .whatsapp-btn .button-icon { background: linear-gradient(135deg, #25d366, #20ba61); }
 .instagram-btn .button-icon { background: linear-gradient(135deg, #f09433, #e6683c); }
 .facebook-btn .button-icon { background: linear-gradient(135deg, #1877f2, #1051e5); }
-.location-btn .button-icon { background: linear-gradient(135deg, #e0eefb, var(--color-white)); }
+.location-btn .button-icon { background: transparent; }
 .pix-btn .button-icon { background: #000; color: var(--primary-dark); }
 .wifi-btn .button-icon { background: linear-gradient(135deg, #3498db, #2980b9); color: #fff; }
 .qrcode-btn .button-icon { background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-blue-light)); }
