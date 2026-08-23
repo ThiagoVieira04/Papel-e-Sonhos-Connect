@@ -293,7 +293,6 @@ function renderServices() {
     const header = document.getElementById('servicesHeader');
     const body = document.getElementById('servicesBody');
     const arrow = document.getElementById('servicesArrow');
-    const whatsappBtn = document.getElementById('servicesWhatsApp');
     if (!list || !header || !body) return;
 
     SERVICES.forEach(service => {
@@ -315,13 +314,6 @@ function renderServices() {
         body.classList.toggle('open');
         arrow.classList.toggle('rotated');
     });
-
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', () => {
-            const message = encodeURIComponent('Olá! Gostaria de informações sobre os serviços da Papel e Sonhos.');
-            window.open(`https://wa.me/${CONFIG.whatsappPhone}?text=${message}`, '_blank', 'noopener,noreferrer');
-        });
-    }
 }
 
 /* --------------------------------------------------------------------------

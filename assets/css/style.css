@@ -374,28 +374,6 @@ body {
     font-weight: 700;
 }
 
-.services-whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin: 0 20px 18px;
-    padding: 12px;
-    background: var(--color-whatsapp);
-    color: #fff;
-    border: none;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.services-whatsapp-btn:hover {
-    background: #20ba61;
-    transform: translateY(-1px);
-}
-
 /* --------------------------------------------------------------------------
    7. LINK BUTTONS
    -------------------------------------------------------------------------- */
@@ -1118,10 +1096,6 @@ body.dark-theme .service-category-title {
 
 body.dark-theme .service-category-items li {
     border-bottom-color: var(--color-dark-border);
-}
-
-body.dark-theme .services-whatsapp-btn {
-    background: #1a8a4a;
 }
 
 body.dark-theme .background-gradient {
