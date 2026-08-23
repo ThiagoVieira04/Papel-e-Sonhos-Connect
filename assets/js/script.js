@@ -17,6 +17,48 @@ const CONFIG = {
     wifiSSID: 'TSDINFORMATICA',
 };
 
+/* --------------------------------------------------------------------------
+   1b. MEDIA GALLERY CONFIGURATION
+   -------------------------------------------------------------------------- */
+
+const MEDIA_GALLERY = {
+    imageDuration: 5000,
+    videoMaxDuration: 15000,
+    transitionDuration: 1500,
+    media: [
+        { type: 'image', src: 'assets/media/imagens/img01.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img02.jpeg' },
+        { type: 'video', src: 'assets/media/videos/video01.mp4' },
+        { type: 'image', src: 'assets/media/imagens/img03.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img04.jpeg' },
+        { type: 'video', src: 'assets/media/videos/video02.mp4' },
+        { type: 'image', src: 'assets/media/imagens/img05.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img06.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img07.jpeg' },
+        { type: 'video', src: 'assets/media/videos/video03.mp4' },
+        { type: 'image', src: 'assets/media/imagens/img08.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img09.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img10.jpeg' },
+        { type: 'video', src: 'assets/media/videos/video04.mp4' },
+        { type: 'image', src: 'assets/media/imagens/img11.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img12.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img13.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img14.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img15.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img16.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img17.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img18.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img19.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img20.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img21.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img22.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img23.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img24.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img25.jpeg' },
+        { type: 'image', src: 'assets/media/imagens/img26.jpeg' },
+    ],
+};
+
 const BANKS = [
     { name: 'Nubank', scheme: 'nubank://', intent: 'intent://open#Intent;scheme=nubank;package=com.nu.production;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.nu.production;end', playStore: 'https://play.google.com/store/apps/details?id=com.nu.production', appStore: 'https://apps.apple.com/app/nubank/id1093127969', color: 'linear-gradient(135deg, #820AD1, #530082)', initials: 'Nu', domain: 'nubank.com.br' },
     { name: 'Itaú', scheme: 'itau://', intent: 'intent://open#Intent;scheme=itau;package=com.itau;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.itau;end', playStore: 'https://play.google.com/store/apps/details?id=com.itau', appStore: 'https://apps.apple.com/app/itau-personal/id577039602', color: 'linear-gradient(135deg, #FF7A00, #EC5E00)', initials: 'Itaú', domain: 'itau.com.br' },
@@ -71,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initEventListeners();
     detectAccessMethod();
+    initMediaGallery();
 });
 
 /* --------------------------------------------------------------------------
@@ -454,7 +497,158 @@ function detectAccessMethod() {
 }
 
 /* --------------------------------------------------------------------------
-   14. EXPORTS (for external access if needed)
+   14. MEDIA GALLERY
+   -------------------------------------------------------------------------- */
+
+let galleryState = {
+    currentIndex: 0,
+    items: [],
+    timer: null,
+    isPaused: false,
+};
+
+function initMediaGallery() {
+    const gallery = document.getElementById('mediaGallery');
+    if (!gallery || !MEDIA_GALLERY.media.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    MEDIA_GALLERY.media.forEach((media, index) => {
+        const item = document.createElement('div');
+        item.className = 'media-item';
+        item.setAttribute('aria-hidden', 'true');
+
+        if (media.type === 'video') {
+            const video = document.createElement('video');
+            video.src = media.src;
+            video.muted = true;
+            video.loop = false;
+            video.playsInline = true;
+            video.preload = index < 2 ? 'auto' : 'metadata';
+            video.setAttribute('aria-hidden', 'true');
+
+            video.addEventListener('ended', () => {
+                advanceGallery();
+            });
+
+            video.addEventListener('error', () => {
+                advanceGallery();
+            });
+
+            item.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = media.src;
+            img.alt = '';
+            img.loading = index < 3 ? 'eager' : 'lazy';
+            img.setAttribute('aria-hidden', 'true');
+
+            img.addEventListener('error', () => {
+                advanceGallery();
+            });
+
+            item.appendChild(img);
+        }
+
+        gallery.appendChild(item);
+        galleryState.items.push(item);
+    });
+
+    if (galleryState.items.length > 0) {
+        showMedia(0);
+        scheduleNext();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            pauseGallery();
+        } else {
+            resumeGallery();
+        }
+    });
+}
+
+function showMedia(index) {
+    galleryState.items.forEach((item, i) => {
+        item.classList.remove('active');
+        const video = item.querySelector('video');
+        if (video) {
+            if (i !== index) {
+                video.pause();
+                video.currentTime = 0;
+            }
+        }
+    });
+
+    const activeItem = galleryState.items[index];
+    if (!activeItem) return;
+
+    activeItem.classList.add('active');
+    const video = activeItem.querySelector('video');
+
+    if (video) {
+        video.currentTime = 0;
+        const playPromise = video.play();
+        if (playPromise) {
+            playPromise.catch(() => {});
+        }
+    }
+}
+
+function advanceGallery() {
+    if (galleryState.isPaused) return;
+
+    const nextIndex = (galleryState.currentIndex + 1) % galleryState.items.length;
+    galleryState.currentIndex = nextIndex;
+    showMedia(nextIndex);
+    scheduleNext();
+}
+
+function scheduleNext() {
+    clearTimeout(galleryState.timer);
+
+    const currentMedia = MEDIA_GALLERY.media[galleryState.currentIndex];
+    let duration;
+
+    if (currentMedia.type === 'video') {
+        duration = MEDIA_GALLERY.videoMaxDuration;
+    } else {
+        duration = MEDIA_GALLERY.imageDuration;
+    }
+
+    galleryState.timer = setTimeout(advanceGallery, duration);
+}
+
+function pauseGallery() {
+    galleryState.isPaused = true;
+    clearTimeout(galleryState.timer);
+
+    const activeItem = galleryState.items[galleryState.currentIndex];
+    if (activeItem) {
+        const video = activeItem.querySelector('video');
+        if (video) video.pause();
+    }
+}
+
+function resumeGallery() {
+    galleryState.isPaused = false;
+
+    const activeItem = galleryState.items[galleryState.currentIndex];
+    if (activeItem) {
+        const video = activeItem.querySelector('video');
+        if (video) {
+            const playPromise = video.play();
+            if (playPromise) {
+                playPromise.catch(() => {});
+            }
+        }
+    }
+
+    scheduleNext();
+}
+
+/* --------------------------------------------------------------------------
+   15. EXPORTS (for external access if needed)
    -------------------------------------------------------------------------- */
 
 window.copyPixKey = copyPixKey;

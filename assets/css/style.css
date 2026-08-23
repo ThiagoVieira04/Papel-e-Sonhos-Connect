@@ -120,6 +120,69 @@ body {
     overflow: hidden;
 }
 
+/* --------------------------------------------------------------------------
+   5b. MEDIA GALLERY (Background)
+   -------------------------------------------------------------------------- */
+
+.media-gallery {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.media-gallery .media-item {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    will-change: opacity, transform;
+}
+
+.media-gallery .media-item.active {
+    opacity: 1;
+}
+
+.media-gallery .media-item img,
+.media-gallery .media-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.85);
+}
+
+.media-gallery .media-item.active img,
+.media-gallery .media-item.active video {
+    animation: kenBurns 8s ease-in-out forwards;
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
+
+.media-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.20) 50%,
+        rgba(0, 0, 0, 0.45) 100%
+    );
+    pointer-events: none;
+}
+
+.header .logo,
+.header .brand-info {
+    position: relative;
+    z-index: 2;
+}
+
 .header::before {
     content: '';
     position: absolute;
@@ -145,8 +208,14 @@ body {
     border-radius: var(--radius-lg);
     padding: 2px;
     background: var(--color-white);
-    box-shadow: var(--shadow-modal);
-    animation: logoFloat 3s ease-in-out infinite;
+    box-shadow: var(--shadow-modal), 0 0 30px rgba(0, 0, 0, 0.3);
+    animation: logoEntrance 1s ease-out forwards, logoFloat 3s ease-in-out 1s infinite;
+    opacity: 0;
+}
+
+@keyframes logoEntrance {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .logo img {
@@ -1097,6 +1166,17 @@ body.dark-theme .background-gradient {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .media-gallery .media-item.active img,
+    .media-gallery .media-item.active video {
+        animation: none !important;
+        transform: scale(1) !important;
+    }
+
+    .logo {
+        animation: none !important;
+        opacity: 1 !important;
     }
 }
 
