@@ -114,10 +114,11 @@ body {
 
 .header {
     background: var(--color-header);
-    padding: 40px 30px;
+    padding: 200px 30px 40px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    min-height: 400px;
 }
 
 /* --------------------------------------------------------------------------
@@ -129,6 +130,7 @@ body {
     inset: 0;
     z-index: 0;
     overflow: hidden;
+    background: #1a1a1a;
 }
 
 .media-gallery .media-item {
@@ -139,6 +141,9 @@ body {
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
     will-change: opacity, transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .media-gallery .media-item.active {
@@ -149,7 +154,7 @@ body {
 .media-gallery .media-item video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     filter: saturate(0.85);
 }
@@ -211,6 +216,11 @@ body {
     box-shadow: var(--shadow-modal), 0 0 30px rgba(0, 0, 0, 0.3);
     animation: logoEntrance 1s ease-out forwards, logoFloat 3s ease-in-out 1s infinite;
     opacity: 0;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
 }
 
 @keyframes logoEntrance {
@@ -239,6 +249,11 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     letter-spacing: 0.5px;
     white-space: nowrap;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 3;
 }
 
 /* --------------------------------------------------------------------------
@@ -1020,9 +1035,9 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .container { max-width: 520px; margin: 20px auto; }
-    .header { padding: 35px 25px; }
+    .header { padding: 160px 25px 35px; min-height: 350px; }
     .brand-info h1 { font-size: 18px; }
-    .logo { width: 75px; height: 75px; }
+    .logo { width: 100px; height: 100px; top: 15px; }
     .links-section { padding: 18px; }
     .buttons-grid { gap: 11px; }
     .link-button { padding: 16px 18px; }
@@ -1035,9 +1050,9 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 600px) and (max-width: 767px) {
     .container { max-width: 95%; margin: 15px auto; }
-    .header { padding: 32px 22px; }
+    .header { padding: 150px 22px 32px; min-height: 320px; }
     .brand-info h1 { font-size: 18px; }
-    .logo { width: 72px; height: 72px; }
+    .logo { width: 90px; height: 90px; top: 12px; }
     .description { padding: 24px 20px; }
     .links-section { padding: 16px; }
     .buttons-grid { gap: 10px; }
@@ -1054,9 +1069,9 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 480px) and (max-width: 599px) {
     .container { border-radius: 15px; max-width: 98%; margin: 10px auto; }
-    .header { padding: 30px 20px; }
+    .header { padding: 140px 20px 30px; min-height: 300px; }
     .brand-info h1 { font-size: 18px; }
-    .logo { width: 70px; height: 70px; }
+    .logo { width: 85px; height: 85px; top: 10px; }
     .description { padding: 24px 18px; }
     .main-text { font-size: 14px; }
     .links-section { padding: 15px; }
@@ -1080,9 +1095,9 @@ body.dark-theme .background-gradient {
 
 @media (min-width: 375px) and (max-width: 479px) {
     .container { border-radius: 14px; max-width: 100%; margin: 8px; }
-    .header { padding: 28px 18px; }
+    .header { padding: 130px 18px 28px; min-height: 280px; }
     .brand-info h1 { font-size: 16px; line-height: 1.2; }
-    .logo { width: 68px; height: 68px; }
+    .logo { width: 80px; height: 80px; top: 8px; }
     .description { padding: 22px 16px; }
     .main-text { font-size: 13px; }
     .links-section { padding: 14px; }
@@ -1105,9 +1120,9 @@ body.dark-theme .background-gradient {
 
 @media (max-width: 374px) {
     .container { border-radius: 12px; max-width: 100%; margin: 5px; }
-    .header { padding: 24px 15px; }
+    .header { padding: 120px 15px 24px; min-height: 260px; }
     .brand-info h1 { font-size: 14px; line-height: 1.1; }
-    .logo { width: 60px; height: 60px; }
+    .logo { width: 70px; height: 70px; top: 6px; }
     .description { padding: 20px 14px; }
     .main-text { font-size: 12px; }
     .links-section { padding: 12px; }
@@ -1132,9 +1147,9 @@ body.dark-theme .background-gradient {
    -------------------------------------------------------------------------- */
 
 @media (max-height: 500px) and (orientation: landscape) {
-    .header { padding: 15px 20px; }
+    .header { padding: 100px 20px 15px; min-height: 200px; }
     .brand-info h1 { font-size: 14px; }
-    .logo { width: 50px; height: 50px; }
+    .logo { width: 60px; height: 60px; top: 5px; }
     .description { padding: 15px 20px; }
     .main-text { font-size: 12px; }
     .links-section { padding: 10px; }
