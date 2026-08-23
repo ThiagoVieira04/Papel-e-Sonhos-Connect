@@ -284,14 +284,9 @@ body {
 }
 
 .services-header-icon {
-    font-size: 20px;
-    color: var(--color-primary-blue);
     width: 36px;
     height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #e0eefb, var(--color-white));
+    object-fit: contain;
     border-radius: 8px;
     flex-shrink: 0;
 }
@@ -1172,7 +1167,7 @@ body.dark-theme .background-gradient {
     .footer { padding: 26px 20px; }
     .modal-content { padding: 32px 22px; max-width: 85%; }
     .services-header { padding: 12px 14px; gap: 10px; }
-    .services-header-icon { width: 34px; height: 34px; font-size: 18px; }
+    .services-header-icon { width: 34px; height: 34px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1262,7 +1257,7 @@ body.dark-theme .background-gradient {
     .toast { right: 8px; left: 8px; bottom: 10px; padding: 10px 12px; font-size: 11px; }
     .services-header { padding: 10px 10px; gap: 8px; }
     .services-title { font-size: 12px; }
-    .services-header-icon { width: 30px; height: 30px; font-size: 16px; }
+    .services-header-icon { width: 30px; height: 30px; }
 }
 
 /* --------------------------------------------------------------------------
