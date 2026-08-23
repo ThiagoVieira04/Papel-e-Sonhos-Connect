@@ -289,61 +289,39 @@ function openLink(url) {
    -------------------------------------------------------------------------- */
 
 function renderServices() {
-    const container = DOM.servicesList;
-    if (!container) return;
+    const list = DOM.servicesList;
+    const header = document.getElementById('servicesHeader');
+    const body = document.getElementById('servicesBody');
+    const arrow = document.getElementById('servicesArrow');
+    const whatsappBtn = document.getElementById('servicesWhatsApp');
+    if (!list || !header || !body) return;
 
-    SERVICES.forEach((service, index) => {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        card.dataset.index = index;
-
-        const header = document.createElement('div');
-        header.className = 'service-card-header';
-        header.innerHTML = `
-            <div class="service-card-icon"><i class="${service.icon}"></i></div>
-            <h3 class="service-card-title">${service.title}</h3>
-            <i class="fas fa-chevron-down service-card-arrow"></i>
-        `;
-
-        const items = document.createElement('div');
-        items.className = 'service-card-items';
-        items.innerHTML = `
-            <ul>
+    SERVICES.forEach(service => {
+        const cat = document.createElement('div');
+        cat.className = 'service-category';
+        cat.innerHTML = `
+            <h3 class="service-category-title">
+                <i class="${service.icon}"></i> ${service.title}
+            </h3>
+            <ul class="service-category-items">
                 ${service.items.map(item => `<li>${item}</li>`).join('')}
             </ul>
-            <button class="service-quote-btn" data-category="${service.title}">
-                <i class="fab fa-whatsapp"></i> Solicitar orçamento
-            </button>
         `;
-
-        card.appendChild(header);
-        card.appendChild(items);
-        container.appendChild(card);
-
-        header.addEventListener('click', () => toggleServiceCard(card));
+        list.appendChild(cat);
     });
 
-    document.querySelectorAll('.service-quote-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openServiceQuote(btn.dataset.category);
+    header.addEventListener('click', () => {
+        const isOpen = body.classList.contains('open');
+        body.classList.toggle('open');
+        arrow.classList.toggle('rotated');
+    });
+
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+            const message = encodeURIComponent('Olá! Gostaria de informações sobre os serviços da Papel e Sonhos.');
+            window.open(`https://wa.me/${CONFIG.whatsappPhone}?text=${message}`, '_blank', 'noopener,noreferrer');
         });
-    });
-}
-
-function toggleServiceCard(card) {
-    const wasExpanded = card.classList.contains('expanded');
-    document.querySelectorAll('.service-card.expanded').forEach(c => c.classList.remove('expanded'));
-    if (!wasExpanded) card.classList.add('expanded');
-}
-
-function openServiceQuote(category) {
-    const message = encodeURIComponent(
-        `Olá! Gostaria de um orçamento para: *${category}*\n\nPode me ajudar?`
-    );
-    const url = `https://wa.me/${CONFIG.whatsappPhone}?text=${message}`;
-    trackEvent('service_quote_click', { category });
-    window.open(url, '_blank', 'noopener,noreferrer');
+    }
 }
 
 /* --------------------------------------------------------------------------
