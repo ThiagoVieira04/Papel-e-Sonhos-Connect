@@ -107,8 +107,7 @@ const SERVICES = [
             'Consertos de notebooks',
             'Formatação de computadores',
             'Formatação de notebooks',
-            'Desenvolvimento de aplicativos',
-            'Recuperação de conta GOV'
+            'Desenvolvimento de aplicativos'
         ]
     },
     {
@@ -132,7 +131,8 @@ const SERVICES = [
             'Entrada em processos de aposentadoria por idade',
             'Entrada em processos de aposentadoria por tempo de serviço',
             'Auxílio-doença',
-            'Entrada em seguro-desemprego'
+            'Entrada em seguro-desemprego',
+            'Recuperação de conta GOV'
         ]
     },
     {
