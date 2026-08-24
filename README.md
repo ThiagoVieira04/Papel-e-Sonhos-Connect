@@ -1,10 +1,14 @@
 # Papel e Sonhos Connect
 
-
-
-Página de apresentação da **Papel e Sonhos Informática** — cartão de visita digital com contatos, pagamento Pix, WiFi e QR Code.
+Página de apresentação da **Papel e Sonhos Informática** — cartão de visita digital com contatos, pagamento Pix, WiFi, catálogo de serviços e QR Code.
 
 **[Acessar o Site](https://papel-e-sonhos-connect.vercel.app/)**
+
+---
+
+## Preview
+
+![Preview do site](https://papel-e-sonhos-connect.vercel.app/assets/img/logo.png)
 
 ---
 
@@ -20,6 +24,8 @@ Página de apresentação da **Papel e Sonhos Informática** — cartão de visi
 | Pix | Exibe a chave Pix com opção de copiar |
 | WiFi Grátis | Mostra rede e senha, com opção de conectar |
 | QR Code | Gera QR Code para compartilhar o site |
+| Nossos Serviços | Lista de serviços por categoria (accordion) |
+| Catálogo de Serviços | Carrossel de imagens e vídeos dos trabalhos |
 
 ---
 
@@ -61,10 +67,11 @@ Salve e recarregue o navegador.
 
 ```
 ├── index.html              ← Página principal
+├── style.css               ← Estilos
 ├── assets/
-│   ├── css/style.css       ← Estilos
 │   ├── js/script.js        ← Lógica e configurações
-│   └── img/                ← Imagens (logo, ícones)
+│   ├── img/                ← Imagens (logo, ícones, gifs)
+│   └── media/              ← Catálogo (imagens e vídeos)
 ├── manifest.json           ← Configuração PWA
 ├── vercel.json             ← Deploy na Vercel
 ├── .htaccess               ← Config Apache
