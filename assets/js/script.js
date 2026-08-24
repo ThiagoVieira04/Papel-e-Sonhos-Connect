@@ -297,7 +297,14 @@ function renderServices() {
                 <i class="${service.icon}"></i> ${service.title}
             </h3>
             <ul class="service-category-items">
-                ${service.items.map(item => `<li>${item}</li>`).join('')}
+                ${service.items.map(item => `
+                    <li>
+                        <span class="service-item-text">${item}</span>
+                        <a class="service-quote-btn" href="https://wa.me/5521987172463?text=${encodeURIComponent('Olá! Gostaria de um orçamento para: ' + item)}" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> Solicite um orçamento
+                        </a>
+                    </li>
+                `).join('')}
             </ul>
         `;
         list.appendChild(cat);
