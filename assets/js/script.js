@@ -177,6 +177,23 @@ const CATALOG_MEDIA = [
     { type: 'image', src: 'assets/media/imagens/img26.jpeg' },
 ];
 
+const CATALOG_SECTIONS = [
+    {
+        id: 'catalog',
+        title: 'Catálogo de Serviços',
+        icon: 'fas fa-th',
+        media: CATALOG_MEDIA
+    },
+    {
+        id: 'testimonials',
+        title: 'Depoimentos',
+        icon: 'fas fa-comment-dots',
+        media: [
+            { type: 'video', src: 'assets/media/videos/video05.mp4' }
+        ]
+    }
+];
+
 /* --------------------------------------------------------------------------
    3. DOM REFERENCES
    -------------------------------------------------------------------------- */
@@ -308,26 +325,74 @@ function renderServices() {
 }
 
 function renderCatalog() {
-    const track = document.getElementById('catalogTrack');
-    const dotsContainer = document.getElementById('catalogDots');
+    const tabsContainer = document.getElementById('catalogTabs');
+    const panelsContainer = document.getElementById('catalogPanels');
     const header = document.getElementById('catalogHeader');
     const body = document.getElementById('catalogBody');
     const arrow = document.getElementById('catalogArrow');
-    if (!track || !header || !body) return;
+    if (!tabsContainer || !panelsContainer || !header || !body) return;
+
+    CATALOG_SECTIONS.forEach((section, sectionIndex) => {
+        const tab = document.createElement('button');
+        tab.className = `catalog-tab ${sectionIndex === 0 ? 'active' : ''}`;
+        tab.innerHTML = `<i class="${section.icon}"></i> ${section.title}`;
+        tab.dataset.section = section.id;
+        tabsContainer.appendChild(tab);
+
+        const panel = document.createElement('div');
+        panel.className = `catalog-panel ${sectionIndex === 0 ? 'active' : ''}`;
+        panel.id = `panel-${section.id}`;
+        panelsContainer.appendChild(panel);
+
+        const carousel = document.createElement('div');
+        carousel.className = 'catalog-carousel';
+        carousel.innerHTML = `
+            <button class="catalog-arrow-btn catalog-prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="catalog-track"></div>
+            <button class="catalog-arrow-btn catalog-next"><i class="fas fa-chevron-right"></i></button>
+            <div class="catalog-dots"></div>
+        `;
+        panel.appendChild(carousel);
+
+        initCarousel(carousel, section.media);
+    });
+
+    tabsContainer.addEventListener('click', (e) => {
+        const tab = e.target.closest('.catalog-tab');
+        if (!tab) return;
+
+        tabsContainer.querySelectorAll('.catalog-tab').forEach(t => t.classList.remove('active'));
+        panelsContainer.querySelectorAll('.catalog-panel').forEach(p => p.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(`panel-${tab.dataset.section}`).classList.add('active');
+    });
+
+    header.addEventListener('click', () => {
+        body.classList.toggle('open');
+        arrow.classList.toggle('rotated');
+    });
+}
+
+function initCarousel(container, media) {
+    const track = container.querySelector('.catalog-track');
+    const dotsContainer = container.querySelector('.catalog-dots');
+    const prevBtn = container.querySelector('.catalog-prev');
+    const nextBtn = container.querySelector('.catalog-next');
 
     let currentIndex = 0;
     let startX = 0;
     let currentX = 0;
     let isDragging = false;
 
-    CATALOG_MEDIA.forEach((media, index) => {
+    media.forEach((item, index) => {
         const slide = document.createElement('div');
         slide.className = 'catalog-slide';
 
-        if (media.type === 'video') {
-            slide.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
+        if (item.type === 'video') {
+            slide.innerHTML = `<video src="${item.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
         } else {
-            slide.innerHTML = `<img src="${media.src}" alt="Serviço ${index + 1}" loading="lazy">`;
+            slide.innerHTML = `<img src="${item.src}" alt="Mídia ${index + 1}" loading="lazy">`;
         }
 
         track.appendChild(slide);
@@ -340,7 +405,7 @@ function renderCatalog() {
 
     const counter = document.createElement('div');
     counter.className = 'catalog-counter';
-    counter.textContent = `1 / ${CATALOG_MEDIA.length}`;
+    counter.textContent = `1 / ${media.length}`;
     dotsContainer.after(counter);
 
     function goToSlide(index) {
@@ -412,18 +477,10 @@ function renderCatalog() {
     track.addEventListener('touchmove', onDragMove, { passive: false });
     track.addEventListener('touchend', onDragEnd);
 
-    const prevBtn = document.getElementById('catalogPrev');
-    const nextBtn = document.getElementById('catalogNext');
-
     if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
 
     goToSlide(0);
-
-    header.addEventListener('click', () => {
-        body.classList.toggle('open');
-        arrow.classList.toggle('rotated');
-    });
 }
 
 /* --------------------------------------------------------------------------
