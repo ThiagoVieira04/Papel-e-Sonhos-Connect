@@ -231,6 +231,9 @@ function initEventListeners() {
         btn.addEventListener('click', closeAllModals);
     });
 
+    const mediaViewerClose = document.getElementById('mediaViewerClose');
+    if (mediaViewerClose) mediaViewerClose.addEventListener('click', closeAllModals);
+
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeAllModals();
@@ -324,12 +327,18 @@ function renderCatalog() {
     CATALOG_MEDIA.forEach((media, index) => {
         const slide = document.createElement('div');
         slide.className = 'catalog-slide';
+        slide.style.cursor = 'pointer';
 
         if (media.type === 'video') {
-            slide.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
+            slide.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata"></video>`;
         } else {
             slide.innerHTML = `<img src="${media.src}" alt="Serviço ${index + 1}" loading="lazy">`;
         }
+
+        slide.addEventListener('click', (e) => {
+            if (e.target.closest('.video-controls')) return;
+            openMediaViewer(media.type, media.src);
+        });
 
         track.appendChild(slide);
 
@@ -670,6 +679,28 @@ function updateButtonLabel(btn, tempText, restoreHTML) {
 
 function closeAllModals() {
     document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    const viewer = document.getElementById('mediaViewerContent');
+    if (viewer) {
+        viewer.innerHTML = '';
+        viewer.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
+    }
+}
+
+function openMediaViewer(type, src) {
+    const modal = document.getElementById('mediaViewerModal');
+    const content = document.getElementById('mediaViewerContent');
+    if (!modal || !content) return;
+
+    content.innerHTML = '';
+    closeAllModals();
+
+    if (type === 'video') {
+        content.innerHTML = `<video src="${src}" controls autoplay playsinline style="max-width:90vw;max-height:85vh;border-radius:12px;"></video>`;
+    } else {
+        content.innerHTML = `<img src="${src}" style="max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain;">`;
+    }
+
+    modal.classList.add('active');
 }
 
 function scrollToTop() {
