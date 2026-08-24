@@ -449,7 +449,18 @@ function renderTestimonials() {
         slide.className = 'catalog-slide';
 
         if (item.type === 'video') {
-            slide.innerHTML = `<video src="${item.src}" loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
+            slide.innerHTML = `
+                <div class="video-container">
+                    <video src="${item.src}" loop playsinline preload="metadata"></video>
+                    <div class="video-controls">
+                        <button class="video-btn video-play-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                        <button class="video-btn video-stop-btn" title="Parar"><i class="fas fa-stop"></i></button>
+                        <div class="video-volume-group">
+                            <i class="fas fa-volume-up video-volume-icon"></i>
+                            <input type="range" class="video-volume" min="0" max="1" step="0.05" value="1">
+                        </div>
+                    </div>
+                </div>`;
         } else {
             slide.innerHTML = `<img src="${item.src}" alt="Depoimento ${index + 1}" loading="lazy">`;
         }
@@ -496,6 +507,7 @@ function renderTestimonials() {
     }
 
     function onDragStart(e) {
+        if (e.target.closest('.video-controls')) return;
         isDragging = true;
         startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
         track.classList.add('dragging');
@@ -543,6 +555,57 @@ function renderTestimonials() {
     if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
 
     goToSlide(0);
+
+    track.querySelectorAll('.video-container').forEach(vc => {
+        const video = vc.querySelector('video');
+        const playBtn = vc.querySelector('.video-play-btn');
+        const stopBtn = vc.querySelector('.video-stop-btn');
+        const volumeSlider = vc.querySelector('.video-volume');
+        const volumeIcon = vc.querySelector('.video-volume-icon');
+
+        playBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play().catch(() => {});
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                video.pause();
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            video.pause();
+            video.currentTime = 0;
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            video.volume = volumeSlider.value;
+            video.muted = false;
+            if (video.volume === 0) {
+                volumeIcon.className = 'fas fa-volume-mute video-volume-icon';
+            } else if (video.volume < 0.5) {
+                volumeIcon.className = 'fas fa-volume-down video-volume-icon';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up video-volume-icon';
+            }
+        });
+
+        volumeIcon.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (video.muted) {
+                volumeIcon.className = 'fas fa-volume-mute video-volume-icon';
+                volumeSlider.value = 0;
+            } else {
+                volumeIcon.className = 'fas fa-volume-up video-volume-icon';
+                volumeSlider.value = video.volume;
+            }
+        });
+
+        video.addEventListener('ended', () => {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        });
+    });
 
     header.addEventListener('click', () => {
         body.classList.toggle('open');

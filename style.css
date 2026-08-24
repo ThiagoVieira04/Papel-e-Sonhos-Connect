@@ -514,6 +514,107 @@ body {
     max-height: 400px;
 }
 
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-container video {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    border-radius: 0 0 12px 12px;
+    pointer-events: auto;
+}
+
+.video-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.video-btn:hover {
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.1);
+}
+
+.video-volume-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.video-volume-icon {
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+}
+
+.video-volume-icon:hover {
+    opacity: 0.8;
+}
+
+.video-volume {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.video-volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.video-volume::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+}
+
 /* --------------------------------------------------------------------------
    8. LINK BUTTONS
    -------------------------------------------------------------------------- */
@@ -1484,6 +1585,9 @@ body.dark-theme .background-gradient {
     .services-header-icon { width: 30px; height: 30px; }
     .catalog-slide img,
     .catalog-slide video { max-height: 220px; }
+    .video-controls { gap: 8px; padding: 8px 10px; }
+    .video-btn { width: 32px; height: 32px; font-size: 12px; }
+    .video-volume { width: 60px; }
 }
 
 /* --------------------------------------------------------------------------
