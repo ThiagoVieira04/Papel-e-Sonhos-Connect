@@ -8,7 +8,7 @@ Página de apresentação da **Papel e Sonhos Informática** — cartão de visi
 
 ## Preview
 
-![Preview do site](https://papel-e-sonhos-connect.vercel.app/assets/img/logo.png)
+![Preview do site](assets/img/preview.png)
 
 ---
 
