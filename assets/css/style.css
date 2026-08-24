@@ -1205,7 +1205,7 @@ body.dark-theme .link-button {
 }
 
 body.dark-theme .services-section {
-    background: var(--color-dark-surface);
+    background: var(--color-dark-surface-alt);
 }
 
 body.dark-theme .services-header:hover {
@@ -1221,7 +1221,7 @@ body.dark-theme .service-category-items li {
 }
 
 body.dark-theme .catalog-section {
-    background: var(--color-dark-surface);
+    background: var(--color-dark-surface-alt);
 }
 
 body.dark-theme .catalog-header:hover {
@@ -1274,10 +1274,11 @@ body.dark-theme .background-gradient {
 
     body:not(.light-theme) .modal-content { background: var(--color-dark-surface); }
     body:not(.light-theme) .link-button { background: var(--color-dark-surface-alt); }
-    body:not(.light-theme) .services-section { background: var(--color-dark-surface); }
+    body:not(.light-theme) .services-section { background: var(--color-dark-surface-alt); }
     body:not(.light-theme) .services-header:hover { background: var(--color-dark-border); }
     body:not(.light-theme) .service-category-title { background: var(--color-dark-border); }
     body:not(.light-theme) .service-category-items li { border-bottom-color: var(--color-dark-border); }
+    body:not(.light-theme) .catalog-section { background: var(--color-dark-surface-alt); }
     body:not(.light-theme) .background-gradient {
         background: linear-gradient(135deg, var(--color-dark-bg) 0%, var(--color-dark-bg-mid) 50%, var(--color-primary-blue-light) 100%) !important;
         background-color: var(--color-dark-bg) !important;
