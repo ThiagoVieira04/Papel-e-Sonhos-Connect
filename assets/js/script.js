@@ -38,7 +38,7 @@ const BANKS = [
 ];
 
 /* --------------------------------------------------------------------------
-   1c. SERVICES CONFIGURATION
+   2. SERVICES CONFIGURATION
    -------------------------------------------------------------------------- */
 
 const SERVICES = [
@@ -178,7 +178,7 @@ const CATALOG_MEDIA = [
 ];
 
 /* --------------------------------------------------------------------------
-   2. DOM REFERENCES
+   3. DOM REFERENCES
    -------------------------------------------------------------------------- */
 
 const DOM = {
@@ -205,7 +205,7 @@ const DOM = {
 };
 
 /* --------------------------------------------------------------------------
-   3. INITIALIZATION
+   4. INITIALIZATION
    -------------------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* --------------------------------------------------------------------------
-   4. EVENT LISTENERS
+   5. EVENT LISTENERS
    -------------------------------------------------------------------------- */
 
 function initEventListeners() {
@@ -248,7 +248,7 @@ function initEventListeners() {
 }
 
 /* --------------------------------------------------------------------------
-   5. BUTTON ACTIONS
+   6. BUTTON ACTIONS
    -------------------------------------------------------------------------- */
 
 function handleButtonClick(e) {
@@ -276,7 +276,7 @@ function openLink(url) {
 }
 
 /* --------------------------------------------------------------------------
-   5b. SERVICES
+   7. SERVICES & CATALOG
    -------------------------------------------------------------------------- */
 
 function renderServices() {
@@ -427,7 +427,7 @@ function renderCatalog() {
 }
 
 /* --------------------------------------------------------------------------
-   6. CLIPBOARD
+   8. CLIPBOARD
    -------------------------------------------------------------------------- */
 
 function copyToClipboard(text, successMsg) {
@@ -448,7 +448,7 @@ function fallbackCopy(text, successMsg) {
     textarea.select();
     try {
         document.execCommand('copy');
-        showSuccessMessage(successMsg);
+        if (successMsg) showSuccessMessage(successMsg);
         return true;
     } catch {
         showToast('Erro ao copiar', 'error');
@@ -478,7 +478,7 @@ function updateButtonLabel(btn, tempText, restoreHTML) {
 }
 
 /* --------------------------------------------------------------------------
-   7. MODALS
+   9. MODALS
    -------------------------------------------------------------------------- */
 
 function closeAllModals() {
@@ -524,7 +524,7 @@ function openBankModal() {
 }
 
 /* --------------------------------------------------------------------------
-   8. QR CODE
+   10. QR CODE
    -------------------------------------------------------------------------- */
 
 function generateQRCode() {
@@ -565,16 +565,14 @@ function downloadQRCode() {
 }
 
 /* --------------------------------------------------------------------------
-   9. WIFI
+   11. WIFI
    -------------------------------------------------------------------------- */
 
 function openWifiSettings() {
     copyWifiPassword();
     trackEvent('wifi_connect_clicked', {});
 
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = /android/.test(ua);
-    const isIOS = /iphone|ipad|ipod/.test(ua);
+    const { isAndroid, isIOS } = detectPlatform();
 
     if (isAndroid) {
         window.location.href = 'intent://wifi#Intent;action=android.settings.WIFI_SETTINGS;end';
@@ -587,7 +585,7 @@ function openWifiSettings() {
 }
 
 /* --------------------------------------------------------------------------
-   10. BANK SELECTOR
+   12. BANK SELECTOR
    -------------------------------------------------------------------------- */
 
 function detectPlatform() {
@@ -668,18 +666,12 @@ function copyPixKeySilent() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(CONFIG.pixKey).catch(() => {});
     } else {
-        const textarea = document.createElement('textarea');
-        textarea.value = CONFIG.pixKey;
-        textarea.style.cssText = 'position:fixed;opacity:0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try { document.execCommand('copy'); } catch {}
-        document.body.removeChild(textarea);
+        fallbackCopy(CONFIG.pixKey, null);
     }
 }
 
 /* --------------------------------------------------------------------------
-   11. THEME
+   13. THEME
    -------------------------------------------------------------------------- */
 
 function initTheme() {
@@ -706,7 +698,7 @@ function toggleTheme() {
 }
 
 /* --------------------------------------------------------------------------
-   12. NOTIFICATIONS
+   14. NOTIFICATIONS
    -------------------------------------------------------------------------- */
 
 function showSuccessMessage(text) {
@@ -722,7 +714,7 @@ function showToast(message, type = 'info') {
 }
 
 /* --------------------------------------------------------------------------
-   13. ANALYTICS
+   15. ANALYTICS
    -------------------------------------------------------------------------- */
 
 function trackEvent(eventName, eventData = {}) {
@@ -749,7 +741,7 @@ function detectAccessMethod() {
 }
 
 /* --------------------------------------------------------------------------
-   14. LOGO ANIMATION
+   16. LOGO ANIMATION
    -------------------------------------------------------------------------- */
 
 function initLogoAnimation() {
@@ -764,7 +756,7 @@ function initLogoAnimation() {
 }
 
 /* --------------------------------------------------------------------------
-   15. EXPORTS (for external access if needed)
+   17. EXPORTS (for external access if needed)
    -------------------------------------------------------------------------- */
 
 window.copyPixKey = copyPixKey;

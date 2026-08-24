@@ -109,7 +109,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   5a. LOGO SECTION (Top)
+   5. LOGO SECTION (Top)
    -------------------------------------------------------------------------- */
 
 .logo-section {
@@ -188,7 +188,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   6b. SERVICES SECTION (Accordion)
+   7. SERVICES SECTION (Accordion)
    -------------------------------------------------------------------------- */
 
 .services-header-icon {
@@ -275,36 +275,6 @@ body {
     content: '• ';
     color: var(--color-primary-blue-light);
     font-weight: 700;
-}
-
-.service-media-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 10px 15px 15px;
-}
-
-.service-media-item {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 1;
-    background: #f0f0f0;
-}
-
-.service-media-item img,
-.service-media-item video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.service-media-item:hover img,
-.service-media-item:hover video {
-    transform: scale(1.05);
 }
 
 .catalog-header-icon {
@@ -457,7 +427,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   7. LINK BUTTONS
+   8. LINK BUTTONS
    -------------------------------------------------------------------------- */
 
 .links-section {
@@ -563,7 +533,7 @@ body {
 .qrcode-btn .button-icon { background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-blue-light)); }
 
 /* --------------------------------------------------------------------------
-   8. FOOTER
+   9. FOOTER
    -------------------------------------------------------------------------- */
 
 .footer {
@@ -609,7 +579,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   9. MODALS (Base)
+   10. MODALS (Base)
    -------------------------------------------------------------------------- */
 
 .modal {
@@ -680,7 +650,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   10. MODAL: Pix
+   11. MODAL: Pix
    -------------------------------------------------------------------------- */
 
 .pix-key-section {
@@ -754,7 +724,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   11. MODAL: QR Code
+   12. MODAL: QR Code
    -------------------------------------------------------------------------- */
 
 .qr-code-container {
@@ -774,7 +744,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   12. MODAL: WiFi
+   13. MODAL: WiFi
    -------------------------------------------------------------------------- */
 
 .wifi-info {
@@ -838,7 +808,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   13. MODAL: Bank Selector
+   14. MODAL: Bank Selector
    -------------------------------------------------------------------------- */
 
 .bank-modal-content {
@@ -996,7 +966,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   14. SHARED COMPONENTS
+   15. SHARED COMPONENTS
    -------------------------------------------------------------------------- */
 
 .copy-btn {
@@ -1052,7 +1022,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   15. TOAST & SUCCESS MESSAGE
+   16. TOAST & SUCCESS MESSAGE
    -------------------------------------------------------------------------- */
 
 .success-message {
@@ -1112,7 +1082,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   16. THEME TOGGLE
+   17. THEME TOGGLE
    -------------------------------------------------------------------------- */
 
 .theme-toggle-btn {
@@ -1145,7 +1115,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   17. DARK THEME
+   18. DARK THEME
    -------------------------------------------------------------------------- */
 
 body.dark-theme {
@@ -1257,7 +1227,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   18. RESPONSIVE - Desktop Large (1200px+)
+   19. RESPONSIVE - Desktop Large (1200px+)
    -------------------------------------------------------------------------- */
 
 @media (min-width: 1200px) {
@@ -1265,7 +1235,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   19. RESPONSIVE - Tablet (768px - 1023px)
+   20. RESPONSIVE - Tablet (768px - 1023px)
    -------------------------------------------------------------------------- */
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -1284,7 +1254,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   20. RESPONSIVE - Mobile Large (600px - 767px)
+   21. RESPONSIVE - Mobile Large (600px - 767px)
    -------------------------------------------------------------------------- */
 
 @media (min-width: 600px) and (max-width: 767px) {
@@ -1306,7 +1276,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   21. RESPONSIVE - Mobile Medium (480px - 599px)
+   22. RESPONSIVE - Mobile Medium (480px - 599px)
    -------------------------------------------------------------------------- */
 
 @media (min-width: 480px) and (max-width: 599px) {
@@ -1332,11 +1302,10 @@ body.dark-theme .background-gradient {
     .success-message.show { transform: translateY(0); }
     .toast { right: 15px; left: 15px; bottom: 15px; max-width: none; }
     .service-category-items li { font-size: 12px; padding: 4px 0; }
-    .service-quote-btn { font-size: 12px; padding: 9px; }
 }
 
 /* --------------------------------------------------------------------------
-   22. RESPONSIVE - Mobile Small (375px - 479px)
+   23. RESPONSIVE - Mobile Small (375px - 479px)
    -------------------------------------------------------------------------- */
 
 @media (min-width: 375px) and (max-width: 479px) {
@@ -1367,7 +1336,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   23. RESPONSIVE - Mobile Extra Small (<= 374px)
+   24. RESPONSIVE - Mobile Extra Small (<= 374px)
    -------------------------------------------------------------------------- */
 
 @media (max-width: 374px) {
@@ -1401,7 +1370,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   24. RESPONSIVE - Landscape & Special
+   25. RESPONSIVE - Landscape & Special
    -------------------------------------------------------------------------- */
 
 @media (max-height: 500px) and (orientation: landscape) {
@@ -1412,7 +1381,6 @@ body.dark-theme .background-gradient {
     .main-text { font-size: 12px; }
     .links-section { padding: 8px; }
     .buttons-grid { gap: 6px; max-height: 200px; overflow-y: auto; }
-    .link-button { padding: 10px 12px; gap: 8px; }
     .button-content h3 { font-size: 12px; margin-bottom: 1px; }
     .button-content p { font-size: 8px; }
     .footer { padding: 10px 15px; }
@@ -1433,7 +1401,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   25. ACCESSIBILITY
+   26. ACCESSIBILITY
    -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1452,7 +1420,7 @@ body.dark-theme .background-gradient {
 }
 
 /* --------------------------------------------------------------------------
-   26. PRINT
+   27. PRINT
    -------------------------------------------------------------------------- */
 
 @media print {
