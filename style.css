@@ -1387,10 +1387,8 @@ body {
     transition: var(--transition);
 }
 
-#a11y-toolbar-btn:nth-child(1) { top: 20px; right: 20px; }
-
-.a11y-toolbar-btn:nth-child(1) { top: 20px; right: 20px; }
-.a11y-toolbar-btn:nth-child(2) { top: 70px; right: 20px; }
+#themeToggle { top: 20px; right: 20px; }
+#contrastToggle { top: 70px; right: 20px; }
 
 .a11y-toolbar-btn:hover {
     transform: scale(1.1) rotate(15deg);
