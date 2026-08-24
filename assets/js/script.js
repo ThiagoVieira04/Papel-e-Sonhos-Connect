@@ -308,24 +308,105 @@ function renderServices() {
 }
 
 function renderCatalog() {
-    const grid = document.getElementById('catalogGrid');
+    const track = document.getElementById('catalogTrack');
+    const dotsContainer = document.getElementById('catalogDots');
     const header = document.getElementById('catalogHeader');
     const body = document.getElementById('catalogBody');
     const arrow = document.getElementById('catalogArrow');
-    if (!grid || !header || !body) return;
+    if (!track || !header || !body) return;
 
-    CATALOG_MEDIA.forEach(media => {
-        const item = document.createElement('div');
-        item.className = 'catalog-item';
+    let currentIndex = 0;
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    CATALOG_MEDIA.forEach((media, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'catalog-slide';
 
         if (media.type === 'video') {
-            item.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
+            slide.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata" onclick="this.paused ? this.play() : this.pause()"></video>`;
         } else {
-            item.innerHTML = `<img src="${media.src}" alt="Serviço" loading="lazy">`;
+            slide.innerHTML = `<img src="${media.src}" alt="Serviço ${index + 1}" loading="lazy">`;
         }
 
-        grid.appendChild(item);
+        track.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = 'catalog-dot';
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
     });
+
+    const counter = document.createElement('div');
+    counter.className = 'catalog-counter';
+    counter.textContent = `1 / ${CATALOG_MEDIA.length}`;
+    dotsContainer.after(counter);
+
+    function goToSlide(index) {
+        const slides = track.querySelectorAll('.catalog-slide');
+        const dots = dotsContainer.querySelectorAll('.catalog-dot');
+
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+
+        pauseAllVideos();
+        currentIndex = index;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+    }
+
+    function pauseAllVideos() {
+        track.querySelectorAll('video').forEach(v => {
+            v.pause();
+            v.currentTime = 0;
+        });
+    }
+
+    function onDragStart(e) {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        track.classList.add('dragging');
+    }
+
+    function onDragMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        const diff = currentX - startX;
+        const offset = -(currentIndex * 100) + (diff / track.offsetWidth * 100);
+        track.style.transform = `translateX(${offset}%)`;
+    }
+
+    function onDragEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        track.classList.remove('dragging');
+
+        const diff = currentX - startX;
+        const threshold = track.offsetWidth * 0.2;
+
+        if (diff < -threshold) {
+            goToSlide(currentIndex + 1);
+        } else if (diff > threshold) {
+            goToSlide(currentIndex - 1);
+        } else {
+            goToSlide(currentIndex);
+        }
+    }
+
+    track.addEventListener('mousedown', onDragStart);
+    track.addEventListener('mousemove', onDragMove);
+    track.addEventListener('mouseup', onDragEnd);
+    track.addEventListener('mouseleave', onDragEnd);
+
+    track.addEventListener('touchstart', onDragStart, { passive: true });
+    track.addEventListener('touchmove', onDragMove, { passive: false });
+    track.addEventListener('touchend', onDragEnd);
+
+    goToSlide(0);
 
     header.addEventListener('click', () => {
         body.classList.toggle('open');
