@@ -287,14 +287,9 @@ body {
 }
 
 .catalog-header-icon {
-    font-size: 20px;
-    color: var(--color-primary-blue);
     width: 36px;
     height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #e0eefb, var(--color-white));
+    object-fit: contain;
     border-radius: 8px;
     flex-shrink: 0;
 }
