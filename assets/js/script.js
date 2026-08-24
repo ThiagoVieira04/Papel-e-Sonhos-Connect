@@ -356,6 +356,12 @@ function renderCatalog() {
 
         dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
         counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+
+        const activeVideo = slides[currentIndex].querySelector('video');
+        if (activeVideo) {
+            activeVideo.currentTime = 0;
+            activeVideo.play().catch(() => {});
+        }
     }
 
     function pauseAllVideos() {
