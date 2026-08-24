@@ -327,6 +327,68 @@ body {
     transform: scale(1.05);
 }
 
+.catalog-section {
+    margin: 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-medium);
+}
+
+.catalog-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: var(--transition);
+}
+
+.catalog-header:hover {
+    background: var(--gray-light);
+}
+
+.catalog-header-icon {
+    font-size: 20px;
+    color: var(--color-primary-blue);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e0eefb, var(--color-white));
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.catalog-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    text-align: left;
+}
+
+.catalog-arrow {
+    font-size: 14px;
+    color: var(--gray-dark);
+    opacity: 0.5;
+    transition: transform 0.3s ease;
+}
+
+.catalog-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.catalog-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.catalog-body.open {
+    max-height: 8000px;
+}
+
 /* --------------------------------------------------------------------------
    7. LINK BUTTONS
    -------------------------------------------------------------------------- */
@@ -1051,7 +1113,15 @@ body.dark-theme .service-category-items li {
     border-bottom-color: var(--color-dark-border);
 }
 
-body.dark-theme .service-media-item {
+body.dark-theme .catalog-section {
+    background: var(--color-dark-surface);
+}
+
+body.dark-theme .catalog-header:hover {
+    background: var(--color-dark-border);
+}
+
+body.dark-theme .catalog-item {
     background: var(--color-dark-border);
 }
 
@@ -1184,7 +1254,7 @@ body.dark-theme .background-gradient {
     .services-header { padding: 11px 12px; gap: 9px; }
     .services-title { font-size: 13px; }
     .service-category-items li { font-size: 11px; }
-    .service-media-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px 12px 14px; }
+    .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px 12px 14px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1216,7 +1286,7 @@ body.dark-theme .background-gradient {
     .services-header { padding: 10px 10px; gap: 8px; }
     .services-title { font-size: 12px; }
     .services-header-icon { width: 30px; height: 30px; }
-    .service-media-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 8px 10px 12px; }
+    .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 8px 10px 12px; }
 }
 
 /* --------------------------------------------------------------------------
