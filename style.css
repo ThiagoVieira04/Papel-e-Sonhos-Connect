@@ -122,6 +122,15 @@ body {
     gap: 15px;
 }
 
+.digital-card-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-yellow);
+    font-weight: 600;
+    opacity: 0.85;
+}
+
 .logo {
     width: 160px;
     height: 160px;
