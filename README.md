@@ -104,6 +104,7 @@ Salve e recarregue o navegador.
 - **WhatsApp:** [+55 21 98717-2463](https://wa.me/5521987172463)
 - **Instagram:** [@papel_e_sonhos0504](https://www.instagram.com/papel_e_sonhos0504/)
 - **Facebook:** [biancathiago0504](https://www.facebook.com/biancathiago0504)
+- **LinkedIn:** [Thiago Vieira](https://www.linkedin.com/in/thiago-vieira-29b972150/)
 
 ---
 
