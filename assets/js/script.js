@@ -167,7 +167,6 @@ const CATALOG_MEDIA = [
     { type: 'image', src: 'assets/media/imagens/img16.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img17.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img18.jpeg' },
-    { type: 'image', src: 'assets/media/imagens/img19.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img20.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img21.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img22.jpeg' },
