@@ -412,6 +412,12 @@ function renderCatalog() {
     track.addEventListener('touchmove', onDragMove, { passive: false });
     track.addEventListener('touchend', onDragEnd);
 
+    const prevBtn = document.getElementById('catalogPrev');
+    const nextBtn = document.getElementById('catalogNext');
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
     goToSlide(0);
 
     header.addEventListener('click', () => {

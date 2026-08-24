@@ -396,6 +396,40 @@ body {
     padding: 10px 0 20px;
 }
 
+.catalog-arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--color-primary-blue);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.catalog-arrow-btn:hover {
+    background: var(--color-primary-blue);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.catalog-prev {
+    left: 10px;
+}
+
+.catalog-next {
+    right: 10px;
+}
+
 .catalog-track {
     display: flex;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -1209,6 +1243,16 @@ body.dark-theme .catalog-counter {
 body.dark-theme .catalog-slide img,
 body.dark-theme .catalog-slide video {
     background: var(--color-dark-border);
+}
+
+body.dark-theme .catalog-arrow-btn {
+    background: rgba(45, 45, 45, 0.9);
+    color: var(--color-primary-blue-light);
+}
+
+body.dark-theme .catalog-arrow-btn:hover {
+    background: var(--color-primary-blue-light);
+    color: var(--white);
 }
 
 body.dark-theme .background-gradient {
