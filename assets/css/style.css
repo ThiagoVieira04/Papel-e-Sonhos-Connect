@@ -194,7 +194,7 @@ body {
 .services-section {
     margin: 0;
     background: var(--white);
-    border-top: 1px solid var(--gray-medium);
+    padding: 15px 0;
 }
 
 .services-header {
@@ -205,10 +205,37 @@ body {
     cursor: pointer;
     user-select: none;
     transition: var(--transition);
+    border: 1px solid var(--gray-medium);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    margin: 0 15px;
+}
+
+.services-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.services-header:hover::before {
+    left: 100%;
 }
 
 .services-header:hover {
-    background: var(--gray-light);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+    border-color: var(--accent-yellow);
+}
+
+.services-header:active {
+    transform: translateY(-1px);
 }
 
 .services-header-icon {
@@ -330,7 +357,7 @@ body {
 .catalog-section {
     margin: 0;
     background: var(--white);
-    border-top: 1px solid var(--gray-medium);
+    padding: 15px 0;
 }
 
 .catalog-header {
@@ -341,10 +368,37 @@ body {
     cursor: pointer;
     user-select: none;
     transition: var(--transition);
+    border: 1px solid var(--gray-medium);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    margin: 0 15px;
+}
+
+.catalog-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.catalog-header:hover::before {
+    left: 100%;
 }
 
 .catalog-header:hover {
-    background: var(--gray-light);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+    border-color: var(--accent-yellow);
+}
+
+.catalog-header:active {
+    transform: translateY(-1px);
 }
 
 .catalog-header-icon {
@@ -1208,8 +1262,13 @@ body.dark-theme .services-section {
     background: var(--color-dark-surface-alt);
 }
 
+body.dark-theme .services-header {
+    background: var(--color-dark-surface-alt);
+    border-color: var(--color-dark-border);
+}
+
 body.dark-theme .services-header:hover {
-    background: var(--color-dark-border);
+    border-color: var(--accent-yellow);
 }
 
 body.dark-theme .service-category-title {
@@ -1224,8 +1283,13 @@ body.dark-theme .catalog-section {
     background: var(--color-dark-surface-alt);
 }
 
+body.dark-theme .catalog-header {
+    background: var(--color-dark-surface-alt);
+    border-color: var(--color-dark-border);
+}
+
 body.dark-theme .catalog-header:hover {
-    background: var(--color-dark-border);
+    border-color: var(--accent-yellow);
 }
 
 body.dark-theme .catalog-dot {
@@ -1275,10 +1339,13 @@ body.dark-theme .background-gradient {
     body:not(.light-theme) .modal-content { background: var(--color-dark-surface); }
     body:not(.light-theme) .link-button { background: var(--color-dark-surface-alt); }
     body:not(.light-theme) .services-section { background: var(--color-dark-surface-alt); }
-    body:not(.light-theme) .services-header:hover { background: var(--color-dark-border); }
+    body:not(.light-theme) .services-header { background: var(--color-dark-surface-alt); border-color: var(--color-dark-border); }
+    body:not(.light-theme) .services-header:hover { border-color: var(--accent-yellow); }
     body:not(.light-theme) .service-category-title { background: var(--color-dark-border); }
     body:not(.light-theme) .service-category-items li { border-bottom-color: var(--color-dark-border); }
     body:not(.light-theme) .catalog-section { background: var(--color-dark-surface-alt); }
+    body:not(.light-theme) .catalog-header { background: var(--color-dark-surface-alt); border-color: var(--color-dark-border); }
+    body:not(.light-theme) .catalog-header:hover { border-color: var(--accent-yellow); }
     body:not(.light-theme) .background-gradient {
         background: linear-gradient(135deg, var(--color-dark-bg) 0%, var(--color-dark-bg-mid) 50%, var(--color-primary-blue-light) 100%) !important;
         background-color: var(--color-dark-bg) !important;
