@@ -56,8 +56,7 @@ const SERVICES = [
             'Necessaires',
             'Bolsinhas',
             'Lembrancinhas',
-            'Canecas',
-            'E muito mais'
+            'Canecas'
         ]
     },
     {
