@@ -1369,10 +1369,8 @@ body {
    17. THEME TOGGLE
    -------------------------------------------------------------------------- */
 
-.theme-toggle-btn {
+.a11y-toolbar-btn {
     position: fixed;
-    top: 20px;
-    right: 20px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -1389,13 +1387,24 @@ body {
     transition: var(--transition);
 }
 
-.theme-toggle-btn:hover {
+#a11y-toolbar-btn:nth-child(1) { top: 20px; right: 20px; }
+
+.a11y-toolbar-btn:nth-child(1) { top: 20px; right: 20px; }
+.a11y-toolbar-btn:nth-child(2) { top: 70px; right: 20px; }
+
+.a11y-toolbar-btn:hover {
     transform: scale(1.1) rotate(15deg);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.theme-toggle-btn:active {
+.a11y-toolbar-btn:active {
     transform: scale(0.95);
+}
+
+.a11y-toolbar-btn.active-contrast {
+    background: var(--color-primary-blue);
+    color: #fff;
+    border-color: var(--color-primary-blue);
 }
 
 /* --------------------------------------------------------------------------
@@ -1830,6 +1839,129 @@ body.dark-theme .background-gradient {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   26f. ACCESSIBILITY - High Contrast Mode
+   -------------------------------------------------------------------------- */
+
+body.high-contrast {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.high-contrast .background-gradient {
+    display: none !important;
+}
+
+body.high-contrast .container {
+    background: #000 !important;
+    box-shadow: none !important;
+    border: 2px solid #fff !important;
+}
+
+body.high-contrast .link-button,
+body.high-contrast .services-header,
+body.high-contrast .catalog-header,
+body.high-contrast .testimonials-header {
+    background: #000 !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+body.high-contrast .link-button:hover,
+body.high-contrast .services-header:hover,
+body.high-contrast .catalog-header:hover,
+body.high-contrast .testimonials-header:hover {
+    background: #222 !important;
+    border-color: var(--accent-yellow) !important;
+}
+
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3 {
+    color: #fff !important;
+}
+
+body.high-contrast p,
+body.high-contrast span,
+body.high-contrast li {
+    color: #eee !important;
+}
+
+body.high-contrast .service-quote-btn {
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+body.high-contrast .service-quote-btn:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.high-contrast .catalog-dot {
+    background: #666 !important;
+}
+
+body.high-contrast .catalog-dot.active {
+    background: var(--accent-yellow) !important;
+}
+
+body.high-contrast .modal-content {
+    background: #000 !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+}
+
+body.high-contrast .modal-content h2 {
+    color: #fff !important;
+}
+
+body.high-contrast .a11y-toolbar-btn {
+    background: #000 !important;
+    border-color: #fff !important;
+    color: #fff !important;
+}
+
+body.high-contrast .footer {
+    background: #000 !important;
+    border-top: 2px solid #fff !important;
+}
+
+body.high-contrast .footer a,
+body.high-contrast .footer p {
+    color: #fff !important;
+}
+
+body.high-contrast .copy-btn {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.high-contrast .action-btn {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.high-contrast .video-controls {
+    background: rgba(0,0,0,0.95) !important;
+}
+
+body.high-contrast .video-btn {
+    border-color: #fff !important;
+}
+
+body.high-contrast .video-volume {
+    background: rgba(255,255,255,0.5) !important;
+}
+
+/* --------------------------------------------------------------------------
+   26g. ACCESSIBILITY - VLibras Widget
+   -------------------------------------------------------------------------- */
+
+[vw] {
+    z-index: 1000 !important;
 }
 
 /* --------------------------------------------------------------------------

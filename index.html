@@ -37,9 +37,21 @@
     <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
     <div class="background-gradient"></div>
 
-    <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar entre tema claro e escuro">
+    <button id="themeToggle" class="a11y-toolbar-btn" aria-label="Alternar entre tema claro e escuro">
         <i class="fas fa-moon" aria-hidden="true"></i>
     </button>
+    <button id="contrastToggle" class="a11y-toolbar-btn" aria-label="Ativar alto contraste">
+        <i class="fas fa-adjust" aria-hidden="true"></i>
+    </button>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-btns" id="vwPluginBtns">
+                <img src="https://vlibras.gov.br/app/assets/logo-vlibras.svg" alt="VLibras - Libras" class="vw-logo-img">
+            </div>
+        </div>
+    </div>
 
     <div class="container" id="mainContent" role="main">
         <header class="logo-section">
@@ -267,5 +279,9 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras.min.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 </html>

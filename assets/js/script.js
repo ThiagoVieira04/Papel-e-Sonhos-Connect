@@ -200,6 +200,7 @@ const DOM = {
     bankGridList: document.getElementById('bankGridList'),
     bankNotice: document.getElementById('bankNotice'),
     themeToggle: document.getElementById('themeToggle'),
+    contrastToggle: document.getElementById('contrastToggle'),
     servicesList: document.getElementById('servicesList'),
 };
 
@@ -248,6 +249,8 @@ function initEventListeners() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllModals();
     });
+
+    if (DOM.contrastToggle) DOM.contrastToggle.addEventListener('click', toggleContrast);
 
     document.querySelectorAll('.services-header, .catalog-header, .testimonials-header').forEach(header => {
         header.addEventListener('keydown', (e) => {
@@ -932,6 +935,16 @@ function initTheme() {
     btn.innerHTML = '<i class="fas fa-sun"></i>';
     localStorage.setItem('theme', 'dark');
 
+    const savedContrast = localStorage.getItem('highContrast') === 'true';
+    if (savedContrast) {
+        document.body.classList.add('high-contrast');
+        const contrastBtn = DOM.contrastToggle;
+        if (contrastBtn) {
+            contrastBtn.classList.add('active-contrast');
+            contrastBtn.setAttribute('aria-label', 'Desativar alto contraste');
+        }
+    }
+
     btn.addEventListener('click', toggleTheme);
 }
 
@@ -944,6 +957,17 @@ function toggleTheme() {
     localStorage.setItem('theme', isDark ? 'light' : 'dark');
     btn.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
     trackEvent('theme_changed', { theme: isDark ? 'light' : 'dark' });
+}
+
+function toggleContrast() {
+    const btn = DOM.contrastToggle;
+    const isActive = document.body.classList.toggle('high-contrast');
+    localStorage.setItem('highContrast', isActive);
+    if (btn) {
+        btn.classList.toggle('active-contrast', isActive);
+        btn.setAttribute('aria-label', isActive ? 'Desativar alto contraste' : 'Ativar alto contraste');
+    }
+    trackEvent('contrast_changed', { highContrast: isActive });
 }
 
 /* --------------------------------------------------------------------------
