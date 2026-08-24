@@ -9,7 +9,7 @@ Página de apresentação da **Papel e Sonhos Informática** — cartão de visi
 ## Preview
 
 <p align="center">
-  <img src="assets/img/preview.png" alt="Preview do site" width="100%">
+  <img src="assets/img/preview.png" alt="Preview do site" width="50%">
 </p>
 
 ---
