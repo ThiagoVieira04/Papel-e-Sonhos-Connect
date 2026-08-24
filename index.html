@@ -34,13 +34,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
     <div class="background-gradient"></div>
 
-    <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar tema">
-        <i class="fas fa-moon"></i>
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar entre tema claro e escuro">
+        <i class="fas fa-moon" aria-hidden="true"></i>
     </button>
 
-    <div class="container">
+    <div class="container" id="mainContent" role="main">
         <header class="logo-section">
             <p class="digital-card-label">Cartão de Visita Digital</p>
             <div class="logo">
@@ -51,123 +52,123 @@
             </div>
         </header>
 
-        <section class="description">
+        <section class="description" aria-label="Descrição da empresa">
             <p class="main-text">Transformamos ideias em memórias que encantam. 😉 Papelaria, impressão, personalizados, serviços digitais e informática em um só lugar! 🖨️✨</p>
         </section>
 
-        <section class="links-section">
-            <div class="buttons-grid">
-                <button class="link-button google-btn" data-action="open-link" data-link="https://g.page/r/CXUQrjKh4lJtEAE/review">
-                    <div class="button-icon"><img src="assets/img/logo-google.png" alt="Google" class="button-icon-img"></div>
+        <section class="links-section" aria-label="Links e ações">
+            <div class="buttons-grid" role="list">
+                <button class="link-button google-btn" data-action="open-link" data-link="https://g.page/r/CXUQrjKh4lJtEAE/review" role="listitem" aria-label="Avalie no Google - Deixe sua avaliação">
+                    <div class="button-icon"><img src="assets/img/logo-google.png" alt="" class="button-icon-img" aria-hidden="true"></div>
                     <div class="button-content">
                         <h3>Avalie no Google</h3>
                         <p>Deixe sua avaliação</p>
                     </div>
                 </button>
 
-                <button class="link-button whatsapp-btn" data-action="open-link" data-link="https://wa.me/5521987172463?text=Olá%20Papel%20e%20Sonhos!%20Gostaria%20de%20informações.">
-                    <div class="button-icon"><i class="fab fa-whatsapp"></i></div>
+                <button class="link-button whatsapp-btn" data-action="open-link" data-link="https://wa.me/5521987172463?text=Olá%20Papel%20e%20Sonhos!%20Gostaria%20de%20informações." role="listitem" aria-label="WhatsApp - Fale conosco agora">
+                    <div class="button-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div>
                     <div class="button-content">
                         <h3>WhatsApp</h3>
                         <p>Fale conosco agora</p>
                     </div>
                 </button>
 
-                <button class="link-button instagram-btn" data-action="open-link" data-link="https://www.instagram.com/papel_e_sonhos0504/">
-                    <div class="button-icon"><i class="fab fa-instagram"></i></div>
+                <button class="link-button instagram-btn" data-action="open-link" data-link="https://www.instagram.com/papel_e_sonhos0504/" role="listitem" aria-label="Instagram - Acompanhe nossas atualizações">
+                    <div class="button-icon"><i class="fab fa-instagram" aria-hidden="true"></i></div>
                     <div class="button-content">
                         <h3>Instagram</h3>
                         <p>Acompanhe nossas atualizações</p>
                     </div>
                 </button>
 
-                <button class="link-button facebook-btn" data-action="open-link" data-link="https://www.facebook.com/biancathiago0504">
-                    <div class="button-icon"><i class="fab fa-facebook"></i></div>
+                <button class="link-button facebook-btn" data-action="open-link" data-link="https://www.facebook.com/biancathiago0504" role="listitem" aria-label="Facebook - Nos acompanhe também">
+                    <div class="button-icon"><i class="fab fa-facebook" aria-hidden="true"></i></div>
                     <div class="button-content">
                         <h3>Facebook</h3>
                         <p>Nos acompanhe também</p>
                     </div>
                 </button>
 
-                <button class="link-button location-btn" data-action="open-link" data-link="https://maps.app.goo.gl/gK2X9JmyqhsShQe49">
-                    <div class="button-icon"><img src="assets/img/local.gif" alt="Localização" class="button-icon-img"></div>
+                <button class="link-button location-btn" data-action="open-link" data-link="https://maps.app.goo.gl/gK2X9JmyqhsShQe49" role="listitem" aria-label="Localização - Veja onde estamos">
+                    <div class="button-icon"><img src="assets/img/local.gif" alt="" class="button-icon-img" aria-hidden="true"></div>
                     <div class="button-content">
                         <h3>Localização</h3>
                         <p>Veja onde estamos</p>
                     </div>
                 </button>
 
-                <button class="link-button pix-btn" data-action="pix-modal">
-                    <div class="button-icon"><img src="assets/img/pix.png" alt="Pix" class="button-icon-img"></div>
+                <button class="link-button pix-btn" data-action="pix-modal" role="listitem" aria-label="Pix - Escaneie ou copie a chave">
+                    <div class="button-icon"><img src="assets/img/pix.png" alt="" class="button-icon-img" aria-hidden="true"></div>
                     <div class="button-content">
                         <h3>Pix</h3>
                         <p>Escaneie ou copie a chave</p>
                     </div>
                 </button>
 
-                <button class="link-button wifi-btn" data-action="wifi-modal">
-                    <div class="button-icon"><i class="fas fa-wifi"></i></div>
+                <button class="link-button wifi-btn" data-action="wifi-modal" role="listitem" aria-label="WiFi Grátis - Conecte-se à rede">
+                    <div class="button-icon"><i class="fas fa-wifi" aria-hidden="true"></i></div>
                     <div class="button-content">
                         <h3>WiFi Grátis</h3>
                         <p>Conecte-se à rede</p>
                     </div>
                 </button>
 
-                <div class="services-header" id="servicesHeader">
-                    <img src="assets/img/serviço.gif" alt="Serviços" class="services-header-icon">
+                <div class="services-header" id="servicesHeader" role="button" tabindex="0" aria-expanded="false" aria-controls="servicesBody">
+                    <img src="assets/img/serviço.gif" alt="" class="services-header-icon" aria-hidden="true">
                     <h2 class="services-title">Nossos Serviços</h2>
-                    <i class="fas fa-chevron-down services-arrow" id="servicesArrow"></i>
+                    <i class="fas fa-chevron-down services-arrow" id="servicesArrow" aria-hidden="true"></i>
                 </div>
-                <div class="services-body" id="servicesBody">
+                <div class="services-body" id="servicesBody" role="region" aria-label="Lista de serviços">
                     <div class="services-list" id="servicesList"></div>
                 </div>
 
-                <div class="catalog-header" id="catalogHeader">
-                    <img src="assets/img/catalago.gif" alt="Catálogo" class="catalog-header-icon">
+                <div class="catalog-header" id="catalogHeader" role="button" tabindex="0" aria-expanded="false" aria-controls="catalogBody">
+                    <img src="assets/img/catalago.gif" alt="" class="catalog-header-icon" aria-hidden="true">
                     <h2 class="catalog-title">Catálogo de Serviços</h2>
-                    <i class="fas fa-chevron-down catalog-arrow" id="catalogArrow"></i>
+                    <i class="fas fa-chevron-down catalog-arrow" id="catalogArrow" aria-hidden="true"></i>
                 </div>
-                <div class="catalog-body" id="catalogBody">
-                    <div class="catalog-carousel" id="catalogCarousel">
-                        <button class="catalog-arrow-btn catalog-prev" id="catalogPrev"><i class="fas fa-chevron-left"></i></button>
-                        <div class="catalog-track" id="catalogTrack"></div>
-                        <button class="catalog-arrow-btn catalog-next" id="catalogNext"><i class="fas fa-chevron-right"></i></button>
-                        <div class="catalog-dots" id="catalogDots"></div>
+                <div class="catalog-body" id="catalogBody" role="region" aria-label="Catálogo de mídias">
+                    <div class="catalog-carousel" id="catalogCarousel" aria-label="Carrossel de imagens e vídeos">
+                        <button class="catalog-arrow-btn catalog-prev" id="catalogPrev" aria-label="Mídia anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <div class="catalog-track" id="catalogTrack" aria-live="polite"></div>
+                        <button class="catalog-arrow-btn catalog-next" id="catalogNext" aria-label="Próxima mídia"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="catalog-dots" id="catalogDots" role="tablist" aria-label="Navegação do carrossel"></div>
                     </div>
                 </div>
 
-                <div class="testimonials-header" id="testimonialsHeader">
-                    <i class="fas fa-comment-dots testimonials-header-icon"></i>
+                <div class="testimonials-header" id="testimonialsHeader" role="button" tabindex="0" aria-expanded="false" aria-controls="testimonialsBody">
+                    <i class="fas fa-comment-dots testimonials-header-icon" aria-hidden="true"></i>
                     <h2 class="testimonials-title">Depoimentos</h2>
-                    <i class="fas fa-chevron-down testimonials-arrow" id="testimonialsArrow"></i>
+                    <i class="fas fa-chevron-down testimonials-arrow" id="testimonialsArrow" aria-hidden="true"></i>
                 </div>
-                <div class="testimonials-body" id="testimonialsBody">
-                    <div class="catalog-carousel testimonials-carousel" id="testimonialsCarousel">
-                        <button class="catalog-arrow-btn catalog-prev" id="testimonialsPrev"><i class="fas fa-chevron-left"></i></button>
-                        <div class="catalog-track" id="testimonialsTrack"></div>
-                        <button class="catalog-arrow-btn catalog-next" id="testimonialsNext"><i class="fas fa-chevron-right"></i></button>
-                        <div class="catalog-dots" id="testimonialsDots"></div>
+                <div class="testimonials-body" id="testimonialsBody" role="region" aria-label="Vídeos de depoimentos">
+                    <div class="catalog-carousel testimonials-carousel" id="testimonialsCarousel" aria-label="Carrossel de depoimentos">
+                        <button class="catalog-arrow-btn catalog-prev" id="testimonialsPrev" aria-label="Depoimento anterior"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                        <div class="catalog-track" id="testimonialsTrack" aria-live="polite"></div>
+                        <button class="catalog-arrow-btn catalog-next" id="testimonialsNext" aria-label="Próximo depoimento"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="catalog-dots" id="testimonialsDots" role="tablist" aria-label="Navegação do carrossel de depoimentos"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="footer">
+        <footer class="footer" role="contentinfo">
             <div class="footer-content">
                 <p class="thank-you">Obrigado pela sua visita!</p>
                 <p class="footer-credits">Desenvolvido por Papel e Sonhos Informática</p>
-                <a href="https://wa.me/5521987172463" target="_blank" class="footer-whatsapp">
-                    <i class="fab fa-whatsapp"></i> +55 21 98717-2463
+                <a href="https://wa.me/5521987172463" target="_blank" class="footer-whatsapp" aria-label="WhatsApp - Ligar para +55 21 98717-2463">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> +55 21 98717-2463
                 </a>
             </div>
         </footer>
     </div>
 
     <!-- Modal: Pix -->
-    <div class="modal" id="pixModal">
+    <div class="modal" id="pixModal" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
         <div class="modal-content pix-modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>Pague com Pix</h2>
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <h2 id="pixModalTitle">Pague com Pix</h2>
             <div class="pix-key-section">
                 <p class="pix-key-label">Chave Pix (Celular):</p>
                 <div class="pix-key-display">
@@ -188,10 +189,10 @@
     </div>
 
     <!-- Modal: Seletor de Banco -->
-    <div class="modal" id="bankModal">
+    <div class="modal" id="bankModal" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle">
         <div class="modal-content bank-modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>🏦 Escolha seu banco</h2>
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <h2 id="bankModalTitle">🏦 Escolha seu banco</h2>
             <p class="bank-modal-description">Selecione o aplicativo bancário para concluir seu pagamento Pix.</p>
             <div class="bank-loading-container" id="bankLoading">
                 <div class="bank-spinner"></div>
@@ -208,10 +209,10 @@
     </div>
 
     <!-- Modal: QR Code -->
-    <div class="modal" id="qrcodeModal">
+    <div class="modal" id="qrcodeModal" role="dialog" aria-modal="true" aria-labelledby="qrcodeModalTitle">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>QR Code da Página</h2>
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <h2 id="qrcodeModalTitle">QR Code da Página</h2>
             <div class="qr-code-container" id="pageQRCode"></div>
             <button class="action-btn" id="downloadQRBtn">
                 <i class="fas fa-download"></i> Baixar QR Code
@@ -224,10 +225,10 @@
     </div>
 
     <!-- Modal: WiFi -->
-    <div class="modal" id="wifiModal">
+    <div class="modal" id="wifiModal" role="dialog" aria-modal="true" aria-labelledby="wifiModalTitle">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <h2>WiFi Grátis</h2>
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <h2 id="wifiModalTitle">WiFi Grátis</h2>
             <div class="wifi-info">
                 <p><strong>Rede:</strong> TSDINFORMATICA</p>
                 <p><strong>Senha:</strong> <span id="wifiPassword">t04101986</span>
@@ -251,17 +252,17 @@
     </div>
 
     <!-- Modal: Visualizador de Mídia -->
-    <div class="modal media-viewer-modal" id="mediaViewerModal">
-        <button class="media-viewer-close" id="mediaViewerClose">&times;</button>
+    <div class="modal media-viewer-modal" id="mediaViewerModal" role="dialog" aria-modal="true" aria-label="Visualizador de mídia em tela cheia">
+        <button class="media-viewer-close" id="mediaViewerClose" aria-label="Fechar visualizador">&times;</button>
         <div class="media-viewer-content" id="mediaViewerContent"></div>
     </div>
 
     <!-- Toast & Success -->
-    <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i>
+    <div class="success-message" id="successMessage" role="status" aria-live="polite">
+        <i class="fas fa-check-circle" aria-hidden="true"></i>
         <p id="successText">Operação realizada com sucesso!</p>
     </div>
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>

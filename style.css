@@ -1732,6 +1732,104 @@ body.dark-theme .background-gradient {
         animation: none !important;
         opacity: 1 !important;
     }
+
+    .catalog-track {
+        transition: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   26b. ACCESSIBILITY - Skip Link
+   -------------------------------------------------------------------------- */
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 9999;
+    padding: 12px 24px;
+    background: var(--color-primary-blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   26c. ACCESSIBILITY - Focus Indicators
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+    outline: 3px solid var(--color-primary-blue);
+    outline-offset: 3px;
+}
+
+.link-button:focus-visible,
+.service-quote-btn:focus-visible,
+.catalog-arrow-btn:focus-visible,
+.video-btn:focus-visible,
+.modal-close:focus-visible,
+.media-viewer-close:focus-visible,
+.copy-btn:focus-visible,
+.action-btn:focus-visible {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(255, 217, 102, 0.3);
+}
+
+.services-header:focus-visible,
+.catalog-header:focus-visible,
+.testimonials-header:focus-visible {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 3px;
+}
+
+.catalog-dot:focus-visible {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 3px;
+    transform: scale(1.5);
+}
+
+.video-volume:focus-visible {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   26d. ACCESSIBILITY - High Contrast Mode
+   -------------------------------------------------------------------------- */
+
+@media (prefers-contrast: high) {
+    .link-button { border-width: 3px; }
+    .service-quote-btn { border-width: 2px; font-weight: 700; }
+    .catalog-dot { width: 12px; height: 12px; }
+    .catalog-dot.active { width: 14px; height: 14px; }
+    .video-btn { border-width: 3px; }
+    .modal-close { border: 2px solid var(--gray-dark); }
+}
+
+/* --------------------------------------------------------------------------
+   26e. ACCESSIBILITY - Screen Reader Only
+   -------------------------------------------------------------------------- */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* --------------------------------------------------------------------------

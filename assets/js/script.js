@@ -248,6 +248,15 @@ function initEventListeners() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllModals();
     });
+
+    document.querySelectorAll('.services-header, .catalog-header, .testimonials-header').forEach(header => {
+        header.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+    });
 }
 
 /* --------------------------------------------------------------------------
@@ -311,9 +320,10 @@ function renderServices() {
     });
 
     header.addEventListener('click', () => {
-        const isOpen = body.classList.contains('open');
         body.classList.toggle('open');
         arrow.classList.toggle('rotated');
+        const isOpen = body.classList.contains('open');
+        header.setAttribute('aria-expanded', isOpen);
     });
 }
 
@@ -439,6 +449,8 @@ function renderCatalog() {
     header.addEventListener('click', () => {
         body.classList.toggle('open');
         arrow.classList.toggle('rotated');
+        const isOpen = body.classList.contains('open');
+        header.setAttribute('aria-expanded', isOpen);
     });
 }
 
@@ -625,6 +637,8 @@ function renderTestimonials() {
     header.addEventListener('click', () => {
         body.classList.toggle('open');
         arrow.classList.toggle('rotated');
+        const isOpen = body.classList.contains('open');
+        header.setAttribute('aria-expanded', isOpen);
     });
 }
 
@@ -695,6 +709,7 @@ function closeAllModals() {
 function openMediaViewer(type, src) {
     const modal = document.getElementById('mediaViewerModal');
     const content = document.getElementById('mediaViewerContent');
+    const closeBtn = document.getElementById('mediaViewerClose');
     if (!modal || !content) return;
 
     content.innerHTML = '';
@@ -707,6 +722,7 @@ function openMediaViewer(type, src) {
     }
 
     modal.classList.add('active');
+    if (closeBtn) closeBtn.focus();
 }
 
 function scrollToTop() {
@@ -719,6 +735,8 @@ function openPixModal() {
     closeAllModals();
     DOM.pixModal.classList.add('active');
     scrollToTop();
+    const closeBtn = DOM.pixModal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
 }
 
 function openQRCodeModal() {
@@ -726,12 +744,16 @@ function openQRCodeModal() {
     DOM.qrcodeModal.classList.add('active');
     generateQRCode();
     scrollToTop();
+    const closeBtn = DOM.qrcodeModal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
 }
 
 function openWiFiModal() {
     closeAllModals();
     DOM.wifiModal.classList.add('active');
     scrollToTop();
+    const closeBtn = DOM.wifiModal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
 }
 
 function openBankModal() {
@@ -739,6 +761,9 @@ function openBankModal() {
     DOM.bankModal.classList.add('active');
     DOM.bankLoading.style.display = 'flex';
     DOM.bankGrid.style.display = 'none';
+    scrollToTop();
+    const closeBtn = DOM.bankModal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
 
     setTimeout(() => {
         DOM.bankLoading.style.display = 'none';
