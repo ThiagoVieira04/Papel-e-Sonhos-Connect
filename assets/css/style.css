@@ -30,8 +30,6 @@
     --color-dark-border: #3d3d3d;
     --color-dark-text: #e0e0e0;
 
-    --color-gallery-bg: #424242;
-
     --shadow-sm: 0 8px 20px rgba(17, 17, 17, 0.06);
     --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.3);
     --shadow-modal: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -122,76 +120,6 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-}
-
-/* --------------------------------------------------------------------------
-   5b. HERO MEDIA (Below Logo)
-   -------------------------------------------------------------------------- */
-
-.hero-media {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-    background: var(--color-gallery-bg);
-}
-
-.media-gallery {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    background: var(--color-gallery-bg);
-}
-
-.media-gallery .media-item {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.media-gallery .media-item.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.media-gallery .media-item img,
-.media-gallery .media-item video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    filter: saturate(0.85);
-}
-
-.media-gallery .media-item.active img,
-.media-gallery .media-item.active video {
-    animation: kenBurns 8s ease-in-out forwards;
-}
-
-@keyframes kenBurns {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.08); }
-}
-
-.media-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.25) 0%,
-        rgba(0, 0, 0, 0.10) 50%,
-        rgba(0, 0, 0, 0.30) 100%
-    );
-    pointer-events: none;
 }
 
 .logo {
@@ -1171,7 +1099,6 @@ body.dark-theme .background-gradient {
 @media (min-width: 768px) and (max-width: 1023px) {
     .container { max-width: 520px; margin: 20px auto; }
     .logo-section { padding: 25px 25px 15px; }
-    .hero-media { height: 300px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 100px; height: 100px; }
     .links-section { padding: 18px; }
@@ -1189,7 +1116,6 @@ body.dark-theme .background-gradient {
 @media (min-width: 600px) and (max-width: 767px) {
     .container { max-width: 95%; margin: 15px auto; }
     .logo-section { padding: 22px 22px 12px; }
-    .hero-media { height: 280px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 90px; height: 90px; }
     .description { padding: 24px 20px; }
@@ -1211,7 +1137,6 @@ body.dark-theme .background-gradient {
 @media (min-width: 480px) and (max-width: 599px) {
     .container { border-radius: 15px; max-width: 98%; margin: 10px auto; }
     .logo-section { padding: 20px 20px 10px; }
-    .hero-media { height: 260px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 85px; height: 85px; }
     .description { padding: 24px 18px; }
@@ -1240,7 +1165,6 @@ body.dark-theme .background-gradient {
 @media (min-width: 375px) and (max-width: 479px) {
     .container { border-radius: 14px; max-width: 100%; margin: 8px; }
     .logo-section { padding: 18px 18px 8px; }
-    .hero-media { height: 240px; }
     .brand-info h1 { font-size: 16px; line-height: 1.2; }
     .logo { width: 80px; height: 80px; }
     .description { padding: 22px 16px; }
@@ -1270,7 +1194,6 @@ body.dark-theme .background-gradient {
 @media (max-width: 374px) {
     .container { border-radius: 12px; max-width: 100%; margin: 5px; }
     .logo-section { padding: 15px 15px 6px; }
-    .hero-media { height: 220px; }
     .brand-info h1 { font-size: 14px; line-height: 1.1; }
     .logo { width: 70px; height: 70px; }
     .description { padding: 20px 14px; }
@@ -1302,7 +1225,6 @@ body.dark-theme .background-gradient {
 
 @media (max-height: 500px) and (orientation: landscape) {
     .logo-section { padding: 10px 20px 5px; }
-    .hero-media { height: 180px; }
     .brand-info h1 { font-size: 14px; }
     .logo { width: 50px; height: 50px; }
     .description { padding: 10px 20px; }
@@ -1338,12 +1260,6 @@ body.dark-theme .background-gradient {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-    }
-
-    .media-gallery .media-item.active img,
-    .media-gallery .media-item.active video {
-        animation: none !important;
-        transform: scale(1) !important;
     }
 
     .logo {
