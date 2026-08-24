@@ -174,7 +174,7 @@ body {
    -------------------------------------------------------------------------- */
 
 .description {
-    padding: 15px 20px;
+    padding: 20px;
     text-align: center;
     background: linear-gradient(to bottom, transparent, rgba(10, 36, 99, 0.02));
     border-bottom: 1px solid var(--gray-medium);
@@ -194,7 +194,7 @@ body {
 .services-section {
     margin: 0;
     background: var(--white);
-    padding: 15px 0;
+    padding: 20px 0;
 }
 
 .services-header {
@@ -357,7 +357,7 @@ body {
 .catalog-section {
     margin: 0;
     background: var(--white);
-    padding: 15px 0;
+    padding: 20px 0;
 }
 
 .catalog-header {
@@ -1374,6 +1374,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 25px 25px 15px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 100px; height: 100px; }
+    .description { padding: 18px; }
     .links-section { padding: 18px; }
     .buttons-grid { gap: 11px; }
     .link-button { padding: 16px 18px; }
@@ -1391,7 +1392,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 22px 22px 12px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 90px; height: 90px; }
-    .description { padding: 24px 20px; }
+    .description { padding: 16px; }
     .links-section { padding: 16px; }
     .buttons-grid { gap: 10px; }
     .link-button { padding: 15px 17px; gap: 14px; }
@@ -1412,7 +1413,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 20px 20px 10px; }
     .brand-info h1 { font-size: 18px; }
     .logo { width: 85px; height: 85px; }
-    .description { padding: 24px 18px; }
+    .description { padding: 15px; }
     .main-text { font-size: 14px; }
     .links-section { padding: 15px; }
     .link-button { padding: 15px 16px; gap: 12px; }
@@ -1440,7 +1441,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 18px 18px 8px; }
     .brand-info h1 { font-size: 16px; line-height: 1.2; }
     .logo { width: 80px; height: 80px; }
-    .description { padding: 22px 16px; }
+    .description { padding: 14px; }
     .main-text { font-size: 13px; }
     .links-section { padding: 14px; }
     .buttons-grid { gap: 9px; }
@@ -1470,7 +1471,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 15px 15px 6px; }
     .brand-info h1 { font-size: 14px; line-height: 1.1; }
     .logo { width: 70px; height: 70px; }
-    .description { padding: 20px 14px; }
+    .description { padding: 12px; }
     .main-text { font-size: 12px; }
     .links-section { padding: 12px; }
     .buttons-grid { gap: 8px; }
@@ -1502,7 +1503,7 @@ body.dark-theme .background-gradient {
     .logo-section { padding: 10px 20px 5px; }
     .brand-info h1 { font-size: 14px; }
     .logo { width: 50px; height: 50px; }
-    .description { padding: 10px 20px; }
+    .description { padding: 8px; }
     .main-text { font-size: 12px; }
     .links-section { padding: 8px; }
     .buttons-grid { gap: 6px; max-height: 200px; overflow-y: auto; }
