@@ -194,13 +194,13 @@ body {
 .services-section {
     margin: 0;
     background: var(--white);
-    padding: 20px 0;
+    padding: 20px;
 }
 
 .services-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     padding: 18px 20px;
     cursor: pointer;
     user-select: none;
@@ -210,7 +210,6 @@ body {
     background: var(--white);
     position: relative;
     overflow: hidden;
-    margin: 0 15px;
 }
 
 .services-header::before {
@@ -357,13 +356,13 @@ body {
 .catalog-section {
     margin: 0;
     background: var(--white);
-    padding: 20px 0;
+    padding: 20px;
 }
 
 .catalog-header {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     padding: 18px 20px;
     cursor: pointer;
     user-select: none;
@@ -373,7 +372,6 @@ body {
     background: var(--white);
     position: relative;
     overflow: hidden;
-    margin: 0 15px;
 }
 
 .catalog-header::before {
@@ -1400,7 +1398,7 @@ body.dark-theme .background-gradient {
     .button-content h3 { font-size: 15px; }
     .footer { padding: 26px 20px; }
     .modal-content { padding: 32px 22px; max-width: 85%; }
-    .services-header { padding: 12px 14px; gap: 10px; }
+    .services-header { padding: 15px 17px; gap: 14px; }
     .services-header-icon { width: 34px; height: 34px; }
 }
 
@@ -1455,7 +1453,7 @@ body.dark-theme .background-gradient {
     .modal-content h2 { font-size: 20px; margin-bottom: 20px; }
     .success-message { left: 10px; right: 10px; max-width: none; padding: 12px 20px; font-size: 12px; }
     .toast { right: 10px; left: 10px; bottom: 12px; padding: 12px 15px; font-size: 12px; }
-    .services-header { padding: 11px 12px; gap: 9px; }
+    .services-header { padding: 14px 15px; gap: 11px; }
     .services-title { font-size: 13px; }
     .service-category-items li { font-size: 11px; }
     .catalog-slide img,
@@ -1488,7 +1486,7 @@ body.dark-theme .background-gradient {
     .success-message { left: 8px; right: 8px; max-width: none; padding: 10px 15px; font-size: 11px; }
     .success-message i { font-size: 16px; }
     .toast { right: 8px; left: 8px; bottom: 10px; padding: 10px 12px; font-size: 11px; }
-    .services-header { padding: 10px 10px; gap: 8px; }
+    .services-header { padding: 13px 12px; gap: 10px; }
     .services-title { font-size: 12px; }
     .services-header-icon { width: 30px; height: 30px; }
     .catalog-slide img,
@@ -1514,7 +1512,7 @@ body.dark-theme .background-gradient {
     .thank-you { font-size: 10px; }
     .modal-content { padding: 18px 14px; }
     .services-list { gap: 5px; }
-    .services-header { padding: 8px 10px; }
+    .services-header { padding: 10px 12px; gap: 8px; }
 }
 
 @media (max-width: 480px) {
