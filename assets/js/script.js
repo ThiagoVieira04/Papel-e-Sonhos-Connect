@@ -481,7 +481,7 @@ function renderTestimonials() {
         if (item.type === 'video') {
             slide.innerHTML = `
                 <div class="video-container">
-                    <video src="${item.src}" loop playsinline preload="metadata"></video>
+                    <video src="${item.src}" muted loop playsinline preload="metadata"></video>
                     <div class="video-controls">
                         <button class="video-btn video-play-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
                         <button class="video-btn video-stop-btn" title="Parar"><i class="fas fa-stop"></i></button>
@@ -719,7 +719,7 @@ function openMediaViewer(type, src) {
     closeAllModals();
 
     if (type === 'video') {
-        content.innerHTML = `<video src="${src}" controls autoplay playsinline style="max-width:90vw;max-height:85vh;border-radius:12px;"></video>`;
+        content.innerHTML = `<video src="${src}" controls autoplay muted playsinline style="max-width:90vw;max-height:85vh;border-radius:12px;"></video>`;
     } else {
         content.innerHTML = `<img src="${src}" style="max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain;">`;
     }
