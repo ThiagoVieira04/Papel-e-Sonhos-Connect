@@ -1566,6 +1566,8 @@ body.dark-theme .background-gradient {
     .testimonials-header { padding: 16px 18px; gap: 14px; }
     .button-content h3 { font-size: 15px; }
     .services-title { font-size: 14px; }
+    .services-list { padding: 0 18px 10px; }
+    .service-category-items { padding: 4px 0 0 24px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1588,6 +1590,8 @@ body.dark-theme .background-gradient {
     .footer { padding: 26px 20px; }
     .modal-content { padding: 32px 22px; max-width: 85%; }
     .services-header-icon { width: 34px; height: 34px; }
+    .services-list { padding: 0 16px 10px; }
+    .service-category-items { padding: 4px 0 0 22px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1617,7 +1621,12 @@ body.dark-theme .background-gradient {
     .success-message { left: 15px; right: 15px; max-width: none; transform: translateY(-100px); font-size: 13px; }
     .success-message.show { transform: translateY(0); }
     .toast { right: 15px; left: 15px; bottom: 15px; max-width: none; }
-    .service-category-items li { font-size: 12px; padding: 4px 0; }
+    .services-list { padding: 0 14px 10px; }
+    .service-category-title { font-size: 13px; padding: 7px 10px; }
+    .service-category-items { padding: 4px 0 0 20px; }
+    .service-category-items li { font-size: 12px; padding: 5px 0; }
+    .service-quote-btn { font-size: 10px; padding: 4px 10px; }
+    .service-quote-btn i { font-size: 12px; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1646,8 +1655,14 @@ body.dark-theme .background-gradient {
     .modal-content h2 { font-size: 20px; margin-bottom: 20px; }
     .success-message { left: 10px; right: 10px; max-width: none; padding: 12px 20px; font-size: 12px; }
     .toast { right: 10px; left: 10px; bottom: 12px; padding: 12px 15px; font-size: 12px; }
-    .services-title { font-size: 13px; }
-    .service-category-items li { font-size: 11px; }
+    .services-list { padding: 0 12px 8px; }
+    .service-category-title { font-size: 12px; padding: 6px 9px; gap: 6px; }
+    .service-category-title i { width: 16px; font-size: 12px; }
+    .service-category-items { padding: 4px 0 0 16px; }
+    .service-category-items li { font-size: 11px; padding: 5px 0; gap: 6px; }
+    .service-item-text { flex: 1; min-width: 0; }
+    .service-quote-btn { font-size: 9px; padding: 4px 8px; gap: 4px; }
+    .service-quote-btn i { font-size: 11px; }
     .catalog-slide img,
     .catalog-slide video { max-height: 280px; }
 }
@@ -1681,7 +1696,16 @@ body.dark-theme .background-gradient {
     .success-message { left: 8px; right: 8px; max-width: none; padding: 10px 15px; font-size: 11px; }
     .success-message i { font-size: 16px; }
     .toast { right: 8px; left: 8px; bottom: 10px; padding: 10px 12px; font-size: 11px; }
-    .services-title { font-size: 12px; }
+    .services-list { padding: 0 10px 6px; }
+    .service-category { margin-bottom: 8px; }
+    .service-category-title { font-size: 11px; padding: 5px 8px; gap: 5px; }
+    .service-category-title i { width: 14px; font-size: 11px; }
+    .service-category-items { padding: 3px 0 0 14px; }
+    .service-category-items li { font-size: 10px; padding: 4px 0; gap: 5px; }
+    .service-category-items li::before { font-size: 10px; }
+    .service-item-text { flex: 1; min-width: 0; }
+    .service-quote-btn { font-size: 8px; padding: 3px 7px; gap: 3px; }
+    .service-quote-btn i { font-size: 10px; }
     .services-header-icon { width: 30px; height: 30px; }
     .catalog-slide img,
     .catalog-slide video { max-height: 220px; }
@@ -1707,7 +1731,12 @@ body.dark-theme .background-gradient {
     .footer { padding: 10px 15px; }
     .thank-you { font-size: 10px; }
     .modal-content { padding: 18px 14px; }
-    .services-list { gap: 5px; }
+    .services-list { padding: 0 12px 5px; gap: 5px; }
+    .service-category { margin-bottom: 6px; }
+    .service-category-title { font-size: 12px; padding: 5px 8px; }
+    .service-category-items { padding: 3px 0 0 14px; }
+    .service-category-items li { font-size: 10px; padding: 3px 0; }
+    .service-quote-btn { font-size: 9px; padding: 3px 7px; }
     .link-button,
     .services-header,
     .catalog-header,
