@@ -236,6 +236,11 @@ function initEventListeners() {
     const mediaViewerClose = document.getElementById('mediaViewerClose');
     if (mediaViewerClose) mediaViewerClose.addEventListener('click', closeAllModals);
 
+    const mediaViewerPrev = document.getElementById('mediaViewerPrev');
+    const mediaViewerNext = document.getElementById('mediaViewerNext');
+    if (mediaViewerPrev) mediaViewerPrev.addEventListener('click', () => navigateMediaViewer(-1));
+    if (mediaViewerNext) mediaViewerNext.addEventListener('click', () => navigateMediaViewer(1));
+
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeAllModals();
@@ -250,6 +255,9 @@ function initEventListeners() {
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllModals();
+        if (mediaViewerIndex < 0) return;
+        if (e.key === 'ArrowLeft') navigateMediaViewer(-1);
+        if (e.key === 'ArrowRight') navigateMediaViewer(1);
     });
 
     if (DOM.contrastToggle) DOM.contrastToggle.addEventListener('click', toggleContrast);
@@ -358,7 +366,7 @@ function renderCatalog() {
 
         slide.addEventListener('click', (e) => {
             if (e.target.closest('.video-controls')) return;
-            openMediaViewer(media.type, media.src);
+            openMediaViewer(media.type, media.src, index);
         });
 
         track.appendChild(slide);
@@ -702,8 +710,12 @@ function updateButtonLabel(btn, tempText, restoreHTML) {
    9. MODALS
    -------------------------------------------------------------------------- */
 
+let mediaViewerIndex = -1;
+
 function closeAllModals() {
     document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    document.body.classList.remove('viewer-open');
+    mediaViewerIndex = -1;
     const viewer = document.getElementById('mediaViewerContent');
     if (viewer) {
         viewer.innerHTML = '';
@@ -711,22 +723,52 @@ function closeAllModals() {
     }
 }
 
-function openMediaViewer(type, src) {
+function openMediaViewer(type, src, index) {
+    if (typeof index !== 'number') {
+        index = CATALOG_MEDIA.findIndex(item => item.src === src);
+    }
+    renderMediaViewer(index);
+}
+
+function navigateMediaViewer(step) {
+    if (mediaViewerIndex < 0) return;
+    const total = CATALOG_MEDIA.length;
+    const nextIndex = (mediaViewerIndex + step + total) % total;
+    renderMediaViewer(nextIndex);
+}
+
+function renderMediaViewer(index) {
     const modal = document.getElementById('mediaViewerModal');
     const content = document.getElementById('mediaViewerContent');
     const closeBtn = document.getElementById('mediaViewerClose');
+    const prevBtn = document.getElementById('mediaViewerPrev');
+    const nextBtn = document.getElementById('mediaViewerNext');
     if (!modal || !content) return;
 
-    content.innerHTML = '';
-    closeAllModals();
+    document.querySelectorAll('.modal').forEach(m => {
+        if (m !== modal) m.classList.remove('active');
+    });
 
-    if (type === 'video') {
-        content.innerHTML = `<video src="${src}" controls autoplay muted playsinline style="max-width:90vw;max-height:85vh;border-radius:12px;"></video>`;
-    } else {
-        content.innerHTML = `<img src="${src}" style="max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain;">`;
+    const isValid = index >= 0 && index < CATALOG_MEDIA.length;
+    mediaViewerIndex = isValid ? index : -1;
+
+    content.innerHTML = '';
+
+    if (isValid) {
+        const item = CATALOG_MEDIA[index];
+        if (item.type === 'video') {
+            content.innerHTML = `<video src="${item.src}" controls autoplay muted playsinline style="max-width:90vw;max-height:85vh;border-radius:12px;"></video>`;
+        } else {
+            content.innerHTML = `<img src="${item.src}" style="max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain;">`;
+        }
     }
 
+    const showArrows = isValid && CATALOG_MEDIA.length > 1;
+    if (prevBtn) prevBtn.classList.toggle('hidden', !showArrows);
+    if (nextBtn) nextBtn.classList.toggle('hidden', !showArrows);
+
     modal.classList.add('active');
+    document.body.classList.add('viewer-open');
     if (closeBtn) closeBtn.focus();
 }
 

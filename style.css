@@ -924,6 +924,35 @@ body {
     padding: 20px;
 }
 
+.media-viewer-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.media-viewer-arrow:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.media-viewer-prev { left: 20px; }
+.media-viewer-next { right: 20px; }
+
+.media-viewer-arrow.hidden { display: none; }
+
 .media-viewer-content img,
 .media-viewer-content video {
     max-width: 90vw;
@@ -1405,6 +1434,13 @@ body {
     border-color: var(--color-primary-blue);
 }
 
+body.viewer-open .a11y-toolbar-btn {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
 /* --------------------------------------------------------------------------
    18. DARK THEME
    -------------------------------------------------------------------------- */
@@ -1745,6 +1781,9 @@ body.dark-theme .background-gradient {
 
 @media (max-width: 480px) {
     .bank-grid { grid-template-columns: repeat(2, 1fr); }
+    .media-viewer-arrow { width: 40px; height: 40px; font-size: 16px; }
+    .media-viewer-prev { left: 8px; }
+    .media-viewer-next { right: 8px; }
 }
 
 @media (min-width: 360px) and (max-width: 800px) {
