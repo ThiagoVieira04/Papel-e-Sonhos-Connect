@@ -174,6 +174,8 @@ const CATALOG_MEDIA = [
     { type: 'image', src: 'assets/media/imagens/img24.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img25.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img26.jpeg' },
+    { type: 'image', src: 'assets/media/imagens/img27.jpeg' },
+    { type: 'video', src: 'assets/media/videos/video06.mp4' },
 ];
 
 /* --------------------------------------------------------------------------
