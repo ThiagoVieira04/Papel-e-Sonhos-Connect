@@ -363,7 +363,7 @@ function renderCatalog() {
         slide.style.cursor = 'pointer';
 
         if (media.type === 'video') {
-            slide.innerHTML = `<video src="${media.src}" muted loop playsinline preload="metadata"></video>`;
+            slide.innerHTML = `<video src="${media.src}" autoplay muted loop playsinline preload="metadata"></video>`;
         } else {
             slide.innerHTML = `<img src="${media.src}" alt="Serviço ${index + 1}" loading="lazy">`;
         }
