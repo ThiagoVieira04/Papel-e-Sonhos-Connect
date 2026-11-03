@@ -145,6 +145,7 @@ const SERVICES = [
 ];
 
 const CATALOG_MEDIA = [
+    { type: 'video', src: 'assets/media/videos/Video00.mp4' },
     { type: 'image', src: 'assets/media/imagens/img01.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img02.jpeg' },
     { type: 'video', src: 'assets/media/videos/video01.mp4' },
