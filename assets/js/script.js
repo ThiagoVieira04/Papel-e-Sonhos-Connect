@@ -146,20 +146,21 @@ const SERVICES = [
 
 const CATALOG_MEDIA = [
     { type: 'video', src: 'assets/media/videos/Video00.mp4' },
+    { type: 'video', src: 'assets/media/videos/video01.mp4' },
+    { type: 'video', src: 'assets/media/videos/video02.mp4' },
+    { type: 'video', src: 'assets/media/videos/video03.mp4' },
+    { type: 'video', src: 'assets/media/videos/video04.mp4' },
+    { type: 'video', src: 'assets/media/videos/video06.mp4' },
     { type: 'image', src: 'assets/media/imagens/img01.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img02.jpeg' },
-    { type: 'video', src: 'assets/media/videos/video01.mp4' },
     { type: 'image', src: 'assets/media/imagens/img03.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img04.jpeg' },
-    { type: 'video', src: 'assets/media/videos/video02.mp4' },
     { type: 'image', src: 'assets/media/imagens/img05.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img06.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img07.jpeg' },
-    { type: 'video', src: 'assets/media/videos/video03.mp4' },
     { type: 'image', src: 'assets/media/imagens/img08.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img09.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img10.jpeg' },
-    { type: 'video', src: 'assets/media/videos/video04.mp4' },
     { type: 'image', src: 'assets/media/imagens/img11.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img12.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img13.jpeg' },
@@ -177,7 +178,6 @@ const CATALOG_MEDIA = [
     { type: 'image', src: 'assets/media/imagens/img25.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img26.jpeg' },
     { type: 'image', src: 'assets/media/imagens/img27.jpeg' },
-    { type: 'video', src: 'assets/media/videos/video06.mp4' },
 ];
 
 /* --------------------------------------------------------------------------
